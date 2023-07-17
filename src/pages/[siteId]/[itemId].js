@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router';
 import Header from '@/components/Header';
 import RelatedPosts from '@/components/RelatedPosts';
+import Sidebar from '@/components/Sidebar';
 
 const Posts = () => {
     const [data, setData] = useState(null);
@@ -43,29 +44,33 @@ const Posts = () => {
     return (
         <div>
             <Header />
-            <div className='container mx-auto px-4 py-6'>
-                <h2 className="text-3xl bg-indigo-400 text-white">{data[0].title}</h2>
-                <div className='desc p-5'>
-                    {<img src={data[0].imgurl}></img>}
-                </div>
-                <div className='pagetitle'>
-                    <h3><a href={data[0].link} target='_blank'>{data[0].title}</a></h3>
-                </div>
-                <RelatedPosts tag={tags[0]} />
-                
-                <div className='rss-feeds'>
-                    <h3 className='text-3xl'>このサイトのRSS一覧</h3>
-                    {rssFeeds.slice(0,6).map((feed, index) => (
-                        <div key={index}>
-                            <a href={feed.link} target="_blank" rel="noopener noreferrer">
-                                <h3 className="text-2xl">{feed.title}</h3>
-                            </a>
-                        </div>
-                    ))}
+            <div className='container mx-auto px-4 py-6 flex flex-col-reverse md:flex-row'>
+                <Sidebar />
+                <div className='md:w-3/4 md:ml-4'>
+                    <h2 className="text-3xl bg-indigo-400 text-white">{data[0].title}</h2>
+                    <div className='desc p-5'>
+                        {<img src={data[0].imgurl}></img>}
+                    </div>
+                    <div className='pagetitle'>
+                        <h3><a href={data[0].link} target='_blank'>{data[0].title}</a></h3>
+                    </div>
+                    <RelatedPosts tag={tags[0]} />
+    
+                    <div className='rss-feeds'>
+                        <h3 className='text-3xl'>このサイトのRSS一覧</h3>
+                        {rssFeeds.slice(0,6).map((feed, index) => (
+                            <div key={index}>
+                                <a href={feed.link} target="_blank" rel="noopener noreferrer">
+                                    <h3 className="text-2xl">{feed.title}</h3>
+                                </a>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>
-    )
+    );
+
 }
 
-export default Posts
+export default Posts;
