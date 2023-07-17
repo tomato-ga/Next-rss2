@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router';
 import Header from '@/components/Header';
+import RelatedPosts from '@/components/RelatedPosts';
 
 const Posts = () => {
     const [data, setData] = useState(null);
@@ -34,7 +35,10 @@ const Posts = () => {
     if (!data) {
         return <p>Loading...</p>
     }
-    console.log(data);
+    // タグをオブジェクト化
+    let tags = data[0].tag.split(',');
+    // console.log(tags)
+
 
     return (
         <div>
@@ -44,10 +48,12 @@ const Posts = () => {
                 <div className='desc p-5'>
                     {<img src={data[0].imgurl}></img>}
                 </div>
-                <div className=''>
+                <div className='pagetitle'>
                     <h3><a href={data[0].link} target='_blank'>{data[0].title}</a></h3>
                 </div>
-                {/* <div className='rss-feeds'>
+                <RelatedPosts tag={tags[0]} />
+                
+                <div className='rss-feeds'>
                     <h3 className='text-3xl'>このサイトのRSS一覧</h3>
                     {rssFeeds.slice(0,6).map((feed, index) => (
                         <div key={index}>
@@ -56,7 +62,7 @@ const Posts = () => {
                             </a>
                         </div>
                     ))}
-                </div> */}
+                </div>
             </div>
         </div>
     )

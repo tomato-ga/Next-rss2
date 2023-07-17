@@ -44,7 +44,7 @@ const RSSList = () => {
     <div className='container mx-auto flex p-5'>
       <div className='border border-gray-300 rounded-lg shadow-lg p-4 flex-grow-0 w-1/3'>
         <h2 className='text-2xl mb-4'>Sidebar</h2>
-        <p>test</p>
+        <p><a href='/ssr'>SSR</a></p>
       </div>
 
       <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-5 p-5">
