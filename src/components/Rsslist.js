@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import shuffle from '@/lib/shuffle';
 import Sidebar from './Sidebar';
+import Tags from './Tags';
 
 const RSSList = () => {
   const [rssItems, setRSSItems] = useState([]);
@@ -25,7 +26,6 @@ const RSSList = () => {
 
         // シャッフル実行
         const shuffledItems = shuffle(combinedRSSItems);
-        console.log(shuffledItems);
 
         setRSSItems(shuffledItems);
       } catch (error) {
@@ -51,15 +51,26 @@ const RSSList = () => {
                     year: 'numeric', month: '2-digit', day: '2-digit',
                     hour: '2-digit', minute: '2-digit', second: '2-digit'
                 }).format(date);
+                const tagsArray = item.tag.split(',').map(tag => tag.trim()); // <--- タグを分割
                 return (
                     <div key={index} className='my-1 px-4 border-gray-300 rounded-lg shadow-lg'>
-                        <div className='border-b border-gray-200'>
+                        <div className='border-b border-gray-200 m-3'>
                             <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
                                 <img src={item.imgurl} className='max-h-[250px]'></img>
                                 <h2 className='m-3 text-xl'>
                                     {item.title}
                                 </h2>
                             </Link>
+                            <div className='tags'>
+                              <Tags tagsArray={tagsArray}/>
+                              {/* {tagsArray.map((tag, tagIndex) => (
+                                  <Link key={tagIndex} href="/tag/[tagpage]" as={`/tag/${tag}`}>
+                                    <span className='px-1.5 text-blue-500'>
+                                    {tag}
+                                    </span>
+                                  </Link>
+                              ))} */}
+                            </div>
                             <div className='date px-2 align-sub text-gray-500'>
                                 <p>{formattedDate}</p>
                             </div>
@@ -71,6 +82,7 @@ const RSSList = () => {
         <div className='order-3 hidden md:block flex-grow' />
     </div>
 );
+
 
 };
 
