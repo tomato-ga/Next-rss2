@@ -28,7 +28,7 @@ const RelatedPosts = ({ tag }) => {
     <div>
       <h2>「{tag}」の関連動画</h2>
       <div className="grid grid-cols-2 gap-5">
-      {posts.slice(0,20).map((post) => {
+      {posts.map((post) => {
             const tagsArray = post.tag.split(',').map(tag => tag.trim());
             return (
                 <div key={post.id} className="border border-gray-300 rounded-lg shadow-lg">
@@ -45,7 +45,7 @@ const RelatedPosts = ({ tag }) => {
       </div>
     </div>
   );
-  
+
 
 };
 

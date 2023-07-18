@@ -9,6 +9,9 @@ const Sidebar = () => {
                 <Link href='/ssr'>
                     SSR
                 </Link>
+                <Link href='/tag/爆乳'>
+                    爆乳
+                </Link>
             </p>
         </div>
     )
