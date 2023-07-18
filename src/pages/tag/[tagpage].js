@@ -10,7 +10,6 @@ const TagPage = () => {
 
     const router = useRouter();
     const { tagpage } = router.query;
-    console.log(tagpage);
 
     return (
         <>

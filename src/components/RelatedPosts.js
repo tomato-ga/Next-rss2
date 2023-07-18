@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Tags from './Tags';
+import Image from 'next/image';
+import styles from './iiim.module.css'
 
 const RelatedPosts = ({ tag }) => {
 
@@ -32,13 +34,13 @@ const RelatedPosts = ({ tag }) => {
             const tagsArray = post.tag.split(',').map(tag => tag.trim());
             return (
                 <div key={post.id} className="border border-gray-300 rounded-lg shadow-lg">
-                <div className="p-4">
                     <Link href="/[siteId]/[itemId]" as={`/${post.site_id}/${post.id}`}>
-                    <img src={post.imgurl} className="max-h-[200px]" alt={post.title} />
+                <div className="p-4 relative">
+                    <Image fill src={post.imgurl} className={styles.image} alt={post.title} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
+                </div>
                     <p className="text-blue-500 hover:text-blue-700">{post.title}</p>
                     </Link>
                     <Tags tagsArray={tagsArray} />
-                </div>
                 </div>
             )
             })}

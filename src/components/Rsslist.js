@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import shuffle from '@/lib/shuffle';
 import Sidebar from './Sidebar';
 import Tags from './Tags';
+import styles from './iiim.module.css'
+
 
 const RSSList = () => {
   const [rssItems, setRSSItems] = useState([]);
@@ -56,7 +59,9 @@ const RSSList = () => {
                     <div key={index} className='my-1 px-4 border-gray-300 rounded-lg shadow-lg'>
                         <div className='border-b border-gray-200 m-3'>
                             <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
-                                <img src={item.imgurl} className='max-h-[250px]'></img>
+                            <div className="p-4 relative">
+                                <Image fill src={item.imgurl} className={styles.image} alt={item.title} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
+                            </div>
                                 <h2 className='m-3 text-xl'>
                                     {item.title}
                                 </h2>
