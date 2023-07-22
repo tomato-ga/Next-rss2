@@ -8,16 +8,22 @@ import Tags from './Tags';
 import styles from './iiim.module.css'
 import Pagination from './Pagination';
 import useFetchRSSItems from './useFetchRssItems';
+import useFetchTotalCount from './useFetchTotalCount';
 import { useRouter } from 'next/router';
 
 const RSSList = ({ page = 0 }) => {
   const limit = 10;
   const rssItems = useFetchRSSItems(page, limit)[0];
+  const totalCount = useFetchTotalCount()[0];
   const router = useRouter();
   // RSSItemsが空の場合は何も表示しない
   if (!rssItems || !rssItems.length) {
     return null;
   }
+
+  console.log('全アイテム' , rssItems.length)
+  console.log('全アイテム' , totalCount)
+
 
   return (
     <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
@@ -60,7 +66,7 @@ const RSSList = ({ page = 0 }) => {
                     </div>
                 );
             })}
-        <Pagination totalCount={rssItems.length} pageSize={limit} currentPage={page} />
+          <Pagination totalCount={totalCount} pageSize={limit} currentPage={page} />
         </div>
     </div>
   );

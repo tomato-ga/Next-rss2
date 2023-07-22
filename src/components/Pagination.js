@@ -11,6 +11,10 @@ const Pagination = ({ totalCount, pageSize, currentPage }) => {
     }, [currentPage]);
 
     const changePage = (newPage) => {
+        console.log(newPage);
+        console.log(totalPages);
+        console.log(totalCount);
+        console.log(pageSize);
         if (newPage >= 0 && newPage < totalPages) {
             router.push(`/page/${newPage + 1}`)
             .then(() => window.scrollTo(0, 0))
