@@ -6,41 +6,16 @@ import shuffle from '@/lib/shuffle';
 import Sidebar from './Sidebar';
 import Tags from './Tags';
 import styles from './iiim.module.css'
+import Pagination from './Pagination';
+import useFetchRSSItems from './useFetchRssItems';
+import { useRouter } from 'next/router';
 
-
-const RSSList = () => {
-  const [rssItems, setRSSItems] = useState([]);
-
-  useEffect(() => {
-    const fetchRSSItems = async () => {
-      try {
-        const responseSites = await fetch('http://192.168.0.25:7002/rss');
-        const sites = await responseSites.json();
-
-        const promises = sites.map(async (site) => {
-          const response = await fetch(`http://192.168.0.25:7002/sites/${site.id}/rss/latest`);
-          const data = await response.json();
-
-          return data.map(item => ({ ...item, siteName: site.name, siteCreatedAt: site.created_at }));
-        });
-
-        let combinedRSSItems = await Promise.all(promises);
-        combinedRSSItems = combinedRSSItems.flat();
-
-        // シャッフル実行
-        const shuffledItems = shuffle(combinedRSSItems);
-
-        setRSSItems(shuffledItems);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchRSSItems();
-  }, []);
-
+const RSSList = ({ page = 0 }) => {
+  const limit = 10;
+  const rssItems = useFetchRSSItems(page, limit)[0];
+  const router = useRouter();
   // RSSItemsが空の場合は何も表示しない
-  if (!rssItems.length) {
+  if (!rssItems || !rssItems.length) {
     return null;
   }
 
@@ -49,46 +24,46 @@ const RSSList = () => {
         <Sidebar />
         <div className="md:w-3/4 md:ml-4 grid sm:grid-cols-1 md:grid-cols-2 gap-5 p-5 order-2 md:order-2">
             {rssItems.slice(0, 20).map((item, index) => {
-                const date = new Date(item.published_at);
-                const formattedDate = new Intl.DateTimeFormat('ja-JP', {
-                    year: 'numeric', month: '2-digit', day: '2-digit',
-                    hour: '2-digit', minute: '2-digit', second: '2-digit'
-                }).format(date);
-                const tagsArray = item.tag.split(',').map(tag => tag.trim()); // <--- タグを分割
+                let date = item.published_at ? new Date(item.published_at) : null;
+                let formattedDate = "";
+
+                if (date && !isNaN(date.getTime())) { // Check if date is valid
+                    formattedDate = new Intl.DateTimeFormat('ja-JP', {
+                        year: 'numeric', month: '2-digit', day: '2-digit',
+                        hour: '2-digit', minute: '2-digit', second: '2-digit'
+                    }).format(date);
+                } else {
+                    console.error("Invalid date: ", item.published_at);
+                }
+                let tagsArray = [];
+                if (item.tag) { // Check if tag exists
+                    tagsArray = item.tag.split(',').map(tag => tag.trim());
+                }
                 return (
                     <div key={index} className='my-1 px-4 border-gray-300 rounded-lg shadow-lg'>
                         <div className='border-b border-gray-200 m-3'>
                             <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
-                            <div className="p-4 relative">
-                                <Image fill src={item.imgurl} className={styles.image} alt={item.title} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
-                            </div>
+                                <div className="p-4 relative">
+                                    <Image fill src={item.imgurl} className={styles.image} alt={item.title} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
+                                </div>
                                 <h2 className='m-3 text-xl'>
                                     {item.title}
                                 </h2>
                             </Link>
                             <div className='tags'>
                               <Tags tagsArray={tagsArray}/>
-                              {/* {tagsArray.map((tag, tagIndex) => (
-                                  <Link key={tagIndex} href="/tag/[tagpage]" as={`/tag/${tag}`}>
-                                    <span className='px-1.5 text-blue-500'>
-                                    {tag}
-                                    </span>
-                                  </Link>
-                              ))} */}
                             </div>
                             <div className='date px-2 align-sub text-gray-500'>
-                                <p>{formattedDate}</p>
+                                {date && <p>{formattedDate}</p>}
                             </div>
                         </div>
                     </div>
                 );
             })}
+        <Pagination totalCount={rssItems.length} pageSize={limit} currentPage={page} />
         </div>
-        <div className='order-3 hidden md:block flex-grow' />
     </div>
-);
-
-
+  );
 };
 
 export default RSSList;
