@@ -1,27 +1,41 @@
+// /Volumes/SSD_1TB/next-antena2/front/src/pages/page/[number].js
+
 import Header from "@/components/Header";
 import RSSList from "@/components/Rsslist";
 
-const Page = ({ page }) => {
+const Page = ({ data, totalCount, page, limit }) => {
   return (
     <>
     <Header />
-    <RSSList page={page} />
+    <RSSList data={data} totalCount={totalCount} page={page} limit={limit} />
     </>
   );
 };
 
 export async function getServerSideProps(context) {
-    const page = context.params.number;  // `page`を`number`に変更
+    const page = context.params.number;
+    const limit = 20;
   
-    // Check if page is a number
-    if (isNaN(page) || page < 1) {
+    if (!page) {
       return {
         notFound: true,
       };
     }
+    
+    const fetchRes = await fetch(`http://192.168.0.25:7002/rss/all/latest?page=${page}&limit=${limit}`);
+    const data = await fetchRes.json();
+  
+    const res = await fetch('http://192.168.0.25:7002/total_count')
+    const totalData = await res.json()
+    const totalCount = totalData.count
   
     return {
-      props: { page: Number(page) - 1 }, // Subtract 1 because pages are 0-indexed
+      props: { 
+        data,
+        totalCount,
+        page: Number(page),
+        limit 
+      },
     }
 }
 
