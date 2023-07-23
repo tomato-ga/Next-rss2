@@ -1,7 +1,13 @@
+import Header from "@/components/Header";
 import RSSList from "@/components/Rsslist";
 
 const Page = ({ page }) => {
-  return <RSSList page={page} />;
+  return (
+    <>
+    <Header />
+    <RSSList page={page} />
+    </>
+  );
 };
 
 export async function getServerSideProps(context) {

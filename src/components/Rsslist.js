@@ -1,3 +1,5 @@
+// /Volumes/SSD_1TB/next-antena2/front/src/components/Rsslist.js
+
 import { useState, useEffect } from 'react';
 import React from 'react';
 import Link from 'next/link';
@@ -13,23 +15,26 @@ import { useRouter } from 'next/router';
 
 const RSSList = ({ page = 0 }) => {
   const limit = 10;
-  const rssItems = useFetchRSSItems(page, limit)[0];
-  const totalCount = useFetchTotalCount()[0];
+  const [rssItems, isLoading] = useFetchRSSItems(page, limit);
+  const [totalCount, loading, error] = useFetchTotalCount();
   const router = useRouter();
+
+  console.log("RSS Items: ", rssItems);
+  console.log("Total Count: ", totalCount);
+
   // RSSItemsが空の場合は何も表示しない
   if (!rssItems || !rssItems.length) {
     return null;
   }
 
-  console.log('全アイテム' , rssItems.length)
-  console.log('全アイテム' , totalCount)
-
+  console.log('ページ変数' , page);
+  console.log('全アイテム' , totalCount);
 
   return (
     <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
         <Sidebar />
         <div className="md:w-3/4 md:ml-4 grid sm:grid-cols-1 md:grid-cols-2 gap-5 p-5 order-2 md:order-2">
-            {rssItems.slice(0, 20).map((item, index) => {
+            {rssItems.map((item, index) => {
                 let date = item.published_at ? new Date(item.published_at) : null;
                 let formattedDate = "";
 
@@ -66,7 +71,7 @@ const RSSList = ({ page = 0 }) => {
                     </div>
                 );
             })}
-          <Pagination totalCount={totalCount} pageSize={limit} currentPage={page} />
+            {!isLoading && !loading && <Pagination totalCount={totalCount} pageSize={limit} currentPage={page} />}
         </div>
     </div>
   );

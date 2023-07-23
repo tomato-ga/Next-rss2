@@ -1,3 +1,5 @@
+// /Volumes/SSD_1TB/next-antena2/front/src/components/useFetchTotalCount.js
+
 import { useEffect, useState } from 'react';
 
 const useFetchTotalCount = () => {
@@ -8,9 +10,9 @@ const useFetchTotalCount = () => {
     useEffect(() => {
         const fetchTotalCount = async () => {
             try {
-                const res = await fetch('http://192.168.0.25:7002/api/rss/total_count');
+                const res = await fetch('http://192.168.0.25:7002/total_count');
                 const data = await res.json();
-                setTotalCount(data);
+                setTotalCount(data.count);
                 setLoading(false);
             } catch (err) {
                 setError(err);

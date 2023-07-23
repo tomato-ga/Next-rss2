@@ -1,3 +1,5 @@
+// /Volumes/SSD_1TB/next-antena2/front/src/components/useFetchRssItems.js
+
 import { useState, useEffect } from 'react';
 
 const useFetchRSSItems = (page, limit) => {
@@ -8,20 +10,12 @@ const useFetchRSSItems = (page, limit) => {
         const fetchRSSItems = async () => {
             setIsLoading(true);
             try {
-                const responseSites = await fetch('http://192.168.0.25:7002/rss');
-                const sites = await responseSites.json();
-
-                const promises = sites.map(async (site) => {
-                    const response = await fetch(`http://192.168.0.25:7002/sites/${site.id}/rss/latest`);
-                    const data = await response.json();
-
-                    return data.map(item => ({ ...item, siteName: site.name, siteCreatedAt: site.created_at }));
-                });
-
-                let combinedRSSItems = await Promise.all(promises);
-                combinedRSSItems = combinedRSSItems.flat();
-
-                setRSSItems(combinedRSSItems.slice(page * limit, (page + 1) * limit));
+                const response = await fetch(`http://192.168.0.25:7002/rss/all/latest?page=${page}&limit=${limit}`);
+                if (!response.ok) {
+                    throw new Error('Error fetching RSS items');
+                }
+                const data = await response.json();
+                setRSSItems(data);
                 setIsLoading(false);
             } catch (error) {
                 console.error(error);
