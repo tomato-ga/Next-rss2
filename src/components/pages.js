@@ -24,7 +24,6 @@ export default function NewSsr({ initialData, initialTotalCount, pageNumber }) {
         router.push(`/page/${page}`);
     }
 
-    console.log(initialData);
     return (
         <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
             <Sidebar />
@@ -85,7 +84,7 @@ export async function getServerSideProps(context) {
     let initialTotalCount = 0;
 
     try {
-        const dataRes = await fetch(`http://119.106.61.124:7002/rss/all/latest?page=${pageNumber}`);
+        const dataRes = await fetch(`http://192.168.0.25:7002/rss/all/latest?page=${pageNumber}`);
         if(dataRes.ok) {
             initialData = await dataRes.json();
         } else {
@@ -93,7 +92,7 @@ export async function getServerSideProps(context) {
             throw new Error('Data fetch error');
         }
 
-        const countRes = await fetch('http://119.106.61.124:7002/total_count');
+        const countRes = await fetch('http://192.168.0.25:7002/total_count');
         if(countRes.ok) {
             const countData = await countRes.json();
             initialTotalCount = countData.count;

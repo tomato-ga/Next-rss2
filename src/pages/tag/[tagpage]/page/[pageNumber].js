@@ -6,37 +6,33 @@ import Sidebar from '@/components/Sidebar';
 import Tags from '@/components/Tags';
 import Pagination from '@/components/Pagination';
 import useTotalCount from '@/hooks/useTotalCount';
-import SearchForm from '@/components/Search';
 import Link from 'next/link';
 import styles from '@/components/iiim.module.css'
 import Image from 'next/image';
 import useTagPagination from '@/hooks/useTagPagination';
+import { useRouter } from 'next/router';
 
 
-const TagPage = ({tagpage, pageNumber}) => {
-    // const router = useRouter();
-    // const { tagpage, pageNumber } = router.query; // Grab pageNumber from router.query
+const TagPage = () => {
+    const router = useRouter();
+    const { tagpage, pageNumber } = router.query; // Grab pageNumber from router.query
     const pageSize = 20; 
 
-    const [posts, currentPage, changePage] = useTagPagination(`http://119.106.61.124:7002`, tagpage, pageSize);
-    const totalCount = useTotalCount(`http://119.106.61.124:7002/tag_count?tag=${tagpage}`);
+    const [posts, currentPage, changePage] = useTagPagination(`http://192.168.0.25:7002`, tagpage, pageSize);
+    const totalCount = useTotalCount(`http://192.168.0.25:7002/tag_count?tag=${tagpage}`);
 
     useEffect(() => {
         changePage(pageNumber);
     }, [tagpage, pageNumber]);
 
-
-    console.log(tagpage, pageNumber);
-    console.log(posts);
-
-
-    console.log(tagpage);
     
     return (
+        <>
+        <Header />
         <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
             <Sidebar />
             <div className="md:w-3/4 md:ml-4 grid sm:grid-cols-1 md:grid-cols-2 gap-5 p-5 order-2 md:order-2">
-            <SearchForm />
+            {/* <SearchForm /> */}
                 {posts.map((item, index) => {
                     let date = item.published_at ? new Date(item.published_at) : null;
                     let formattedDate = "";
@@ -74,16 +70,19 @@ const TagPage = ({tagpage, pageNumber}) => {
                         </div>
                     );
                 })}
-                    <Pagination 
-                        totalCount={totalCount} 
-                        pageSize={pageSize} 
-                        currentPage={currentPage} 
-                        changePage={changePage}
-                        pageChangeUrl={(page) => `/page/${page}`}
-                    />
+                <Pagination 
+                totalCount={totalCount} 
+                pageSize={pageSize} 
+                currentPage={currentPage} 
+                changePage={changePage}
+                pageChangeUrl={(page) => {
+                    return `/tag/${tagpage}/page/${page}`;
+                }}
+                />
     
             </div>
         </div>
+        </>
     );
 }
 

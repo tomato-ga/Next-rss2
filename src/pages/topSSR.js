@@ -1,4 +1,4 @@
-// /Volumes/SSD_1TB/next-antena2/front/src/pages/ssr.js
+// /Volumes/SSD_1TB/next-antena2/front/src/pages/topSSR.js
 
 import { useState, useEffect } from 'react';
 import React from 'react';
@@ -53,7 +53,7 @@ export default function Ssr({ data, totalCount, page, limit }) {
                     </div>
                 );
             })}
-            <Pagination totalCount={totalCount} pageSize={limit} currentPage={page} />
+            <Pagination totalCount={totalCount} pageSize={limit} currentPage={page} pageChangeUrl={(page) => `/page/${page}`} />
         </div>
     </div>
 );

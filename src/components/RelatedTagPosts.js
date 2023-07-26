@@ -11,7 +11,7 @@ const RelatedTagPosts = ({ tag }) => {
   useEffect(() => {
     const fetchRelatedPosts = async () => {
       try {
-        const response = await fetch(`http://119.106.61.124:7002/tag?tag=${tag}`);
+        const response = await fetch(`http://192.168.0.25:7002/tag?tag=${tag}`);
         const data = await response.json();
         setPosts(data);
       } catch (error) {

@@ -19,16 +19,10 @@ const RSSList = ({ page = 0 }) => {
   const [totalCount, loading, error] = useFetchTotalCount();
   const router = useRouter();
 
-  console.log("RSS Items: ", rssItems);
-  console.log("Total Count: ", totalCount);
-
   // RSSItemsが空の場合は何も表示しない
   if (!rssItems || !rssItems.length) {
     return null;
   }
-
-  console.log('ページ変数' , page);
-  console.log('全アイテム' , totalCount);
 
   return (
     <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>

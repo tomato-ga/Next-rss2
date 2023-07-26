@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
-const Pagination = ({ totalCount, pageSize, currentPage }) => {
+const Pagination = ({ totalCount, pageSize, currentPage, pageChangeUrl }) => {
     const router = useRouter();
     const [current, setCurrent] = useState(currentPage);
     const totalPages = Math.ceil(totalCount / pageSize);
@@ -14,7 +14,7 @@ const Pagination = ({ totalCount, pageSize, currentPage }) => {
 
     const changePage = (newPage) => {
         if (newPage >= 1 && newPage <= totalPages) {
-            router.push(`/page/${newPage}`)
+            router.push(pageChangeUrl(newPage))
             .then(() => window.scrollTo(0, 0))
             .catch((error) => console.error(error));
         }
@@ -45,5 +45,6 @@ const Pagination = ({ totalCount, pageSize, currentPage }) => {
     );
     
 }
+
 
 export default Pagination;
