@@ -10,7 +10,7 @@ const useFetchTotalCount = () => {
     useEffect(() => {
         const fetchTotalCount = async () => {
             try {
-                const res = await fetch('http://192.168.0.25:7002/total_count');
+                const res = await fetch('http://119.106.61.124:7002/total_count');
                 const data = await res.json();
                 setTotalCount(data.count);
                 setLoading(false);

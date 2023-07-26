@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-// import shuffle from '@/lib/shuffle';
 import styles from '@/components/iiim.module.css'
 import Sidebar from '@/components/Sidebar';
 import Tags from '@/components/Tags';
@@ -12,7 +11,6 @@ import Pagination from '@/components/Pagination';
 
 
 export default function Ssr({ data, totalCount, page, limit }) {
-
 
   return (
     <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
