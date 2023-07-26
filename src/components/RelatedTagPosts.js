@@ -4,14 +4,14 @@ import Tags from './Tags';
 import Image from 'next/image';
 import styles from './iiim.module.css'
 
-const RelatedPosts = ({ tag }) => {
+const RelatedTagPosts = ({ tag }) => {
 
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchRelatedPosts = async () => {
       try {
-        const response = await fetch(`http://119.106.61.124:7002/rss/tag/${tag}`);
+        const response = await fetch(`http://119.106.61.124:7002/tag?tag=${tag}`);
         const data = await response.json();
         setPosts(data);
       } catch (error) {
@@ -51,4 +51,4 @@ const RelatedPosts = ({ tag }) => {
 
 };
 
-export default RelatedPosts;
+export default RelatedTagPosts;

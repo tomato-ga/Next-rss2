@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router';
 import Header from '@/components/Header';
-import RelatedPosts from '@/components/RelatedPosts';
 import Sidebar from '@/components/Sidebar';
+import RelatedTagPosts from '@/components/RelatedTagPosts';
 
 const Posts = () => {
     const [data, setData] = useState(null);
@@ -54,7 +54,7 @@ const Posts = () => {
                     <div className='pagetitle'>
                         <h3><a href={data[0].link} target='_blank'>{data[0].title}</a></h3>
                     </div>
-                    <RelatedPosts tag={tags[0]} />
+                    <RelatedTagPosts tag={tags[0]} />
     
                     <div className='rss-feeds'>
                         <h3 className='text-3xl'>このサイトのRSS一覧</h3>

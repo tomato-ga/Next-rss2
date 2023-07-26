@@ -3,7 +3,6 @@
 import React, { useEffect } from 'react';
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
-import RelatedPosts from '@/components/RelatedPosts';
 import Tags from '@/components/Tags';
 import Pagination from '@/components/Pagination';
 import useTotalCount from '@/hooks/useTotalCount';
