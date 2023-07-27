@@ -9,21 +9,21 @@ import useTotalCount from '@/hooks/useTotalCount';
 import Link from 'next/link';
 import styles from '@/components/iiim.module.css'
 import Image from 'next/image';
-import useTagPagination from '@/hooks/useTagPagination';
+import useSearchPagination from '@/hooks/useSearchPagination';
 import { useRouter } from 'next/router';
 
 
-const TagPage = () => {
+const SearchPage = () => {
     const router = useRouter();
-    const { tagpage, pageNumber } = router.query; // Grab pageNumber from router.query
+    const { keyword, pageNumber } = router.query; // Grab pageNumber from router.query
     const pageSize = 20; 
 
-    const [posts, currentPage, changePage] = useTagPagination(`http://192.168.0.25:7002`, tagpage, pageSize);
-    const totalCount = useTotalCount(`http://192.168.0.25:7002/tag_count?tag=${tagpage}`);
+    const [posts, currentPage, changePage] = useSearchPagination(`http://192.168.0.25:7002`, keyword, pageSize);
+    const totalCount = useTotalCount(`http://192.168.0.25:7002/search_count?tag=${keyword}`);
 
     useEffect(() => {
         changePage(pageNumber);
-    }, [tagpage, pageNumber]);
+    }, [keyword, pageNumber]);
 
 
     return (
@@ -32,7 +32,7 @@ const TagPage = () => {
         <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
             <Sidebar />
             <div className="md:w-3/4 md:ml-4 grid sm:grid-cols-1 md:grid-cols-2 gap-5 p-5 order-2 md:order-2">
-            {/* <SearchForm /> */}
+            <h2>{keyword}の関連動画</h2>
                 {posts.map((item, index) => {
                     let date = item.published_at ? new Date(item.published_at) : null;
                     let formattedDate = "";
@@ -76,7 +76,7 @@ const TagPage = () => {
                 currentPage={currentPage} 
                 changePage={changePage}
                 pageChangeUrl={(page) => {
-                    return `/tag/${tagpage}/page/${page}`;
+                    return `/tag/${keyword}/page/${page}`;
                 }}
                 />
     
@@ -86,4 +86,4 @@ const TagPage = () => {
     );
 }
 
-export default TagPage;
+export default SearchPage;
