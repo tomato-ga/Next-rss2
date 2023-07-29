@@ -23,7 +23,8 @@ const SearchBar = () => {
         <input value={searchWord}
         onChange={handleSearchInput}
         type='text' />
-        <Link key={searchWord} href="/search/[keyword]/page/[pageNumber]" as={`/search/${searchWord}/page/1`}>
+        {/* <Link href="/search/[keyword]/page/[pageNumber]" as={`/search/${searchWord}/page/1`}> */}
+        <Link href="/search/[keyword]/page/[pageNumber]" as={searchWord ? `/search/${searchWord}/page/1` : '/' }>
         <input onClick={callSearchFunction}
         type='submit'
         value='検索' />

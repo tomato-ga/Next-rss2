@@ -11,6 +11,8 @@ import styles from '@/components/iiim.module.css'
 import Image from 'next/image';
 import useSearchPagination from '@/hooks/useSearchPagination';
 import { useRouter } from 'next/router';
+import { handleClickCount } from '@/lib/clickCountDB';
+
 
 
 const SearchPage = () => {
@@ -52,6 +54,7 @@ const SearchPage = () => {
                     return (
                         <div key={index} className='my-1 px-4 border-gray-300 rounded-lg shadow-lg'>
                             <div className='border-b border-gray-200 m-3'>
+                                <div onClick={() => {handleClickCount(item.id)}}>
                                 <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
                                     <div className="p-4 relative">
                                         <Image fill src={item.imgurl} className={styles.image} alt={item.title} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
@@ -60,6 +63,7 @@ const SearchPage = () => {
                                         {item.title}
                                     </h2>
                                 </Link>
+                                </div>
                                 <div className='tags'>
                                 <Tags tagsArray={tagsArray}/>
                                 </div>
