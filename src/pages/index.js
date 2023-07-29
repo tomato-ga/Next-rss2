@@ -1,16 +1,16 @@
-// /Volumes/SSD_1TB/next-antena2/front/src/pages/index.js
+// /pages/index.js
 
 import Header from '@/components/Header'
 import Ssr from './topSSR'
 import SearchBar from '@/components/SearchBar';
 
 
-export default function Home({ data, totalCount, page, limit, clickCounts }) {
+export default function Home({ data, totalCount, page, limit }) {
   return (
     <>
       <Header />
       <SearchBar />
-      <Ssr data={data} totalCount={totalCount} page={page} limit={limit} clickCounts={clickCounts} />
+      <Ssr data={data} totalCount={totalCount} page={page} limit={limit} />
     </>
   )
 }
@@ -27,19 +27,6 @@ export async function getServerSideProps(context) {
   const res = await fetch('http://192.168.0.25:7002/total_count')
   const totalData = await res.json()
   const totalCount = totalData.count
-
-
-  const itemIds = data.map(item => item.id);
-  
-  // const response = await fetch('/click_counts', {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  //   body: JSON.stringify({ rss_ids: itemIds }), 
-  // });
-
-  // const initialClickCounts = await response.json();
 
 
   if (!data && !totalCount) {
@@ -60,7 +47,6 @@ export async function getServerSideProps(context) {
       totalCount,
       page, 
       limit,
-      // initialClickCounts
     }
   }
 }
