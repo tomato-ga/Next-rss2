@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 export default function usePagination(baseUrl, pageSize) {
     const [data, setData] = useState([]);
-    const [currentPage, setCurrentPage] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
 
     const changePage = (newPage) => {
         setCurrentPage(newPage);

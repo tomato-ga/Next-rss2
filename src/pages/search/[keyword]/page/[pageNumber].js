@@ -24,7 +24,7 @@ const SearchPage = () => {
     const totalCount = useTotalCount(`http://192.168.0.25:7002/search_count?tag=${keyword}`);
 
     useEffect(() => {
-        changePage(pageNumber);
+        changePage(parseInt(pageNumber));
     }, [keyword, pageNumber]);
 
 

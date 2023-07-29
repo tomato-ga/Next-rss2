@@ -16,12 +16,25 @@ export default function useTagPagination(baseUrl, tag, pageSize) {
             return;
         }
 
+        const controller = new AbortController(); // Create new AbortController
+        const signal = controller.signal;
+
         const fetchUrl = `${baseUrl}/tag?tag=${tag}&page=${currentPage}&limit=${pageSize}`;
-        
-        fetch(fetchUrl)
+
+        fetch(fetchUrl, { signal }) // Add signal to the fetch options
             .then(response => response.json())
             .then(jsonData => setData(jsonData))
-            .catch(error => console.error(error));
+            .catch(error => {
+                if (error.name === 'AbortError') {
+                    console.log('Fetch cancelled');
+                } else {
+                    console.error(error);
+                }
+            });
+
+        return () => {
+            controller.abort(); // Abort fetch on unmount or when dependencies change
+        };
     }, [currentPage, pageSize, baseUrl, tag]);
 
     return [data, currentPage, changePage];

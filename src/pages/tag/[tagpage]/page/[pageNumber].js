@@ -22,7 +22,7 @@ const TagPage = () => {
     const totalCount = useTotalCount(`http://192.168.0.25:7002/tag_count?tag=${tagpage}`);
 
     useEffect(() => {
-        changePage(pageNumber);
+        changePage(parseInt(pageNumber));
     }, [tagpage, pageNumber]);
 
 
