@@ -3,7 +3,6 @@ const { default: Link } = require("next/link");
 
 const Tags = ({ tagsArray }) => {
 
-    console.log(tagsArray);
     return (
         <div className='tags'>
             {tagsArray.map((tag, tagIndex) => (

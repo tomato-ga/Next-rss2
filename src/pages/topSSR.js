@@ -1,6 +1,6 @@
 // /Volumes/SSD_1TB/next-antena2/front/src/pages/topSSR.js
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -8,10 +8,41 @@ import styles from '@/components/iiim.module.css'
 import Sidebar from '@/components/Sidebar';
 import Tags from '@/components/Tags';
 import Pagination from '@/components/Pagination';
-import { handleClickCount } from '@/lib/clickCountDB';
+import { handleClickCount, getClickCount } from '@/lib/clickCountDB';
 
+export async function getServerSideProps({ data }) {
+  const itemIds = data.map(item => item.id);
+  
+  const response = await fetch('/click_counts', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ rss_ids: itemIds }), 
+  });
 
-export default function Ssr({ data, totalCount, page, limit }) {
+  const initialClickCounts = await response.json();
+
+  return {
+    props: {  
+      initialClickCounts,
+    },
+  };
+}
+
+export default function Ssr({ data, totalCount, page, limit, initialClickCounts }) {
+
+    const itemIds = useMemo(() => data.map(item => item.id), [data]);
+    const [items, setItems] = useState(itemIds);
+    const [clickCounts, setClickCounts] = useState({});
+
+    useEffect(() => {
+        setItems(itemIds);
+    }, [itemIds]);
+
+    useEffect(() => {
+        setClickCounts(initialClickCounts);
+    }, [initialClickCounts]);
 
   return (
     <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
@@ -62,4 +93,3 @@ export default function Ssr({ data, totalCount, page, limit }) {
     </div>
 );
 }
-

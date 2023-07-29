@@ -5,15 +5,16 @@ import Ssr from './topSSR'
 import SearchBar from '@/components/SearchBar';
 
 
-export default function Home({ data, totalCount, page, limit }) {
+export default function Home({ data, totalCount, page, limit, clickCounts }) {
   return (
     <>
       <Header />
       <SearchBar />
-      <Ssr data={data} totalCount={totalCount} page={page} limit={limit} />
+      <Ssr data={data} totalCount={totalCount} page={page} limit={limit} clickCounts={clickCounts} />
     </>
   )
 }
+
 
 export async function getServerSideProps(context) {
   const page = context.query.page || 1;
@@ -22,12 +23,24 @@ export async function getServerSideProps(context) {
   const fetchRes = await fetch(`http://192.168.0.25:7002/rss/all/latest?page=${page}&limit=${limit}`);
   const data = await fetchRes.json();
 
+
   const res = await fetch('http://192.168.0.25:7002/total_count')
   const totalData = await res.json()
   const totalCount = totalData.count
 
 
-  console.log("Fetched data: ", data); // Add this line
+  const itemIds = data.map(item => item.id);
+  
+  // const response = await fetch('/click_counts', {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //   },
+  //   body: JSON.stringify({ rss_ids: itemIds }), 
+  // });
+
+  // const initialClickCounts = await response.json();
+
 
   if (!data && !totalCount) {
     return {
@@ -46,7 +59,8 @@ export async function getServerSideProps(context) {
       data,
       totalCount,
       page, 
-      limit
+      limit,
+      // initialClickCounts
     }
   }
 }
