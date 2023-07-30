@@ -10,9 +10,7 @@ const Comment = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // TODO pydanticのmainがエラー出してるよ！！！！！！！！！！！！！！！！！！
-        
-        //TODO: APIにポストするのを後で実装する
+
         // TODO : おすすめするをコメントしたら再レンダリングして、投稿を取得して表示する
         // TODO : ログインしていないとコメントは見られないようにする
 
@@ -27,19 +25,26 @@ const Comment = () => {
             comment: comment,
         }
 
-        const sendComment = async () => {
-            const fetchComment = await fetch(`http://192.168.0.25:7002/comment`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(TimeAndComment),
-            });
+        console.log(timeString, typeof timeString)
 
-            if (!fetchComment.ok) {
-                console.error("fetchCommentがエラーです")
+        const sendComment = async () => {
+            try {
+                const fetchComment = await fetch(`http://192.168.0.25:7002/comment`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(TimeAndComment),
+                });
+        
+                if (!fetchComment.ok) {
+                    const errorData = await fetchComment.json();
+                    console.error('fetchCommentエラー: ', errorData.detail);
+                }
+            } catch (err) {
+                console.error("Network error: ", err);  // ネットワークエラーが発生した場合
             }
-        } 
+        }
 
         if (TimeAndComment) {
             sendComment();
