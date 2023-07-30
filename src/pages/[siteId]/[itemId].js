@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
 import RelatedTagPosts from '@/components/RelatedTagPosts';
+import Comment from '@/components/Comment';
 
 const Posts = () => {
     const [data, setData] = useState(null);
@@ -51,9 +52,16 @@ const Posts = () => {
                     <div className='desc p-5'>
                         {<img src={data[0].imgurl}></img>}
                     </div>
-                    <div className='pagetitle'>
-                        <h3><a href={data[0].link} target='_blank'>{data[0].title}</a></h3>
+                    <div className='pagetitle text-xl bg-blue-300 text-white'>
+                        <h3><a href={data[0].link} target='_blank'>{data[0].title}を見る</a></h3>
                     </div>
+
+                    {/* コメント */}
+                    <div className='py-10 px-3'>
+                    <Comment />
+                    </div>
+
+                    {/* 関連動画 */}
                     <RelatedTagPosts tag={tags[0]} />
     
                     <div className='rss-feeds'>
