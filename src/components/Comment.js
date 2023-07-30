@@ -2,11 +2,13 @@ import { useState } from "react"
 import React from 'react'
 
 
-const Comment = () => {
+const Comment = ({rss_id}) => {
     const [hours, setHours] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const [seconds, setSeconds] = useState(0);
     const [comment, setComment] = useState('');
+
+    console.log(rss_id);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -20,12 +22,14 @@ const Comment = () => {
         const formattedSeconds = seconds.toString().padStart(2, '0');
         const timeString = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`
 
+        // TODO rss_idがデータベースに保存されていない
         const TimeAndComment = {
+            rss_id: rss_id,
             recommend_time: timeString,
             comment: comment,
         }
 
-        console.log(timeString, typeof timeString)
+        // console.log(timeString, typeof timeString)
 
         const sendComment = async () => {
             try {

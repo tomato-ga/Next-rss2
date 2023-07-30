@@ -58,7 +58,8 @@ const Posts = () => {
 
                     {/* コメント */}
                     <div className='py-10 px-3'>
-                    <Comment />
+                    <Comment rss_id={itemId}/> 
+                    {/* itemId=データベースのrss_idなので、propsで渡す */}
                     </div>
 
                     {/* 関連動画 */}
