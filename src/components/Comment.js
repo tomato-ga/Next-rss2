@@ -10,9 +10,47 @@ const Comment = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(videoTime, comment, hours, minutes, seconds);
+        // TODO pydanticのmainがエラー出してるよ！！！！！！！！！！！！！！！！！！
+        
         //TODO: APIにポストするのを後で実装する
         // TODO : おすすめするをコメントしたら再レンダリングして、投稿を取得して表示する
+        // TODO : ログインしていないとコメントは見られないようにする
+
+        // 選択された時間を"HH:MM:SS"形式に整形し、APIへ送信する
+        const formattedHours = hours.toString().padStart(2, '0');
+        const formattedMinutes = minutes.toString().padStart(2, '0');
+        const formattedSeconds = seconds.toString().padStart(2, '0');
+        const timeString = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`
+
+        const TimeAndComment = {
+            recommend_time: timeString,
+            comment: comment,
+        }
+
+        const sendComment = async () => {
+            const fetchComment = await fetch(`http://192.168.0.25:7002/comment`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(TimeAndComment),
+            });
+
+            if (!fetchComment.ok) {
+                console.error("fetchCommentがエラーです")
+            }
+        } 
+
+        if (TimeAndComment) {
+            sendComment();
+        } else {
+            console.error("TIMEANDCOMMENTが送信できませんでした")
+        }
+
+        setHours(0);
+        setMinutes(0);
+        setSeconds(0);
+        setComment('');
     }
 
     return (
@@ -34,7 +72,7 @@ const Comment = () => {
                 コメント：
                 <input type="text" value={comment} onChange={e => setComment(e.target.value)} />
             </label>
-            <button type="submit">おすすめする</button>
+            <button type="submit" onClick={handleSubmit}>おすすめする</button>
         </form>
     )
 }
