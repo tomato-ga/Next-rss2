@@ -8,8 +8,6 @@ const Comment = ({rss_id}) => {
     const [seconds, setSeconds] = useState(0);
     const [comment, setComment] = useState('');
 
-    console.log(rss_id);
-
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -22,7 +20,6 @@ const Comment = ({rss_id}) => {
         const formattedSeconds = seconds.toString().padStart(2, '0');
         const timeString = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`
 
-        // TODO rss_idがデータベースに保存されていない
         const TimeAndComment = {
             rss_id: rss_id,
             recommend_time: timeString,
