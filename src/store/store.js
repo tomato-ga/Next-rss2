@@ -6,3 +6,12 @@ export const store = configureStore({
     data: dataSlice
   }
 });
+
+export function initializeStore(preloadedState = {}) {
+  return configureStore({
+    reducer: {
+      data: dataSlice
+    },
+    preloadedState
+  });
+}

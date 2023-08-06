@@ -1,20 +1,13 @@
 // /Users/donbe/Codes/Next-rss2/src/pages/test/testd.js
 
-import { useState, useEffect, useMemo, useContext } from 'react';
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import styles from '@/components/iiim.module.css'
-import Sidebar from '@/components/Sidebar';
-import Tags from '@/components/Tags';
-import Pagination from '@/components/Pagination';
-import { handleClickCount } from '@/lib/clickCountDB';
-import DataContext from '@/context/DataContext';
-
+import { useSelector } from 'react-redux';
+import { selectData, selectTotalCount, selectPage, selectLimit } from '@/store/dataSlice';
 
 export default function TestSsr() {
-
-    const { data, totalCount, page, limit } = useContext(DataContext);
+    const data = useSelector(selectData);
+    const totalCount = useSelector(selectTotalCount);
+    const page = useSelector(selectPage);
+    const limit = useSelector(selectLimit);
 
     console.log(data);
     console.log(totalCount);
@@ -22,6 +15,6 @@ export default function TestSsr() {
     console.log(limit);
 
     return (
-            <p>てすと</p>
+        <p>てすと</p>
     );
 }

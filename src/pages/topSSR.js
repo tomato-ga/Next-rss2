@@ -18,7 +18,7 @@ export default function Ssr({ data, totalCount, page, limit }) {
 
     useEffect(() => {
         const fetchClickCounts = async () => {
-            const response = await fetch('http://119.106.61.124:7002/click_counts', {
+            const response = await fetch('http://192.168.0.25:7002/click_counts', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -48,53 +48,48 @@ export default function Ssr({ data, totalCount, page, limit }) {
 
 
     return (
-        <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
-            <Sidebar />
-            <div className="md:w-3/4 md:ml-4 grid sm:grid-cols-1 md:grid-cols-2 gap-5 p-5 order-2 md:order-2">
-                {data.map((item, index) => {
-                    let date = item.published_at ? new Date(item.published_at) : null;
-                    let formattedDate = "";
-    
-                    if (date && !isNaN(date.getTime())) { // Check if date is valid
-                        formattedDate = new Intl.DateTimeFormat('ja-JP', {
-                            year: 'numeric', month: '2-digit', day: '2-digit',
-                            hour: '2-digit', minute: '2-digit', second: '2-digit'
-                        }).format(date);
-                    } else {
-                        console.error("Invalid date: ", item.published_at);
-                    }
-                    let tagsArray = [];
-                    if (item.tag) { // Check if tag exists
-                        tagsArray = item.tag.split(',').map(tag => tag.trim());
-                    }
-                    return (
-                        <div key={index} className='my-1 px-4 border-gray-300 rounded-lg shadow-lg'>
-                            <div className='border-b border-gray-200 m-3'>
-                                <div onClick={() => {handleClickCount(item.id)}}>
-                                <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
-                                    <div className="p-4 relative">
-                                        <Image fill src={item.imgurl} className={styles.image} alt={item.title} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
-                                        <p className='absolute top-0 left-0 bg-white opacity-75'>クリック数: {clickCounts[item.id] || 0}</p>
-                                    </div>
-                                    <h2 className='m-3 text-xl'>
-                                        {item.title}
-                                    </h2>
-                                </Link>
-                                </div>
-                                <div className='tags'>
-                                <Tags tagsArray={tagsArray}/>
-                                </div>
-                                <div className='date px-2 align-sub text-gray-500'>
-                                    {date && <p>{formattedDate}</p>}
-                                </div>
-                            </div>
-                        </div>
-                    );
-                })}
-                <Pagination totalCount={totalCount} pageSize={limit} currentPage={page} pageChangeUrl={(page) => `/page/${page}`} />
-            </div>
-        </div>
-    );
-    
-    
+      <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
+          <Sidebar />
+          <div className="md:w-3/4 md:ml-4 grid sm:grid-cols-1 md:grid-cols-2 gap-5 p-5 order-2 md:order-2">
+  
+              {data.map((item, index) => {
+                  let date = item.published_at ? new Date(item.published_at) : null;
+                  let formattedDate = "";
+      
+                  if (date && !isNaN(date.getTime())) {
+                      formattedDate = new Intl.DateTimeFormat('ja-JP', {
+                          year: 'numeric', month: '2-digit', day: '2-digit',
+                          hour: '2-digit', minute: '2-digit', second: '2-digit'
+                      }).format(date);
+                  } else {
+                      console.error("Invalid date: ", item.published_at);
+                  }
+      
+                  let tagsArray = [];
+                  if (item.tag) {
+                      tagsArray = item.tag.split(',').map(tag => tag.trim());
+                  }
+      
+                  return (
+                      <div key={index} className='Ui w-96 h-96 relative'>
+                          <div onClick={() => {handleClickCount(item.id)}}>
+                              <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
+                                  <div className="Topimages w-96 h-56 left-0 top-0 absolute bg-pink-100 rounded-sm">
+                                      <Image fill src={item.imgurl} className={styles.image} alt={item.title} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
+                                  </div>
+                                  <div className="Titles w-96 h-36 left-0 top-[225px] absolute">
+                                      <div className="Rectangle5 w-96 h-28 left-0 top-0 absolute bg-white" />
+                                      <div className=" w-96 h-20 left-[28px] top-[34px] absolute text-black text-2xl font-normal">
+                                          {item.title}
+                                      </div>
+                                  </div>
+                              </Link>
+                          </div>
+                      </div>
+                  );
+              })}
+          </div>
+      </div>
+  );
+  
 }

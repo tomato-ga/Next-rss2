@@ -30,7 +30,7 @@ const Comment = ({rss_id}) => {
 
         const sendComment = async () => {
             try {
-                const fetchComment = await fetch(`http://119.106.61.124:7002/comment`, {
+                const fetchComment = await fetch(`http://192.168.0.25:7002/comment`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

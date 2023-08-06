@@ -1,39 +1,57 @@
-// /Volumes/SSD_1TB/next-antena2/front/src/pages/tag/[tagpage]/page/[pageNumber].js
+// /Volumes/SSD_1TB/next-antena2/front/src/pages/topSSR.js
 
-import React, { useEffect } from 'react';
-import Header from '@/components/Header';
+import { useState, useEffect, useMemo } from 'react';
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import styles from '@/components/iiim.module.css'
 import Sidebar from '@/components/Sidebar';
 import Tags from '@/components/Tags';
 import Pagination from '@/components/Pagination';
-import useTotalCount from '@/hooks/useTotalCount';
-import Link from 'next/link';
-import styles from '@/components/iiim.module.css'
-import Image from 'next/image';
-import useTagPagination from '@/hooks/useTagPagination';
-import { useRouter } from 'next/router';
+import { handleClickCount } from '@/lib/clickCountDB';
 
+export default function Ssroriginal({ data, totalCount, page, limit }) {
 
-const TagPage = () => {
-    const router = useRouter();
-    const { tagpage, pageNumber } = router.query; // Grab pageNumber from router.query
-    const pageSize = 20; 
-
-    const [posts, currentPage, changePage] = useTagPagination(`http://192.168.0.25:7002`, tagpage, pageSize);
-    const totalCount = useTotalCount(`http://192.168.0.25:7002/tag_count?tag=${tagpage}`);
+    const itemIds = useMemo(() => data.map(item => item.id), [data]);
+    const [items, setItems] = useState(itemIds);
+    const [clickCounts, setClickCounts] = useState({});
 
     useEffect(() => {
-        changePage(parseInt(pageNumber));
-    }, [tagpage, pageNumber]);
+        const fetchClickCounts = async () => {
+            const response = await fetch('http://192.168.0.25:7002/click_counts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(itemIds), 
+            });
+    
+            if (!response.ok) {
+                console.error(`Error fetching click counts: ${response.status} ${response.statusText}`);
+                return;
+            }
+    
+            const initialClickCounts = await response.json();
+            setClickCounts(initialClickCounts);
+        };
+    
+        if (Array.isArray(itemIds) && itemIds.every(Number.isInteger)) {
+            fetchClickCounts();
+        } else {
+            console.error("itemIds must be an array of integers", itemIds);
+        }
+    }, [itemIds]);
+    
+    // console.log('ID一覧',itemIds);
+    // console.log('クリックカウント数',clickCounts);
+    // console.log('clickCountsの型:', typeof clickCounts);
 
 
     return (
-        <>
-        <Header />
         <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
             <Sidebar />
             <div className="md:w-3/4 md:ml-4 grid sm:grid-cols-1 md:grid-cols-2 gap-5 p-5 order-2 md:order-2">
-            {/* <SearchForm /> */}
-                {posts.map((item, index) => {
+                {data.map((item, index) => {
                     let date = item.published_at ? new Date(item.published_at) : null;
                     let formattedDate = "";
     
@@ -52,14 +70,17 @@ const TagPage = () => {
                     return (
                         <div key={index} className='my-1 px-4 border-gray-300 rounded-lg shadow-lg'>
                             <div className='border-b border-gray-200 m-3'>
+                                <div onClick={() => {handleClickCount(item.id)}}>
                                 <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
                                     <div className="p-4 relative">
                                         <Image fill src={item.imgurl} className={styles.image} alt={item.title} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
+                                        <p className='absolute top-0 left-0 bg-white opacity-75'>クリック数: {clickCounts[item.id] || 0}</p>
                                     </div>
                                     <h2 className='m-3 text-xl'>
                                         {item.title}
                                     </h2>
                                 </Link>
+                                </div>
                                 <div className='tags'>
                                 <Tags tagsArray={tagsArray}/>
                                 </div>
@@ -70,20 +91,10 @@ const TagPage = () => {
                         </div>
                     );
                 })}
-                <Pagination 
-                totalCount={totalCount} 
-                pageSize={pageSize} 
-                currentPage={currentPage} 
-                changePage={changePage}
-                pageChangeUrl={(page) => {
-                    return `/tag/${tagpage}/page/${page}`;
-                }}
-                />
-    
+                <Pagination totalCount={totalCount} pageSize={limit} currentPage={page} pageChangeUrl={(page) => `/page/${page}`} />
             </div>
         </div>
-        </>
     );
+    
+    
 }
-
-export default TagPage;

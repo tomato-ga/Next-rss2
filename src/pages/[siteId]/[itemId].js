@@ -15,13 +15,13 @@ const Posts = () => {
         if (router.isReady) {
             const fetchData = async () => {
                 try {
-                    const ENDP = `http://119.106.61.124:7002/sites/rss/${itemId}`;
+                    const ENDP = `http://192.168.0.25:7002/sites/rss/${itemId}`;
                     const res = await fetch(ENDP);
                     const data = await res.json();
                     setData(data);
                     
 
-                    const feedsResponse = await fetch(`http://119.106.61.124:7002/sites/${siteId}/rss/latest`);
+                    const feedsResponse = await fetch(`http://192.168.0.25:7002/sites/${siteId}/rss/latest`);
                     const feedsData = await feedsResponse.json();
                     setRssFeeds(feedsData);
                 } catch (error) {
