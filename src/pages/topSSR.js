@@ -54,7 +54,7 @@ export default function Ssr({ data, totalCount, page, limit }) {
               {data.map((item, index) => {
                   let date = item.published_at ? new Date(item.published_at) : null;
                   let formattedDate = "";
-  
+    
                   if (date && !isNaN(date.getTime())) {
                       formattedDate = new Intl.DateTimeFormat('ja-JP', {
                           year: 'numeric', month: '2-digit', day: '2-digit',
@@ -63,28 +63,29 @@ export default function Ssr({ data, totalCount, page, limit }) {
                   } else {
                       console.error("Invalid date: ", item.published_at);
                   }
-  
+    
                   let tagsArray = [];
                   if (item.tag) {
                       tagsArray = item.tag.split(',').map(tag => tag.trim());
                   }
-  
+    
                   return (
                       <div key={index} className='Ui w-96 h-auto p-4 bg-white shadow-md rounded-md'>
                           <div onClick={() => { handleClickCount(item.id) }}>
                               <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
-                                  <div>
-                                      <div className="Topimages w-full h-56 bg-white-100 rounded-sm mb-4">
-                                        <Image fill src={item.imgurl} className={styles.image} alt={item.title} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
+                                  
+                                      <div className="Topimages w-full h-56 bg-pink-100 rounded-sm mb-4">
+                                          <Image fill src={item.imgurl} className={styles.image} alt={item.title} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
                                       </div>
                                       <div className="Titles text-black text-2xl font-normal mb-4">
                                           {item.title}
                                       </div>
-  
+                              </Link>
+    
                                       <div className="Tags text-black text-2xl font-normal mb-4">
                                           <Tags tagsArray={tagsArray} />
                                       </div>
-  
+    
                                       <div className="Clicks text-center mb-4">
                                           <span style={{ color: 'black', fontSize: '24px', fontWeight: 'normal', letterSpacing: '0.1em' }}>
                                               {clickCounts[item.id] || 0}
@@ -93,15 +94,15 @@ export default function Ssr({ data, totalCount, page, limit }) {
                                               Click
                                           </span>
                                       </div>
-                                  </div>
-                              </Link>
+                                  
                           </div>
                       </div>
                   );
               })}
           </div>
       </div>
-  );
+    );
+    
   
   
   
