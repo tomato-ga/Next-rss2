@@ -47,65 +47,69 @@ export default function Ssr({ data, totalCount, page, limit }) {
     // console.log('clickCountsの型:', typeof clickCounts);
 
 
+
     return (
-      <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
-          <Sidebar />
-          <div className="md:w-3/4 md:ml-4 grid sm:grid-cols-1 md:grid-cols-2 gap-5 p-5 order-2 md:order-2">
-              {data.map((item, index) => {
-                  let date = item.published_at ? new Date(item.published_at) : null;
-                  let formattedDate = "";
+        <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
+            <Sidebar />
+            <div className="md:w-3/4 md:ml-4 grid sm:grid-cols-1 md:grid-cols-2 gap-5 p-5 order-2 md:order-2">
+                {data.map((item, index) => {
+                    let date = item.published_at ? new Date(item.published_at) : null;
+                    let formattedDate = "";
     
-                  if (date && !isNaN(date.getTime())) {
-                      formattedDate = new Intl.DateTimeFormat('ja-JP', {
-                          year: 'numeric', month: '2-digit', day: '2-digit',
-                          hour: '2-digit', minute: '2-digit', second: '2-digit'
-                      }).format(date);
-                  } else {
-                      console.error("Invalid date: ", item.published_at);
-                  }
-    
-                  let tagsArray = [];
-                  if (item.tag) {
-                      tagsArray = item.tag.split(',').map(tag => tag.trim());
-                  }
-    
-                  return (
-                      <div key={index} className='Ui w-96 h-auto p-4 bg-white shadow-md rounded-md'>
-                          <div onClick={() => { handleClickCount(item.id) }}>
-                              <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
+                    if (date && !isNaN(date.getTime())) { // Check if date is valid
+                        formattedDate = new Intl.DateTimeFormat('ja-JP', {
+                            year: 'numeric', month: '2-digit', day: '2-digit',
+                            hour: '2-digit', minute: '2-digit', second: '2-digit'
+                        }).format(date);
+                    } else {
+                        console.error("Invalid date: ", item.published_at);
+                    }
+                    let tagsArray = [];
+                    if (item.tag) { // Check if tag exists
+                        tagsArray = item.tag.split(',').map(tag => tag.trim());
+                    }
+                    return (
+                        <div key={index} className='my-1 px-4 border-gray-300 rounded shadow-md '>
+                            <div className=' border-gray-200 m-3'>
+                                <div onClick={() => {handleClickCount(item.id)}}>
+                                <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
+                                    <div className="p-4 relative">
+                                        <Image fill src={item.imgurl} className={styles.image} alt={item.title} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
+                                        {/* <p className='absolute top-0 left-0 bg-white opacity-75'>クリック数: {clickCounts[item.id] || 0}</p> */}
+                                    </div>
+                                    <h2 className='m-3 text-xl font-bold'>
+                                        {item.title}
+                                    </h2>
+                                </Link>
+                                </div>
+                                <div className='tags'>
+                                <Tags tagsArray={tagsArray}/>
+                                </div>
+
+                                <div className="relative text-center">
+                                    <span className="text-black text-2xl font-normal tracking-widest text-center">
+                                    {clickCounts[item.id] || 0}
+                                    </span>
+                                    <span className="text-black text-xl font-normal tracking-widest text-center">Click</span>
+                                </div>
+
+                                {/* <div className='date px-2 align-sub text-gray-500'>
+                                    {date && <p>{formattedDate}</p>}
+                                </div> */}
                                   
-                                      <div className="Topimages w-full h-56 bg-pink-100 rounded-sm mb-4">
-                                          <Image fill src={item.imgurl} className={styles.image} alt={item.title} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
-                                      </div>
-                                      <div className="Titles text-black text-2xl font-normal mb-4">
-                                          {item.title}
-                                      </div>
-                              </Link>
-    
-                                      <div className="Tags text-black text-2xl font-normal mb-4">
-                                          <Tags tagsArray={tagsArray} />
-                                      </div>
-    
-                                      <div className="Clicks text-center mb-4">
-                                          <span style={{ color: 'black', fontSize: '24px', fontWeight: 'normal', letterSpacing: '0.1em' }}>
-                                              {clickCounts[item.id] || 0}
-                                          </span>
-                                          <span style={{ color: 'black', fontSize: '16px', fontWeight: 'normal', letterSpacing: '0.1em' }}>
-                                              Click
-                                          </span>
-                                      </div>
-                                  
-                          </div>
-                      </div>
-                  );
-              })}
-          </div>
-      </div>
+
+                            </div>
+                        </div>
+                    );
+                })}
+                <Pagination totalCount={totalCount} pageSize={limit} currentPage={page} pageChangeUrl={(page) => `/page/${page}`} />
+            </div>
+        </div>
     );
     
-  
-  
-  
+
 }
 
-// TODO タグとクリックCSSいれる
+// タグとクリック入れられた。
+// todo: cssの調整で、カード型でスマホで見やすくすることで構成する https://flowbite.com/docs/components/card/ https://tailwind-elements.com/docs/standard/components/cards/ https://ordinarycoders.com/blog/article/17-tailwindcss-cards
+// ここらへんのURLを参考にしてcard型にトライする
