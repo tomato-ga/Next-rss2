@@ -47,7 +47,6 @@ export default function Ssr({ data, totalCount, page, limit }) {
     // console.log('clickCountsの型:', typeof clickCounts);
 
 
-
     return (
         <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
             <Sidebar />

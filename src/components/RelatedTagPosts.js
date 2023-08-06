@@ -29,16 +29,16 @@ const RelatedTagPosts = ({ tag }) => {
   return (
     <div>
       <h2>「{tag}」の関連動画</h2>
-      <div className="grid grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
       {posts.map((post) => {
             const tagsArray = post.tag.split(',').map(tag => tag.trim());
             return (
                 <div key={post.id} className="border border-gray-300 rounded-lg shadow-lg">
                     <Link href="/[siteId]/[itemId]" as={`/${post.site_id}/${post.id}`}>
-                <div className="p-4 relative">
-                    <Image fill src={post.imgurl} className={styles.image} alt={post.title} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
+                <div className="relative h-[320px]">
+                    <Image fill src={post.imgurl} className={styles.image} alt={post.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw"/>
                 </div>
-                    <p className="text-blue-500 hover:text-blue-700">{post.title}</p>
+                    <p className="m-2 text-xl font-bold text-blue-600">{post.title}</p>
                     </Link>
                     <Tags tagsArray={tagsArray} />
                 </div>
@@ -52,3 +52,5 @@ const RelatedTagPosts = ({ tag }) => {
 };
 
 export default RelatedTagPosts;
+
+// TODO クリックカウント関数をコピーして持ってきて表示する
