@@ -69,15 +69,31 @@ export default function Ssr({ data, totalCount, page, limit }) {
                         tagsArray = item.tag.split(',').map(tag => tag.trim());
                     }
                     return (
-                        <div key={index} className='my-1 px-4 border-gray-300 rounded shadow-md '>
-                            <div className=' border-gray-200 m-3'>
+                        <div key={index} className=' border-gray-300 rounded shadow-md '>
+                            <div className=' border-gray-200 '>
                                 <div onClick={() => {handleClickCount(item.id)}}>
                                 <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
-                                    <div className="p-4 relative">
-                                        <Image fill src={item.imgurl} className={styles.image} alt={item.title} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
+                                <div className="relative h-[320px]">
+                                    <Image fill src={item.imgurl} className="object-cover" alt={item.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw"/>
+
+                                    <span className="absolute rounded-md top-2 left-2 bg-white bg-opacity-90 text-red-600 text-xl font-bold tracking-widest text-center p-1">
+                                        {clickCounts[item.id] || 0}<br/><div className='text-xs'>Click</div>
+                                    </span>
+                                    
+                                </div>
+                                {/* <div className="relative h-[320px]">
+                                <Image fill src={item.imgurl} className="object-cover" alt={item.title} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
+                                </div> */}
+
+                                        {/* <div className="absolute top-0 left-0 text-center">
+                                        <span className="text-black text-2xl font-normal tracking-widest text-center">
+                                        {clickCounts[item.id] || 0}
+                                        </span>
+                                        <span className="text-black text-sm font-normal tracking-widest text-center">Click</span>
+                                        </div> */}
                                         {/* <p className='absolute top-0 left-0 bg-white opacity-75'>クリック数: {clickCounts[item.id] || 0}</p> */}
-                                    </div>
-                                    <h2 className='m-3 text-xl font-bold'>
+                                    
+                                    <h2 className='m-2 text-xl font-bold text-blue-600'>
                                         {item.title}
                                     </h2>
                                 </Link>
@@ -85,18 +101,9 @@ export default function Ssr({ data, totalCount, page, limit }) {
                                 <div className='tags'>
                                 <Tags tagsArray={tagsArray}/>
                                 </div>
-
-                                <div className="relative text-center">
-                                    <span className="text-black text-2xl font-normal tracking-widest text-center">
-                                    {clickCounts[item.id] || 0}
-                                    </span>
-                                    <span className="text-black text-xl font-normal tracking-widest text-center">Click</span>
-                                </div>
-
                                 {/* <div className='date px-2 align-sub text-gray-500'>
                                     {date && <p>{formattedDate}</p>}
                                 </div> */}
-                                  
 
                             </div>
                         </div>
