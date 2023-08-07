@@ -98,7 +98,7 @@ export default function Ssr({ data, totalCount, page, limit }) {
                                 </Link>
                                 </div>
                                 <div className='tags'>
-                                <Tags tagsArray={tagsArray}/>
+                                <Tags tagsArray={tagsArray} numberTags={5}/>
                                 </div>
                                 {/* <div className='date px-2 align-sub text-gray-500'>
                                     {date && <p>{formattedDate}</p>}

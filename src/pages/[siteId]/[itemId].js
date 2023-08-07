@@ -4,6 +4,7 @@ import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
 import RelatedTagPosts from '@/components/RelatedTagPosts';
 import Comment from '@/components/Comment';
+import Tags from '@/components/Tags';
 
 const Posts = () => {
     const [data, setData] = useState(null);
@@ -48,24 +49,33 @@ const Posts = () => {
             <div className='container mx-auto px-4 py-6 flex flex-col-reverse md:flex-row'>
                 <Sidebar />
                 <div className='md:w-3/4 md:ml-4'>
-                    <h2 className="text-3xl bg-indigo-400 text-white">{data[0].title}</h2>
-                    <div className='desc p-5'>
-                        {<img src={data[0].imgurl}></img>}
+                    <h1 className="m-2 text-xl md:text-4xl font-bold text-blue-600 border-b pb-2">{data[0].title}</h1>
+
+                    <div className='grid md:grid-cols-2 gap-2'>
+                        <div className='desc p-5'>
+                            {<img src={data[0].imgurl}></img>}
+                        </div>
+
+                        <div className='p-2 md:p-4'>
+                        <Tags tagsArray={tags} numberTags={20}/>
+                        </div>
                     </div>
-                    <div className='pagetitle text-xl bg-blue-300 text-white'>
-                        <h3><a href={data[0].link} target='_blank'>{data[0].title}を見る</a></h3>
+
+                    <div className='text-2xl bg-blue-700 text-white text-center font-semibold hover:bg-orange-700 rounded-md'>
+                        <h3><a href={data[0].link} target='_blank'>{data[0].title}のページを見る</a></h3>
                     </div>
 
                     {/* コメント */}
-                    <div className='py-10 px-3'>
-                    <Comment rss_id={itemId}/> 
+                    {/* <div className='py-10 px-3'>
+                    <Comment rss_id={itemId}/>  */}
                     {/* itemId=データベースのrss_idなので、propsで渡す */}
-                    </div>
+                    {/* </div> */}
 
                     {/* 関連動画 */}
                     <RelatedTagPosts tag={tags[0]} />
     
-                    <div className='rss-feeds'>
+                    {/* このサイトのRSS URL */}
+                    {/* <div className='rss-feeds'>
                         <h3 className='text-3xl'>このサイトのRSS一覧</h3>
                         {rssFeeds.slice(0,6).map((feed, index) => (
                             <div key={index}>
@@ -74,7 +84,8 @@ const Posts = () => {
                                 </a>
                             </div>
                         ))}
-                    </div>
+                    </div> */}
+
                 </div>
             </div>
         </div>

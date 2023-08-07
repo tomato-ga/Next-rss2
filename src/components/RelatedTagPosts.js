@@ -28,8 +28,10 @@ const RelatedTagPosts = ({ tag }) => {
 
   return (
     <div>
+      <div className='mt-5 mb-3 p-2 font-bold text-2xl bg-slate-400 text-black'>
       <h2>「{tag}」の関連動画</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
       {posts.map((post) => {
             const tagsArray = post.tag.split(',').map(tag => tag.trim());
             return (
@@ -40,7 +42,7 @@ const RelatedTagPosts = ({ tag }) => {
                 </div>
                     <p className="m-2 text-xl font-bold text-blue-600">{post.title}</p>
                     </Link>
-                    <Tags tagsArray={tagsArray} />
+                    <Tags tagsArray={tagsArray} numberTags={5} />
                 </div>
             )
             })}
