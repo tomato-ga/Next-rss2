@@ -72,7 +72,7 @@ export default function Ssr({ data, totalCount, page, limit }) {
                             <div className=' border-gray-200 '>
                                 <div onClick={() => {handleClickCount(item.id)}}>
                                 <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
-                                <div className="relative h-[320px]">
+                                <div className="relative h-[230px] md:h-[320px]">
                                     <Image fill src={item.imgurl} className="object-cover" alt={item.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw"/>
 
                                     <span className="absolute rounded-md top-2 left-2 bg-white bg-opacity-90 text-red-600 text-xl font-bold tracking-widest text-center p-1">

@@ -35,7 +35,7 @@ const RelatedTagPosts = ({ tag }) => {
             return (
                 <div key={post.id} className="border border-gray-300 rounded-lg shadow-lg">
                     <Link href="/[siteId]/[itemId]" as={`/${post.site_id}/${post.id}`}>
-                <div className="relative h-[320px]">
+                <div className="relative h-[230px] md:h-[320px]">
                     <Image fill src={post.imgurl} className={styles.image} alt={post.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw"/>
                 </div>
                     <p className="m-2 text-xl font-bold text-blue-600">{post.title}</p>

@@ -50,22 +50,22 @@ const TagPage = () => {
                         tagsArray = item.tag.split(',').map(tag => tag.trim());
                     }
                     return (
-                        <div key={index} className='my-1 px-4 border-gray-300 rounded-lg shadow-lg'>
-                            <div className='border-b border-gray-200 m-3'>
+                        <div key={index} className='border-gray-300 rounded shadow-md'>
+                            <div className='border-gray-200'>
                                 <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
-                                    <div className="p-4 relative">
-                                        <Image fill src={item.imgurl} className={styles.image} alt={item.title} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
+                                    <div className="relative h-[230px] md:h-[320px]">
+                                        <Image fill src={item.imgurl} className="object-cover" alt={item.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw"/>
                                     </div>
-                                    <h2 className='m-3 text-xl'>
+                                    <h2 className='m-2 text-xl font-bold text-blue-600'>
                                         {item.title}
                                     </h2>
                                 </Link>
                                 <div className='tags'>
                                 <Tags tagsArray={tagsArray}/>
                                 </div>
-                                <div className='date px-2 align-sub text-gray-500'>
+                                {/* <div className='date px-2 align-sub text-gray-500'>
                                     {date && <p>{formattedDate}</p>}
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     );
