@@ -50,7 +50,7 @@ export default function Ssr({ data, totalCount, page, limit }) {
     return (
         <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
             <Sidebar />
-            <div className="md:w-3/4 md:ml-4 grid sm:grid-cols-1 md:grid-cols-2 gap-5 p-5 order-2 md:order-2">
+            <div className="md:w-3/4 md:ml-4 grid sm:grid-cols-1 md:grid-cols-2 gap-3 p-1 order-2 md:order-2">
                 {data.map((item, index) => {
                     let date = item.published_at ? new Date(item.published_at) : null;
                     let formattedDate = "";
@@ -68,12 +68,12 @@ export default function Ssr({ data, totalCount, page, limit }) {
                         tagsArray = item.tag.split(',').map(tag => tag.trim());
                     }
                     return (
-                        <div key={index} className=' border-gray-300 rounded shadow-md '>
+                        <div key={index} className='border-gray-300 rounded-lg shadow-lg'>
                             <div className=' border-gray-200 '>
                                 <div onClick={() => {handleClickCount(item.id)}}>
                                 <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
-                                <div className="relative h-[230px] md:h-[320px]">
-                                    <Image fill src={item.imgurl} className="object-cover" alt={item.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw"/>
+                                <div className="relative h-[170px] w-full md:h-[320px] md:w-full">
+                                    <Image fill src={item.imgurl} className={styles.image} alt={item.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw"/>
 
                                     <span className="absolute rounded-md top-2 left-2 bg-white bg-opacity-90 text-red-600 text-xl font-bold tracking-widest text-center p-1">
                                         {clickCounts[item.id] || 0}<br/><div className='text-xs'>Click</div>
@@ -92,7 +92,7 @@ export default function Ssr({ data, totalCount, page, limit }) {
                                         </div> */}
                                         {/* <p className='absolute top-0 left-0 bg-white opacity-75'>クリック数: {clickCounts[item.id] || 0}</p> */}
                                     
-                                    <h2 className='m-2 text-xl font-bold text-blue-600'>
+                                    <h2 className='m-2 text-sm md:text-xl font-bold text-blue-600'>
                                         {item.title}
                                     </h2>
                                 </Link>

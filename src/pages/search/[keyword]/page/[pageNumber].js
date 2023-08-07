@@ -33,7 +33,7 @@ const SearchPage = () => {
         <Header />
         <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
             <Sidebar />
-            <div className="md:w-3/4 md:ml-4 grid sm:grid-cols-1 md:grid-cols-2 gap-5 p-5 order-2 md:order-2">
+            <div className="md:w-3/4 md:ml-4 grid sm:grid-cols-1 md:grid-cols-2 gap-3 p-1 order-2 md:order-2">
             <h2>{keyword}の関連動画</h2>
                 {posts.map((item, index) => {
                     let date = item.published_at ? new Date(item.published_at) : null;
@@ -56,7 +56,7 @@ const SearchPage = () => {
                             <div className='border-b border-gray-200 m-3'>
                                 <div onClick={() => {handleClickCount(item.id)}}>
                                 <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
-                                    <div className="p-4 relative">
+                                    <div className="relative h-[170px] w-full md:h-[320px] md:w-full">
                                         <Image fill src={item.imgurl} className={styles.image} alt={item.title} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
                                     </div>
                                     <h2 className='m-3 text-xl'>
@@ -65,7 +65,7 @@ const SearchPage = () => {
                                 </Link>
                                 </div>
                                 <div className='tags'>
-                                <Tags tagsArray={tagsArray}/>
+                                <Tags tagsArray={tagsArray} numberTags={5}/>
                                 </div>
                                 <div className='date px-2 align-sub text-gray-500'>
                                     {date && <p>{formattedDate}</p>}

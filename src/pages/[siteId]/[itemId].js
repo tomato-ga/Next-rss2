@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
 import RelatedTagPosts from '@/components/RelatedTagPosts';
 import Comment from '@/components/Comment';
 import Tags from '@/components/Tags';
+import styles from '@/components/iiim.module.css';
+
 
 const Posts = () => {
     const [data, setData] = useState(null);
@@ -21,10 +25,28 @@ const Posts = () => {
                     const data = await res.json();
                     setData(data);
                     
+                console.log(data[0].id);
+                let savedArticles = JSON.parse(localStorage.getItem('articleData')) || [];
 
-                    const feedsResponse = await fetch(`http://192.168.0.25:7002/sites/${siteId}/rss/latest`);
-                    const feedsData = await feedsResponse.json();
-                    setRssFeeds(feedsData);
+                // 同じIDのデータが存在するかチェック
+                const isArticleExist = savedArticles.some(article => article[0].id === data[0].id);
+                
+                if (!isArticleExist) {
+                  // 保存されたデータが5件の場合、最古のデータを削除
+                  if (savedArticles.length === 5) {
+                    savedArticles.shift();
+                  }
+                
+                  // 新しいデータを追加
+                  savedArticles.push(data);
+                
+                  // 更新されたデータを保存
+                  localStorage.setItem('articleData', JSON.stringify(savedArticles));
+                }
+
+                    // const feedsResponse = await fetch(`http://192.168.0.25:7002/sites/${siteId}/rss/latest`);
+                    // const feedsData = await feedsResponse.json();
+                    // setRssFeeds(feedsData);
                 } catch (error) {
                     console.error("Error fetching data: ", error);
                 }
@@ -42,6 +64,17 @@ const Posts = () => {
     let tags = data[0].tag.split(',');
     // console.log(tags)
 
+const checkSavedArticles = () => {
+    let savedbrowserArticles = JSON.parse(localStorage.getItem('articleData')) || [];
+
+    if (savedbrowserArticles) {
+    return savedbrowserArticles;
+    } else {
+        return false;
+    }
+}
+
+const articles = checkSavedArticles();
 
     return (
         <div>
@@ -69,7 +102,23 @@ const Posts = () => {
                     {/* <div className='py-10 px-3'>
                     <Comment rss_id={itemId}/>  */}
                     {/* itemId=データベースのrss_idなので、propsで渡す */}
-                    {/* </div> */}
+
+                    <div className='mt-5 mb-3 p-2 font-bold text-2xl bg-slate-400 text-black'>
+                    <h2>最近チェックした動画</h2>
+                    </div>
+                    <div>
+                    {articles ? articles.reverse().map((articleGroup, groupIndex) => (
+                        <div key={groupIndex}>
+                        {articleGroup.map((article, articleIndex) => (
+                            <div key={articleIndex}>
+                            <h3>{article.title}</h3>
+                            {/* 画像が必要な場合、コメントを外して使用 */}
+                            {/* <Image fill src={article.imgurl} className={styles.image} alt={article.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw"/> */}
+                            </div>
+                        ))}
+                        </div>
+                    )) : null}
+                    </div>
 
                     {/* 関連動画 */}
                     <RelatedTagPosts tag={tags[0]} />

@@ -31,7 +31,7 @@ const TagPage = () => {
         <Header />
         <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
             <Sidebar />
-            <div className="md:w-3/4 md:ml-4 grid sm:grid-cols-1 md:grid-cols-2 gap-5 p-5 order-2 md:order-2">
+            <div className="md:w-3/4 md:ml-4 grid sm:grid-cols-1 md:grid-cols-2 gap-3 p-1 order-2 md:order-2">
             {/* <SearchForm /> */}
                 {posts.map((item, index) => {
                     let date = item.published_at ? new Date(item.published_at) : null;
@@ -53,15 +53,15 @@ const TagPage = () => {
                         <div key={index} className='border-gray-300 rounded shadow-md'>
                             <div className='border-gray-200'>
                                 <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
-                                    <div className="relative h-[230px] md:h-[320px]">
+                                    <div className="relative h-[170px] w-full md:h-[320px] md:w-full">
                                         <Image fill src={item.imgurl} className="object-cover" alt={item.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw"/>
                                     </div>
-                                    <h2 className='m-2 text-xl font-bold text-blue-600'>
+                                    <h2 className='m-2 text-sm md:text-xl font-bold text-blue-600'>
                                         {item.title}
                                     </h2>
                                 </Link>
                                 <div className='tags'>
-                                <Tags tagsArray={tagsArray}/>
+                                <Tags tagsArray={tagsArray} numberTags={5}/>
                                 </div>
                                 {/* <div className='date px-2 align-sub text-gray-500'>
                                     {date && <p>{formattedDate}</p>}
