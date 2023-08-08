@@ -9,6 +9,7 @@ import Sidebar from '@/components/Sidebar';
 import Tags from '@/components/Tags';
 import Pagination from '@/components/Pagination';
 import { handleClickCount } from '@/lib/clickCountDB';
+import NewSidebar from '@/components/NewSide';
 
 export default function Ssr({ data, totalCount, page, limit }) {
 

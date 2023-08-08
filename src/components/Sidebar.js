@@ -1,15 +1,40 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Sidebar = () => {
+
+    const [topTags, settopTags] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const ENDP = `http://192.168.0.25:7002/top_tags`;
+                const res = await fetch(ENDP);
+                const data = await res.json();
+                settopTags(data);
+            } catch (error) {
+                console.error("Error fetching data", error);
+            }
+        };
+    
+        fetchData(); // 非同期関数を呼び出す
+    }, []);
+    
+
     return (
-        <div className='border border-gray-300 rounded-lg shadow-lg p-4 flex-grow-0 w-72'>
-            <h2 className='text-2xl mb-4'>サイドバー</h2>
-            <p>
-                <Link href='/tag/爆乳/page/1'>
-                    爆乳
-                </Link>
-            </p>
+        <div className='border border-gray-300 rounded-lg shadow-lg p-5 flex-grow-0 w-56'>
+            <h2 className='text-xl mb-4 text-center'>人気のキーワード</h2>
+            {topTags.slice(0,10).map((tag, index) => (
+                <div>
+                    <ul className='space-y-2'>
+                        <li className='list-disc text-blue-500 font-bold'>
+                            <Link href={`/tag/${tag}/page/1`}>
+                            {tag}
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+            ))}
         </div>
     )
 }

@@ -7,7 +7,7 @@ import Sidebar from '@/components/Sidebar';
 import RelatedTagPosts from '@/components/RelatedTagPosts';
 import Comment from '@/components/Comment';
 import Tags from '@/components/Tags';
-import styles from '@/components/iiim.module.css';
+import Link from 'next/link';
 
 
 const Posts = () => {
@@ -33,7 +33,7 @@ const Posts = () => {
                     
                     if (!isArticleExist) {
                     // 保存されたデータが5件の場合、最古のデータを削除
-                    if (savedArticles.length === 5) {
+                    if (savedArticles.length === 1000) {
                         savedArticles.shift();
                     }
                     
@@ -76,6 +76,9 @@ const checkSavedArticles = () => {
 
 const articles = checkSavedArticles();
 
+console.log(articles);
+
+
     return (
         <div>
             <Header />
@@ -108,18 +111,22 @@ const articles = checkSavedArticles();
                     </div>
 
                     {/* コンポーネント化する */}
-                    <div>
-                        {articles ? articles.reverse().map((articleGroup, groupIndex) => (
-                            <div key={groupIndex}>
-                            {articleGroup.map((article, articleIndex) => (
-                                <div key={articleIndex}>
-                                <h3>{article.title}</h3>
-                                {/* 画像が必要な場合、コメントを外して使用 */}
-                                {/* <Image fill src={article.imgurl} className={styles.image} alt={article.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw"/> */}
-                                </div>
-                            ))}
+
+                    <div className="flex flex-wrap md:flex-nowrap justify-center">
+                    {articles ? articles.reverse().slice(0, 6).map((articleGroup, groupIndex) => (
+                        articleGroup.map((article, articleIndex) => (
+                        <>
+                        <Link href="/[siteId]/[itemId]" as={`/${article.site_id}/${article.id}`}>
+                            <div key={articleIndex} className="mr-3 mb-3 flex flex-col">
+                            <div className="relative flex justify-center items-center h-[200px] md:h-[170px] w-[250px] md:w-[170px] mx-auto">
+                                <Image className="" fill src={article.imgurl} alt={article.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw" />
                             </div>
-                        )) : null}
+                            <h3 className='p-2 text-center text-base'>{article.title}</h3>
+                            </div>
+                        </Link>
+                        </>
+                        ))
+                    )) : null}
                     </div>
 
                     {/* 関連動画 */}
