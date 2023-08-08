@@ -25,24 +25,24 @@ const Posts = () => {
                     const data = await res.json();
                     setData(data);
                     
-                console.log(data[0].id);
-                let savedArticles = JSON.parse(localStorage.getItem('articleData')) || [];
+                    console.log(data[0].id);
+                    let savedArticles = JSON.parse(localStorage.getItem('articleData')) || [];
 
-                // 同じIDのデータが存在するかチェック
-                const isArticleExist = savedArticles.some(article => article[0].id === data[0].id);
-                
-                if (!isArticleExist) {
-                  // 保存されたデータが5件の場合、最古のデータを削除
-                  if (savedArticles.length === 5) {
-                    savedArticles.shift();
-                  }
-                
-                  // 新しいデータを追加
-                  savedArticles.push(data);
-                
-                  // 更新されたデータを保存
-                  localStorage.setItem('articleData', JSON.stringify(savedArticles));
-                }
+                    // 同じIDのデータが存在するかチェック
+                    const isArticleExist = savedArticles.some(article => article[0].id === data[0].id);
+                    
+                    if (!isArticleExist) {
+                    // 保存されたデータが5件の場合、最古のデータを削除
+                    if (savedArticles.length === 5) {
+                        savedArticles.shift();
+                    }
+                    
+                    // 新しいデータを追加
+                    savedArticles.push(data);
+                    
+                    // 更新されたデータを保存
+                    localStorage.setItem('articleData', JSON.stringify(savedArticles));
+                    }
 
                     // const feedsResponse = await fetch(`http://192.168.0.25:7002/sites/${siteId}/rss/latest`);
                     // const feedsData = await feedsResponse.json();
@@ -90,7 +90,7 @@ const articles = checkSavedArticles();
                         </div>
 
                         <div className='p-2 md:p-4'>
-                        <Tags tagsArray={tags} numberTags={20}/>
+                            <Tags tagsArray={tags} numberTags={20}/>
                         </div>
                     </div>
 
@@ -104,20 +104,22 @@ const articles = checkSavedArticles();
                     {/* itemId=データベースのrss_idなので、propsで渡す */}
 
                     <div className='mt-5 mb-3 p-2 font-bold text-2xl bg-slate-400 text-black'>
-                    <h2>最近チェックした動画</h2>
+                        <h2>最近チェックした動画</h2>
                     </div>
+
+                    {/* コンポーネント化する */}
                     <div>
-                    {articles ? articles.reverse().map((articleGroup, groupIndex) => (
-                        <div key={groupIndex}>
-                        {articleGroup.map((article, articleIndex) => (
-                            <div key={articleIndex}>
-                            <h3>{article.title}</h3>
-                            {/* 画像が必要な場合、コメントを外して使用 */}
-                            {/* <Image fill src={article.imgurl} className={styles.image} alt={article.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw"/> */}
+                        {articles ? articles.reverse().map((articleGroup, groupIndex) => (
+                            <div key={groupIndex}>
+                            {articleGroup.map((article, articleIndex) => (
+                                <div key={articleIndex}>
+                                <h3>{article.title}</h3>
+                                {/* 画像が必要な場合、コメントを外して使用 */}
+                                {/* <Image fill src={article.imgurl} className={styles.image} alt={article.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw"/> */}
+                                </div>
+                            ))}
                             </div>
-                        ))}
-                        </div>
-                    )) : null}
+                        )) : null}
                     </div>
 
                     {/* 関連動画 */}

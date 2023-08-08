@@ -5,7 +5,7 @@ const Header = () => {
         <>
         <header className="border-b flex items-center h-16 px-8">
             <Link href='/'>
-                HOME!
+                エロコメスト
             </Link>
         </header>
         </>
