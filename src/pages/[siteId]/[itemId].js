@@ -17,6 +17,10 @@ export async function getServerSideProps(context) {
   const res = await fetch(ENDP);
   const data = await res.json();
 
+  console.log(siteId, itemId);
+  console.log(data);
+
+
   // タグの分割
   const tags = data[0]?.tag.split(',');
 
@@ -28,9 +32,8 @@ export async function getServerSideProps(context) {
   };
 }
 
-const Posts = ({ data, tags }) => {
+const Posts = ({ data }) => {
 
-    console.log(data);
   if (!data) {
     return <p>Loading...</p>;
   }
@@ -39,16 +42,31 @@ const Posts = ({ data, tags }) => {
 
   return (
     <div>
-      <Header />
-      <div className='container mx-auto px-4 py-6 flex flex-col-reverse md:flex-row'>
-        <Sidebar />
-        <div className='md:w-3/4 md:ml-4'>
-          <h1 className="m-2 text-xl md:text-4xl font-bold text-blue-600 border-b pb-2">{data[0].title}</h1>
-          {/* 他のコンポーネントとマークアップを追加 */}
-        </div>
-      </div>
-    </div>
-  );
+        <Header />
+        <div className='container mx-auto px-4 py-6 flex flex-col-reverse md:flex-row'>
+            <Sidebar />
+            <div className='md:w-3/4 md:ml-4'>
+                <h1 className="m-2 text-xl md:text-4xl font-bold text-blue-600 border-b pb-2">{data[0].title}</h1>
+
+                <div className='grid md:grid-cols-2 gap-2'>
+                    <div className='desc p-5'>
+                        {<img src={data[0].imgurl}></img>}
+
+
+                    </div>
+
+                    <div className='p-2 md:p-4'>
+                    </div>
+                </div>
+
+                <div className='text-2xl bg-blue-700 text-white text-center font-semibold hover:bg-orange-700 rounded-md'>
+                    <h3><a href={data[0].link} target='_blank'>{data[0].title}のページを見る</a></h3>
+                </div>
+
+              </div>
+              </div>
+              </div>
+);
 };
 
 export default Posts;
