@@ -10,6 +10,7 @@ import Tags from '@/components/Tags';
 import Pagination from '@/components/Pagination';
 import { handleClickCount } from '@/lib/clickCountDB';
 import NewSidebar from '@/components/NewSide';
+import PopularMovies from '@/components/PopularMovies';
 
 export default function Ssr({ data, totalCount, page, limit }) {
 
@@ -49,9 +50,10 @@ export default function Ssr({ data, totalCount, page, limit }) {
 
 
     return (
+
         <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
-            <Sidebar />
-            <div className="md:w-3/4 md:ml-4 grid sm:grid-cols-1 md:grid-cols-2 gap-3 p-1 order-2 md:order-2">
+             <Sidebar />
+             <div className="md:w-3/4 md:ml-4 grid sm:grid-cols-1 md:grid-cols-2 gap-3 p-1 order-2 md:order-2">
                 {data.map((item, index) => {
                     let date = item.published_at ? new Date(item.published_at) : null;
                     let formattedDate = "";
@@ -73,7 +75,7 @@ export default function Ssr({ data, totalCount, page, limit }) {
                             <div className=' border-gray-200 '>
                                 <div onClick={() => {handleClickCount(item.id)}}>
                                 <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
-                                <div className="relative h-[170px] w-full md:h-[320px] md:w-full">
+                                <div className="relative h-[270px] w-full md:h-[320px] md:w-full">
                                     <Image fill src={item.imgurl} className={styles.image} alt={item.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw"/>
 
                                     <span className="absolute rounded-md top-2 left-2 bg-white bg-opacity-90 text-red-600 text-xl font-bold tracking-widest text-center p-1">
@@ -81,17 +83,6 @@ export default function Ssr({ data, totalCount, page, limit }) {
                                     </span>
                                     
                                 </div>
-                                {/* <div className="relative h-[320px]">
-                                <Image fill src={item.imgurl} className="object-cover" alt={item.title} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
-                                </div> */}
-
-                                        {/* <div className="absolute top-0 left-0 text-center">
-                                        <span className="text-black text-2xl font-normal tracking-widest text-center">
-                                        {clickCounts[item.id] || 0}
-                                        </span>
-                                        <span className="text-black text-sm font-normal tracking-widest text-center">Click</span>
-                                        </div> */}
-                                        {/* <p className='absolute top-0 left-0 bg-white opacity-75'>クリック数: {clickCounts[item.id] || 0}</p> */}
                                     
                                     <h2 className='m-2 text-sm md:text-xl font-bold text-blue-600'>
                                         {item.title}
@@ -101,9 +92,7 @@ export default function Ssr({ data, totalCount, page, limit }) {
                                 <div className='tags'>
                                 <Tags tagsArray={tagsArray} numberTags={5}/>
                                 </div>
-                                {/* <div className='date px-2 align-sub text-gray-500'>
-                                    {date && <p>{formattedDate}</p>}
-                                </div> */}
+
 
                             </div>
                         </div>
@@ -112,9 +101,8 @@ export default function Ssr({ data, totalCount, page, limit }) {
                 <Pagination totalCount={totalCount} pageSize={limit} currentPage={page} pageChangeUrl={(page) => `/page/${page}`} />
             </div>
         </div>
-    );
     
-
+    );
 }
 
 // タグとクリック入れられた。

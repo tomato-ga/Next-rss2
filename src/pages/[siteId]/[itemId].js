@@ -76,8 +76,6 @@ const checkSavedArticles = () => {
 
 const articles = checkSavedArticles();
 
-console.log(articles);
-
 
     return (
         <div>
@@ -111,7 +109,6 @@ console.log(articles);
                     </div>
 
                     {/* コンポーネント化する */}
-
                     <div className="flex flex-wrap md:flex-nowrap justify-center">
                     {articles ? articles.reverse().slice(0, 6).map((articleGroup, groupIndex) => (
                         articleGroup.map((article, articleIndex) => (
