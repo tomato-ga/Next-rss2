@@ -17,10 +17,6 @@ export async function getServerSideProps(context) {
   const res = await fetch(ENDP);
   const data = await res.json();
 
-  console.log(siteId, itemId);
-  console.log(data);
-
-
   // タグの分割
   const tags = data[0]?.tag.split(',');
 
