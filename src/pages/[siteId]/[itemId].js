@@ -8,6 +8,8 @@ import RelatedTagPosts from '@/components/RelatedTagPosts';
 import Comment from '@/components/Comment';
 import Tags from '@/components/Tags';
 import Link from 'next/link';
+import FetchClickCounts from '@/components/Clickcount';
+
 
 
 const Posts = () => {
@@ -88,6 +90,8 @@ const articles = checkSavedArticles();
                     <div className='grid md:grid-cols-2 gap-2'>
                         <div className='desc p-5'>
                             {<img src={data[0].imgurl}></img>}
+
+
                         </div>
 
                         <div className='p-2 md:p-4'>
@@ -117,6 +121,7 @@ const articles = checkSavedArticles();
                             <div key={articleIndex} className="mr-3 mb-3 flex flex-col">
                             <div className="relative flex justify-center items-center h-[200px] md:h-[170px] w-[250px] md:w-[170px] mx-auto">
                                 <Image className="" fill src={article.imgurl} alt={article.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw" />
+                                <FetchClickCounts itemId={article.id}/>
                             </div>
                             <h3 className='p-2 text-center text-base'>{article.title}</h3>
                             </div>

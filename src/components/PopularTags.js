@@ -25,7 +25,7 @@ const PopularTags = () => {
             <div className="text-center font-bold p-10 md:w-1/2 w-full">
                 <h2 className="mb-4">
                     <span className="border-b-2 pb-1 border-blue-300 text-2xl">
-                        人気タグ
+                        人気キーワード
                     </span>
                 </h2>
     

@@ -11,6 +11,8 @@ import styles from '@/components/iiim.module.css'
 import Image from 'next/image';
 import useTagPagination from '@/hooks/useTagPagination';
 import { useRouter } from 'next/router';
+import FetchClickCounts from '@/components/Clickcount';
+
 
 
 const TagPage = () => {
@@ -55,6 +57,8 @@ const TagPage = () => {
                                 <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
                                     <div className="relative h-[170px] w-full md:h-[320px] md:w-full">
                                         <Image fill src={item.imgurl} className="object-cover" alt={item.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw"/>
+                                        <FetchClickCounts itemId={item.id}/>
+
                                     </div>
                                     <h2 className='m-2 text-sm md:text-xl font-bold text-blue-600'>
                                         {item.title}

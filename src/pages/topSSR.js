@@ -11,6 +11,7 @@ import Pagination from '@/components/Pagination';
 import { handleClickCount } from '@/lib/clickCountDB';
 import NewSidebar from '@/components/NewSide';
 import PopularMovies from '@/components/PopularMovies';
+import FetchClickCounts from '@/components/Clickcount';
 
 export default function Ssr({ data, totalCount, page, limit }) {
 
@@ -18,32 +19,33 @@ export default function Ssr({ data, totalCount, page, limit }) {
     const [items, setItems] = useState(itemIds);
     const [clickCounts, setClickCounts] = useState({});
 
-    useEffect(() => {
-        const fetchClickCounts = async () => {
-            const response = await fetch('http://192.168.0.25:7002/click_counts', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(itemIds), 
-            });
+    // useEffect(() => {
+    //     const fetchClickCounts = async () => {
+    //         const response = await fetch('http://192.168.0.25:7002/click_counts', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify(itemIds), 
+    //         });
     
-            if (!response.ok) {
-                console.error(`Error fetching click counts: ${response.status} ${response.statusText}`);
-                return;
-            }
+    //         if (!response.ok) {
+    //             console.error(`Error fetching click counts: ${response.status} ${response.statusText}`);
+    //             return;
+    //         }
     
-            const initialClickCounts = await response.json();
-            setClickCounts(initialClickCounts);
-        };
+    //         const initialClickCounts = await response.json();
+    //         setClickCounts(initialClickCounts);
+    //     };
     
-        if (Array.isArray(itemIds) && itemIds.every(Number.isInteger)) {
-            fetchClickCounts();
-        } else {
-            console.error("itemIds must be an array of integers", itemIds);
-        }
-    }, [itemIds]);
+    //     if (Array.isArray(itemIds) && itemIds.every(Number.isInteger)) {
+    //         fetchClickCounts();
+    //     } else {
+    //         console.error("itemIds must be an array of integers", itemIds);
+    //     }
+    // }, [itemIds]);
     
+
     // console.log('ID一覧',itemIds);
     // console.log('クリックカウント数',clickCounts);
     // console.log('clickCountsの型:', typeof clickCounts);
@@ -52,8 +54,8 @@ export default function Ssr({ data, totalCount, page, limit }) {
     return (
 
         <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
-             <Sidebar />
-             <div className="md:w-3/4 md:ml-4 grid sm:grid-cols-1 md:grid-cols-2 gap-3 p-1 order-2 md:order-2">
+            <Sidebar />
+            <div className="md:w-3/4 md:ml-4 grid sm:grid-cols-1 md:grid-cols-2 gap-3 p-1 order-2 md:order-2">
                 {data.map((item, index) => {
                     let date = item.published_at ? new Date(item.published_at) : null;
                     let formattedDate = "";
@@ -79,7 +81,7 @@ export default function Ssr({ data, totalCount, page, limit }) {
                                     <Image fill src={item.imgurl} className={styles.image} alt={item.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw"/>
 
                                     <span className="absolute rounded-md top-2 left-2 bg-white bg-opacity-90 text-red-600 text-xl font-bold tracking-widest text-center p-1">
-                                        {clickCounts[item.id] || 0}<br/><div className='text-xs'>Click</div>
+                                        <FetchClickCounts itemId={item.id}/>
                                     </span>
                                     
                                 </div>
@@ -92,8 +94,6 @@ export default function Ssr({ data, totalCount, page, limit }) {
                                 <div className='tags'>
                                 <Tags tagsArray={tagsArray} numberTags={5}/>
                                 </div>
-
-
                             </div>
                         </div>
                     );
@@ -101,10 +101,5 @@ export default function Ssr({ data, totalCount, page, limit }) {
                 <Pagination totalCount={totalCount} pageSize={limit} currentPage={page} pageChangeUrl={(page) => `/page/${page}`} />
             </div>
         </div>
-    
     );
 }
-
-// タグとクリック入れられた。
-// todo: cssの調整で、カード型でスマホで見やすくすることで構成する https://flowbite.com/docs/components/card/ https://tailwind-elements.com/docs/standard/components/cards/ https://ordinarycoders.com/blog/article/17-tailwindcss-cards
-// ここらへんのURLを参考にしてcard型にトライする

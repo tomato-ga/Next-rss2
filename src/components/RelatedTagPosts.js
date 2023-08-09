@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Tags from './Tags';
 import Image from 'next/image';
 import styles from './iiim.module.css'
+import FetchClickCounts from './Clickcount';
 
 const RelatedTagPosts = ({ tag }) => {
 
@@ -38,7 +39,10 @@ const RelatedTagPosts = ({ tag }) => {
                 <div key={post.id} className="border-gray-300 rounded-lg shadow-lg">
                     <Link href="/[siteId]/[itemId]" as={`/${post.site_id}/${post.id}`}>
                 <div className="relative h-[170px] w-full md:h-[320px] md:w-full">
+
                     <Image fill src={post.imgurl} className={styles.image} alt={post.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw"/>
+                    <FetchClickCounts itemId={post.id}/> 
+
                 </div>
                     <p className="m-2 text-sm md:text-xl font-bold text-blue-600">{post.title}</p>
                     </Link>
@@ -54,5 +58,3 @@ const RelatedTagPosts = ({ tag }) => {
 };
 
 export default RelatedTagPosts;
-
-// TODO クリックカウント関数をコピーして持ってきて表示する
