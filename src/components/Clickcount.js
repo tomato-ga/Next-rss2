@@ -3,9 +3,6 @@ import { useEffect, useState } from 'react';
 
 const FetchClickCounts = ({ itemId }) => {
     const [clickCount, setClickCount] = useState(0);
-
-    console.log(itemId);
-
     useEffect(() => {
         const fetchClickCounts = async () => {
             if (typeof itemId !== 'number') {

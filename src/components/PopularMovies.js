@@ -23,8 +23,6 @@ const PopularMovies = () => {
         fetchData();
     }, [])
 
-    console.log(data);
-    console.log(typeof data);
 
     return (
 <div className="justify-center text-center font-bold">

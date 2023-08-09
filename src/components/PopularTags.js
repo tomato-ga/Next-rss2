@@ -31,11 +31,13 @@ const PopularTags = () => {
     
                 <ul className='flex flex-wrap space-x-2 justify-center'>
                     {data.map((tag, index) => (
+                        <div key={index} className="">
                         <li className='inline-block bg-pink-50 rounded-full px-3 py-1 text-xs md:text-sm font-semibold text-pink-600 mr-2 mb-2'>
                             <Link href={`/tag/${tag}/page/1`}>
                                 #{tag}
                             </Link>
                         </li>
+                        </div>
                     ))}
                 </ul>
             </div>

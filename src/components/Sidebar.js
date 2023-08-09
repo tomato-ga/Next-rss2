@@ -25,7 +25,7 @@ const Sidebar = () => {
         <div className='border border-gray-300 rounded-lg shadow-lg p-5 flex-grow-0 w-56'>
             <h2 className='text-xl mb-4 text-center'>人気のキーワード</h2>
             {topTags.slice(0,10).map((tag, index) => (
-                <div>
+                <div key={index}>
                     <ul className='space-y-2'>
                         <li className='list-disc text-blue-500 font-bold'>
                             <Link href={`/tag/${tag}/page/1`}>

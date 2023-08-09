@@ -12,6 +12,8 @@ import Image from 'next/image';
 import useTagPagination from '@/hooks/useTagPagination';
 import { useRouter } from 'next/router';
 import FetchClickCounts from '@/components/Clickcount';
+import { handleClickCount } from '@/lib/clickCountDB';
+
 
 
 
@@ -53,6 +55,8 @@ const TagPage = () => {
                     }
                     return (
                         <div key={index} className='border-gray-300 rounded shadow-md'>
+                            <div onClick={() => { handleClickCount(item.id) }}>
+
                             <div className='border-gray-200'>
                                 <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
                                     <div className="relative h-[170px] w-full md:h-[320px] md:w-full">
@@ -72,6 +76,7 @@ const TagPage = () => {
                                 </div> */}
                             </div>
                         </div>
+                </div>
                     );
                 })}
                 <Pagination 
@@ -83,7 +88,6 @@ const TagPage = () => {
                     return `/tag/${tagpage}/page/${page}`;
                 }}
                 />
-    
             </div>
         </div>
         </>
