@@ -2,7 +2,7 @@
 
 export const handleClickCount = async (postitemid) => {
     try {
-        const response = await fetch(`http://192.168.0.25:7002/click_count/${postitemid}`, {
+        const response = await fetch(`http://119.106.61.124:7002/click_count/${postitemid}`, {
             method: 'PUT',
         });
         if (!response.ok) {
@@ -17,7 +17,7 @@ export const handleClickCount = async (postitemid) => {
 // export const getClickCount = async (postitemid) => {
 //     let response;
 //     try {
-//         response = await fetch(`http://192.168.0.25:7002/click_count/${postitemid}`, {
+//         response = await fetch(`http://119.106.61.124:7002/click_count/${postitemid}`, {
 //             method: 'GET',
 //         });
 //         if (!response.ok) {

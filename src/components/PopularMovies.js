@@ -11,7 +11,7 @@ const PopularMovies = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const ENDP = `http://192.168.0.25:7002/top_movies`;
+                const ENDP = `http://119.106.61.124:7002/top_movies`;
                 const res = await fetch(ENDP);
                 const data = await res.json();
                 setData(data);
