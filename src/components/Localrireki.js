@@ -4,8 +4,9 @@ import Image from "next/image";
 const Localrireki = ({ localData }) => {
     return (
 
+        // TODO 最近の履歴が更新されて表示されない。保存件数が多すぎるか、reverseがいたずらしている
         <div className="flex flex-wrap md:flex-nowrap justify-center">
-            {localData ? localData.reverse().slice(0, 6).map((articleGroup, groupIndex) => (
+            {localData ? localData.slice(0, 6).map((articleGroup, groupIndex) => (
             <div key={groupIndex}>
                 {articleGroup.map((article, articleIndex) => (
                 <Link key={articleIndex} href="/[siteId]/[itemId]" as={`/${article.site_id}/${article.id}`}> {/* 内側のマップで別のキーを使用 */}
