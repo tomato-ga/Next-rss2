@@ -10,7 +10,7 @@ const FetchClickCounts = ({ itemId }) => {
                 return;
             }
 
-            const response = await fetch('http://119.106.61.124:7002/click_counts', {
+            const response = await fetch('http://192.168.0.25:7002/click_counts', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -9,7 +9,7 @@ import Comment from '@/components/Comment';
 import Tags from '@/components/Tags';
 import Link from 'next/link';
 import FetchClickCounts from '@/components/Clickcount';
-
+import { handleClickCount } from '@/lib/clickCountDB';
 
 
 const Posts = () => {
@@ -22,7 +22,7 @@ const Posts = () => {
         if (router.isReady) {
             const fetchData = async () => {
                 try {
-                    const ENDP = `http://119.106.61.124:7002/sites/rss/${itemId}`;
+                    const ENDP = `http://192.168.0.25:7002/sites/rss/${itemId}`;
                     const res = await fetch(ENDP);
                     const data = await res.json();
                     setData(data);
@@ -46,7 +46,7 @@ const Posts = () => {
                     localStorage.setItem('articleData', JSON.stringify(savedArticles));
                     }
 
-                    // const feedsResponse = await fetch(`http://119.106.61.124:7002/sites/${siteId}/rss/latest`);
+                    // const feedsResponse = await fetch(`http://192.168.0.25:7002/sites/${siteId}/rss/latest`);
                     // const feedsData = await feedsResponse.json();
                     // setRssFeeds(feedsData);
                 } catch (error) {
@@ -132,7 +132,9 @@ const articles = checkSavedArticles();
                     </div>
 
                     {/* 関連動画 */}
+                    <div onClick={() => {handleClickCount(item.id)}}>
                     <RelatedTagPosts tag={tags[0]} />
+                    </div>
     
                     {/* このサイトのRSS URL */}
                     {/* <div className='rss-feeds'>

@@ -8,7 +8,7 @@ const Sidebar = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const ENDP = `http://119.106.61.124:7002/top_tags`;
+                const ENDP = `http://192.168.0.25:7002/top_tags`;
                 const res = await fetch(ENDP);
                 const data = await res.json();
                 settopTags(data);

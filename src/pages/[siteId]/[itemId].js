@@ -10,12 +10,14 @@ import Tags from '@/components/Tags';
 import Link from 'next/link';
 import FetchClickCounts from '@/components/Clickcount';
 import Localrireki from '@/components/Localrireki';
+import { handleClickCount } from '@/lib/clickCountDB';
+
 
 
 // TODO contextのitemidから確認する
 export async function getServerSideProps(context) {
   const { siteId, itemId } = context.params;
-  const ENDP = `http://119.106.61.124:7002/sites/rss/${itemId}`;
+  const ENDP = `http://192.168.0.25:7002/sites/rss/${itemId}`;
   const res = await fetch(ENDP);
   const data = await res.json();
 
@@ -43,11 +45,11 @@ const Posts = ({ data }) => {
     const isArticleExist = savedArticles.some(article => article[0].id === data[0].id);
 
     if (!isArticleExist) {
-      if (savedArticles.length === 1000) {
-        savedArticles.shift();
+      if (savedArticles.length === 500) {
+        savedArticles.pop(); // 末尾の要素を削除
       }
-
-      savedArticles.push(data);
+    
+      savedArticles.unshift(data); // 先頭に追加
       localStorage.setItem('articleData', JSON.stringify(savedArticles));
     }
 
@@ -70,7 +72,7 @@ const Posts = ({ data }) => {
         <Header />
         <div className='container mx-auto px-4 py-6 flex flex-col-reverse md:flex-row'>
             <Sidebar />
-            <div className='md:w-3/4 md:ml-4'>
+            <div className='md:w-3/4 md:ml-4 overflow-hidden'>
                 <h1 className="m-2 text-xl md:text-4xl font-bold text-blue-600 border-b pb-2">{data[0].title}</h1>
 
                 <div className='grid md:grid-cols-2 gap-2'>
@@ -93,13 +95,15 @@ const Posts = ({ data }) => {
                         <h2>最近チェックした動画</h2>
                 </div>
 
-                <Localrireki localData={localData} />
+                <div className="relative">
+                    <Localrireki localData={localData} />
+                </div>
 
                 <RelatedTagPosts tag={tags[0]} />
 
-              </div>
-              </div>
-              </div>
+            </div>
+        </div>
+    </div>
 );
 };
 
