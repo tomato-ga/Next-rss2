@@ -9,8 +9,7 @@ const Localrireki = ({ localData }) => {
             {localData ? localData.slice(0, 5).map((articleGroup, groupIndex) => (
             <div key={groupIndex} className="w-full md:w-1/2 lg:w-auto mb-3">
                 {articleGroup.map((article, articleIndex) => (
-                <div onClick={() => {handleClickCount(article.id)}}>
-
+                <div key={articleIndex} onClick={() => {handleClickCount(article.id)}}>
                     <Link key={articleIndex} href="/[siteId]/[itemId]" as={`/${article.site_id}/${article.id}`}>
                         <div className="mr-3 flex flex-col lg:flex-inline">
                         <div className="relative flex justify-center items-center h-[200px] md:h-[170px] w-[250px] md:w-[170px] mx-auto">
