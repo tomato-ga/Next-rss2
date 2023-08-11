@@ -38,6 +38,14 @@ const SearchPage = () => {
         <Header />
         <SearchBar />
 
+        <div className="justify-center text-center font-bold">
+            <h2 className="mb-4">
+                <span className="border-b-2 pb-1 border-blue-300 text-2xl">
+                {keyword}の関連動画
+                </span>
+            </h2>
+        </div>
+
         <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
             <Sidebar />
             <div className="md:w-3/4 md:ml-4 grid sm:grid-cols-1 md:grid-cols-2 gap-3 p-1 order-2 md:order-2">
