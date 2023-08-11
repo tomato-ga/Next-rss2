@@ -14,7 +14,7 @@ const Header = () => {
             <nav className="border-gray-200 w-full">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <Link href='/' className="text-lg font-bold text-black">
-                        コメスト
+                        エロコメスト
                     </Link>
 
                     <div className="relative inline-block text-left"> {/* This div is added to contain the button and dropdown */}

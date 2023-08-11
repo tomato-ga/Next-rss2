@@ -12,6 +12,9 @@ import FetchClickCounts from '@/components/Clickcount';
 import Localrireki from '@/components/Localrireki';
 import { handleClickCount } from '@/lib/clickCountDB';
 import Fav from '@/components/Favs';
+import { handleFavCount } from '@/lib/clickCountDB';
+import Footer from '@/components/Footer';
+
 
 
 
@@ -34,6 +37,7 @@ export async function getServerSideProps(context) {
 }
 
 const Posts = ({ data }) => {
+
   if (!data) {
     return <p>ロード中です。もしかしたらデータないかも</p>;
   }
@@ -43,28 +47,40 @@ const Posts = ({ data }) => {
   useEffect(() => {
     let savedArticles = JSON.parse(localStorage.getItem('articleData')) || [];
 
-    const isArticleExist = savedArticles.some(article => article[0].id === data[0].id);
+    // タイムスタンプの追加
+    let currentTime = new Date().toISOString();
+    let newDataWithTimestamp = { ...data[0], timestamp: currentTime };
 
-    if (!isArticleExist) {
-      if (savedArticles.length === 500) {
-        savedArticles.pop(); // 末尾の要素を削除
-      }
-    
-      savedArticles.unshift(data); // 先頭に追加
-      localStorage.setItem('articleData', JSON.stringify(savedArticles));
+    const isArticleExist = savedArticles.some(article => article[0].id === newDataWithTimestamp.id);
+
+    // 既に存在するIDのデータを削除
+    if (isArticleExist) {
+      savedArticles = savedArticles.filter(article => article[0].id !== newDataWithTimestamp.id);
     }
+
+    if (savedArticles.length === 500) {
+      savedArticles.pop(); // 末尾の要素を削除
+    }
+
+    savedArticles.unshift([newDataWithTimestamp]); // 先頭に追加
+    localStorage.setItem('articleData', JSON.stringify(savedArticles));
 
     const checkSavedArticles = () => {
       let savedbrowserArticles = JSON.parse(localStorage.getItem('articleData')) || [];
+
+      // タイムスタンプに基づいて記事をソート
+      savedbrowserArticles.sort((a, b) => new Date(b[0].timestamp) - new Date(a[0].timestamp));
+
       if (savedbrowserArticles) {
         setLocalData(savedbrowserArticles);
-      } else {
-        return false;
       }
     };
 
-    checkSavedArticles(); // 関数の呼び出し位置を修正
-  }, [data]);
+    checkSavedArticles();
+}, [data]);
+
+
+
 
   let tags = data[0].tag.split(',');
 
@@ -107,6 +123,7 @@ const Posts = ({ data }) => {
 
             </div>
         </div>
+    <Footer />
     </div>
 );
 };

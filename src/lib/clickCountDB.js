@@ -22,13 +22,16 @@ export const handleFavCount = async (postId) => {
                 'Content-Type': 'application/json',
             },
         });
+        console.log(response);
         
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
         
         const data = await response.json();
+        console.log(data);
         return data.count;  // APIから返された実際のカウントを返します。
+
         
     } catch (error) {
         console.error("Failed to handle fav count", error);

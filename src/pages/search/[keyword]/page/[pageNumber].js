@@ -14,6 +14,10 @@ import { useRouter } from 'next/router';
 import { handleClickCount } from '@/lib/clickCountDB';
 import FetchClickCounts from '@/components/Clickcount';
 
+import SearchBar from '@/components/SearchBar';
+import PopularMovies from '@/components/PopularMovies';
+import PopularTags from '@/components/PopularTags';
+import Footer from '@/components/Footer';
 
 
 const SearchPage = () => {
@@ -32,10 +36,11 @@ const SearchPage = () => {
     return (
         <>
         <Header />
+        <SearchBar />
+
         <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
             <Sidebar />
             <div className="md:w-3/4 md:ml-4 grid sm:grid-cols-1 md:grid-cols-2 gap-3 p-1 order-2 md:order-2">
-            {/* <SearchForm /> */}
                 {posts.map((item, index) => {
                     let date = item.published_at ? new Date(item.published_at) : null;
                     let formattedDate = "";
@@ -90,7 +95,10 @@ const SearchPage = () => {
     
             </div>
         </div>
+    <Footer />
+
         </>
+
     );
 
 }

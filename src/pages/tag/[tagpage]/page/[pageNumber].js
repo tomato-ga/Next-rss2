@@ -14,7 +14,10 @@ import { useRouter } from 'next/router';
 import FetchClickCounts from '@/components/Clickcount';
 import { handleClickCount } from '@/lib/clickCountDB';
 
-
+import SearchBar from '@/components/SearchBar';
+import PopularMovies from '@/components/PopularMovies';
+import PopularTags from '@/components/PopularTags';
+import Footer from '@/components/Footer';
 
 
 const TagPage = () => {
@@ -33,6 +36,9 @@ const TagPage = () => {
     return (
         <>
         <Header />
+        <SearchBar />
+        <PopularMovies />
+        <PopularTags />
         <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
             <Sidebar />
             <div className="md:w-3/4 md:ml-4 grid sm:grid-cols-1 md:grid-cols-2 gap-3 p-1 order-2 md:order-2">
@@ -90,6 +96,8 @@ const TagPage = () => {
                 />
             </div>
         </div>
+    <Footer />
+
         </>
     );
 }

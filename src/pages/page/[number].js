@@ -3,11 +3,21 @@
 import Header from "@/components/Header";
 import Ssr from "../topSSR";
 
+import SearchBar from '@/components/SearchBar';
+import PopularMovies from '@/components/PopularMovies';
+import PopularTags from '@/components/PopularTags';
+import Footer from '@/components/Footer';
+
 const Page = ({ data, totalCount, page, limit }) => {
   return (
     <>
     <Header />
+    <SearchBar />
+    <PopularMovies />
+    <PopularTags />
     <Ssr data={data} totalCount={totalCount} page={page} limit={limit} />
+    <Footer />
+
     </>
   );
 };

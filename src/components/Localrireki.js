@@ -18,14 +18,13 @@ const Localrireki = ({ localData }) => {
                         <h3 className='p-2 text-center text-base'>{article.title}</h3>
                         </div>
                     </Link>
-
                 </div>
                 ))}
             </div>
             )) : null}
         </div>
     )
-
 }
+
 
 export default Localrireki;
