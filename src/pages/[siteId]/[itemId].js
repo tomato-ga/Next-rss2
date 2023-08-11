@@ -14,11 +14,9 @@ import { handleClickCount } from '@/lib/clickCountDB';
 import Fav from '@/components/Favs';
 import { handleFavCount } from '@/lib/clickCountDB';
 import Footer from '@/components/Footer';
+import SearchBar from '@/components/SearchBar';
 
 
-
-
-// TODO contextのitemidから確認する
 export async function getServerSideProps(context) {
   const { siteId, itemId } = context.params;
   const ENDP = `http://192.168.0.25:7002/sites/rss/${itemId}`;
@@ -87,6 +85,8 @@ const Posts = ({ data }) => {
   return (
     <div>
         <Header />
+        <SearchBar />
+
         <div className='container mx-auto px-4 py-6 flex flex-col-reverse md:flex-row'>
             <Sidebar />
             <div className='md:w-3/4 md:ml-4 overflow-hidden'>

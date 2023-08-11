@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 const Footer = () => {
   return (
@@ -22,11 +23,18 @@ const Footer = () => {
             <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">登録について</h2>
             <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
-                    <a href="#" className="hover:underline">人気動画</a>
+                    <Link href="/Mostpopular" className="hover:underline">人気動画</Link>
+                </li>
+
+                <li className="mb-4">
+                    <Link href="/favpage" className="hover:underline">お気に入り</Link>
                 </li>
 
             </ul>
         </div>
+
+
+
         <div>
             <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">兄弟サイト</h2>
             <ul className="text-gray-500 dark:text-gray-400 font-medium">

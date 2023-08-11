@@ -3,8 +3,6 @@ import { handleFavCount } from "../lib/clickCountDB";
 
 const Fav = ({ postId, articleData }) => {
 
-    console.log(articleData)
-
     const [FavCount, setFavCount] = useState(0);
     const [isFavorited, setIsFavorited] = useState(false);
 

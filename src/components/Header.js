@@ -1,34 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-
 
 const Header = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
+    const buttonRef = useRef(null);
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
-    }
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target) && !buttonRef.current.contains(event.target)) {
+                setIsDropdownOpen(false);
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
 
     return (
-        <header className="border-b flex items-center h-16 px-8 justify-between bg-white text-black relative"> {/* relative class added here */}
+        <header className="border-b flex items-center h-16 px-8 justify-between bg-white text-black relative">
             <nav className="border-gray-200 w-full">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                    <Link href='/' className="text-lg font-bold text-black">
-                        エロコメスト
+                    <Link href='/'>
+                        <span className="text-lg font-bold text-black">エロコメスト</span>
                     </Link>
 
-                    <div className="relative inline-block text-left"> {/* This div is added to contain the button and dropdown */}
-                        <button onClick={toggleDropdown} id="dropdownDefaultButton" data-dropdown-toggle="dropdown" className="text-white bg-pink-500 hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center" type="button">メニュー
+                    <div className="relative inline-block text-left">
+                        <button ref={buttonRef} onClick={toggleDropdown} id="dropdownDefaultButton" data-dropdown-toggle="dropdown" className="text-blue-700 bg-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center" type="button">
+                            <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
                             <svg className="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
                             </svg>
                         </button>
-                        <div id="dropdown" className={`z-50 origin-top-right absolute right-0 mt-2 ${isDropdownOpen ? 'block' : 'hidden'} bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-44 dark:bg-gray-700`}> {/* adjusted positioning */}
+                        <div ref={dropdownRef} id="dropdown" className={`z-50 origin-top-right absolute right-0 mt-2 ${isDropdownOpen ? 'block' : 'hidden'} bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-44 dark:bg-blue-600`}>
                             <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                                <li><a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a></li>
-                                <li><a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a></li>
-                                <li><a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a></li>
-                                <li><a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a></li>
+                                <li><Link href="/Mostpopular" className="block px-4 py-2 hover:text-red-300">人気動画</Link></li>
+                                <li><Link href="/favpage" className="block px-4 py-2 hover:text-red-300">お気に入り</Link></li>
+                                
+
                             </ul>
                         </div>
                     </div>
@@ -39,6 +56,7 @@ const Header = () => {
 }
 
 export default Header;
+
 
 
 

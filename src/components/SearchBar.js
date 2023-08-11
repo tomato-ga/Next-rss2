@@ -20,16 +20,17 @@ const SearchBar = () => {
     };
 
     return (
+        <div className='p-5'>
         <form 
             onSubmit={handleSubmit} // 変更
-            className='flex border border-gray-300 rounded-md shadow-sm w-full max-w-md mx-auto my-4'
+            className='flex border border-gray-300 rounded-md shadow-sm w-full max-w-md mx-auto my-4 '
         >
             <input
                 value={searchWord}
                 onChange={handleSearchInput}
                 type='text'
                 className='flex-grow p-2 rounded-l-md focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500'
-                placeholder='キーワードを入力...'
+                placeholder='おっぱい...'
             />
             <button
                 type='submit'
@@ -38,6 +39,7 @@ const SearchBar = () => {
                 検索
             </button>
         </form>
+        </div>
     );
 }
 

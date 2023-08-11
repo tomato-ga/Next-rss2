@@ -28,7 +28,9 @@ const PopularMovies = () => {
 <div className="justify-center text-center font-bold">
     <h2 className="mb-4">
         <span className="border-b-2 pb-1 border-blue-300 text-2xl">
+            <Link href="/Mostpopular">
             人気動画
+            </Link>
         </span>
     </h2>
     
