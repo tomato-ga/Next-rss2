@@ -11,6 +11,7 @@ import Link from 'next/link';
 import FetchClickCounts from '@/components/Clickcount';
 import Localrireki from '@/components/Localrireki';
 import { handleClickCount } from '@/lib/clickCountDB';
+import Fav from '@/components/Favs';
 
 
 
@@ -80,7 +81,10 @@ const Posts = ({ data }) => {
                         {<img src={data[0].imgurl}></img>}
                     </div>
                     <div className='p-2 md:p-4'>
-                            <Tags tagsArray={tags} numberTags={20}/>
+                      <Tags tagsArray={tags} numberTags={20}/>
+                      <Fav postId={data[0].id} articleData={data} />
+
+
                     </div>
 
                     <div className='p-2 md:p-4'>

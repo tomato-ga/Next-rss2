@@ -5,6 +5,7 @@ import Ssr from './topSSR'
 import SearchBar from '@/components/SearchBar';
 import PopularMovies from '@/components/PopularMovies';
 import PopularTags from '@/components/PopularTags';
+import Footer from '@/components/Footer';
 
 import { useDispatch } from 'react-redux';
 import { setData } from '@/store/dataSlice';
@@ -25,6 +26,7 @@ export default function Home({ data, totalCount, page, limit }) {
       <PopularMovies />
       <PopularTags />
       <Ssr data={data} totalCount={totalCount} page={page} limit={limit} />
+      <Footer />
     </>
   )
 }

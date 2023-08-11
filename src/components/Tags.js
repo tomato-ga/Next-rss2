@@ -3,7 +3,7 @@ const { default: Link } = require("next/link");
 
 const Tags = ({ tagsArray, numberTags }) => {
 
-const cleanedTags = tagsArray.map(tag => tag.trim());
+    const cleanedTags = tagsArray.map(tag => tag.trim());
 
 return (
     <div className='tags flex sm:m-auto flex-wrap p-2'>
@@ -16,8 +16,6 @@ return (
         ))}
     </div>
 );
-
-
 };
 
 
