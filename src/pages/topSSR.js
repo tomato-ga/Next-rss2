@@ -14,8 +14,9 @@ import PopularMovies from '@/components/PopularMovies';
 import FetchClickCounts from '@/components/Clickcount';
 
 export default function Ssr({ data, totalCount, page, limit }) {
+    
+    const itemIds = useMemo(() => data ? data.map(item => item.id) : [], [data]);
 
-    const itemIds = useMemo(() => data.map(item => item.id), [data]);
     const [items, setItems] = useState(itemIds);
     const [clickCounts, setClickCounts] = useState({});
 
