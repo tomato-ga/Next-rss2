@@ -50,7 +50,6 @@ const TagPage = () => {
         <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
             <Sidebar />
             <div className="md:w-3/4 md:ml-4 grid sm:grid-cols-1 md:grid-cols-2 gap-3 p-1 order-2 md:order-2">
-            {/* <SearchForm /> */}
                 {posts.map((item, index) => {
                     let date = item.published_at ? new Date(item.published_at) : null;
                     let formattedDate = "";

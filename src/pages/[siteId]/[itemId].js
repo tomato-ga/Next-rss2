@@ -15,6 +15,7 @@ import Fav from '@/components/Favs';
 import { handleFavCount } from '@/lib/clickCountDB';
 import Footer from '@/components/Footer';
 import SearchBar from '@/components/SearchBar';
+import { NextSeo } from 'next-seo';
 
 
 export async function getServerSideProps(context) {
@@ -77,7 +78,7 @@ const Posts = ({ data }) => {
     checkSavedArticles();
 }, [data]);
 
-
+console.log(data);
 
 
   let tags = data[0].tag.split(',');
@@ -85,6 +86,11 @@ const Posts = ({ data }) => {
   // todo next-seoのコンポーネント入れる
   return (
     <div>
+      <NextSeo 
+      title={data[0].title}
+      description={data[0].description} 
+      canonical={`http://localhost:3000/${data[0].site_id}/${data[0].id}`}
+      />
         <Header />
         <SearchBar />
 

@@ -1,25 +1,25 @@
 export default {
-  titleTemplate: '%s | サイト名',
-  defaultTitle: 'タイトル',
+  titleTemplate: '%s | エロコメスト',
+  defaultTitle: '',
   additionalMetaTags: [
     {
       property: 'dc:creator',
-      content: '運営者名',
+      content: 'エロコメスト運営',
     },
     {
       name: 'application-name',
-      content: 'サイト名',
+      content: 'エロコメスト',
     },
   ],
   openGraph: {
     url: 'https://hogehoge.com/',
     type: 'website',
     locale: 'ja_JP',
-    site_name: 'サイト名',
+    site_name: 'エロコメスト',
   },
-  twitter: {
-    handle: '@hogehoge',
-    site: '@fugafuga',
-    cardType: 'summary_large_image',
-  },
+  // twitter: {
+  //   handle: '@hogehoge',
+  //   site: '@fugafuga',
+  //   cardType: 'summary_large_image',
+  // },
 };
