@@ -28,10 +28,11 @@ const Header = () => {
             <nav className="border-gray-200 w-full">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <Link href='/'>
-                        <span className="text-lg font-bold text-black">エロコメスト</span>
+                        <span className="text-lg font-bold text-black cursor-pointer">エロコメスト</span>
                     </Link>
 
-                    <div className="relative inline-block text-left">
+                    {/* ハンバーガーメニューボタン: 小さいデバイスでのみ表示 */}
+                    <div className="relative inline-block text-left lg:hidden">
                         <button ref={buttonRef} onClick={toggleDropdown} id="dropdownDefaultButton" data-dropdown-toggle="dropdown" className="text-blue-700 bg-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center" type="button">
                             <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -44,10 +45,14 @@ const Header = () => {
                             <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
                                 <li><Link href="/Mostpopular" className="block px-4 py-2 hover:text-red-300">人気動画</Link></li>
                                 <li><Link href="/favpage" className="block px-4 py-2 hover:text-red-300">お気に入り</Link></li>
-                                
-
                             </ul>
                         </div>
+                    </div>
+
+                    {/* 中央・大きいデバイスでのみ表示するリンク */}
+                    <div className="hidden lg:flex space-x-4">
+                        <Link href="/Mostpopular" className="text-gray-700 hover:text-red-300">人気動画</Link>
+                        <Link href="/favpage" className="text-gray-700 hover:text-red-300">お気に入り</Link>
                     </div>
                 </div>
             </nav>
@@ -56,6 +61,7 @@ const Header = () => {
 }
 
 export default Header;
+
 
 
 

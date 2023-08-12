@@ -9,6 +9,7 @@ import PopularTags from '@/components/PopularTags';
 import Footer from '@/components/Footer';
 
 const Page = ({ data, totalCount, page, limit }) => {
+  // todo next-seoのコンポーネント入れる
   return (
     <>
     <Header />

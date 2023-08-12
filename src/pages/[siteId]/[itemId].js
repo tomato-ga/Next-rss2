@@ -82,6 +82,7 @@ const Posts = ({ data }) => {
 
   let tags = data[0].tag.split(',');
 
+  // todo next-seoのコンポーネント入れる
   return (
     <div>
         <Header />

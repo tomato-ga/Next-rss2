@@ -1,6 +1,7 @@
 // /pages/index.js
 
 import Header from '@/components/Header'
+
 import Ssr from './topSSR'
 import SearchBar from '@/components/SearchBar';
 import PopularMovies from '@/components/PopularMovies';
