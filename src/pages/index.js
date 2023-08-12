@@ -7,17 +7,11 @@ import PopularMovies from '@/components/PopularMovies';
 import PopularTags from '@/components/PopularTags';
 import Footer from '@/components/Footer';
 
-import { useDispatch } from 'react-redux';
 import { setData } from '@/store/dataSlice';
 import { useEffect } from 'react';
 
 export default function Home({ data, totalCount, page, limit }) {
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(setData({ data, totalCount, page, limit}));
-  }, [data, totalCount, page, limit]);
 
   return (
     <>
