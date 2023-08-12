@@ -10,7 +10,7 @@ const useFetchRSSItems = (page, limit) => {
         const fetchRSSItems = async () => {
             setIsLoading(true);
             try {
-                const response = await fetch(`http://192.168.0.25:7002/rss/all/latest?page=${page}&limit=${limit}`);
+                const response = await fetch(`https://api.erorice.com/rss/all/latest?page=${page}&limit=${limit}`);
                 if (!response.ok) {
                     throw new Error('Error fetching RSS items');
                 }

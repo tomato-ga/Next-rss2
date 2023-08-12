@@ -21,7 +21,7 @@ export default function Ssr({ data, totalCount, page, limit }) {
 
     // useEffect(() => {
     //     const fetchClickCounts = async () => {
-    //         const response = await fetch('http://192.168.0.25:7002/click_counts', {
+    //         const response = await fetch('https://api.erorice.com/click_counts', {
     //             method: 'POST',
     //             headers: {
     //                 'Content-Type': 'application/json',

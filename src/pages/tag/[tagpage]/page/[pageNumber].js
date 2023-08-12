@@ -25,8 +25,8 @@ const TagPage = () => {
     const { tagpage, pageNumber } = router.query; // Grab pageNumber from router.query
     const pageSize = 20; 
 
-    const [posts, currentPage, changePage] = useTagPagination(`http://192.168.0.25:7002`, tagpage, pageSize);
-    const totalCount = useTotalCount(`http://192.168.0.25:7002/tag_count?tag=${tagpage}`);
+    const [posts, currentPage, changePage] = useTagPagination(`https://api.erorice.com`, tagpage, pageSize);
+    const totalCount = useTotalCount(`https://api.erorice.com/tag_count?tag=${tagpage}`);
 
     useEffect(() => {
         changePage(parseInt(pageNumber));

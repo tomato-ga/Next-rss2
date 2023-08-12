@@ -8,7 +8,7 @@ const Sidebar = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const ENDP = `http://192.168.0.25:7002/top_tags`;
+                const ENDP = `https://api.erorice.com/top_tags`;
                 const res = await fetch(ENDP);
                 const data = await res.json();
                 settopTags(data);

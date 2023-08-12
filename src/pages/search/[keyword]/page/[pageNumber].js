@@ -25,8 +25,8 @@ const SearchPage = () => {
     const { keyword, pageNumber } = router.query; // Grab pageNumber from router.query
     const pageSize = 20; 
 
-    const [posts, currentPage, changePage] = useSearchPagination(`http://192.168.0.25:7002`, keyword, pageSize);
-    const totalCount = useTotalCount(`http://192.168.0.25:7002/search_count?tag=${keyword}`);
+    const [posts, currentPage, changePage] = useSearchPagination(`https://api.erorice.com`, keyword, pageSize);
+    const totalCount = useTotalCount(`https://api.erorice.com/search_count?tag=${keyword}`);
 
     useEffect(() => {
         changePage(parseInt(pageNumber));

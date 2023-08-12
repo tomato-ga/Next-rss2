@@ -2,7 +2,7 @@
 
 export const handleClickCount = async (postitemid) => {
     try {
-        const response = await fetch(`http://192.168.0.25:7002/click_count/${postitemid}`, {
+        const response = await fetch(`https://api.erorice.com/click_count/${postitemid}`, {
             method: 'PUT',
         });
         if (!response.ok) {
@@ -16,7 +16,7 @@ export const handleClickCount = async (postitemid) => {
 
 export const handleFavCount = async (postId) => {
     try {
-        const response = await fetch(`http://192.168.0.25:7002/fav_count/${postId}`, {
+        const response = await fetch(`https://api.erorice.com/fav_count/${postId}`, {
             method: 'PUT',  // 仮定: PUTメソッドでお気に入りをインクリメントします。
             headers: {
                 'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ export const handleFavCount = async (postId) => {
 // export const getClickCount = async (postitemid) => {
 //     let response;
 //     try {
-//         response = await fetch(`http://192.168.0.25:7002/click_count/${postitemid}`, {
+//         response = await fetch(`https://api.erorice.com/click_count/${postitemid}`, {
 //             method: 'GET',
 //         });
 //         if (!response.ok) {

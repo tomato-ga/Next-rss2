@@ -20,7 +20,7 @@ import { NextSeo } from 'next-seo';
 
 export async function getServerSideProps(context) {
   const { siteId, itemId } = context.params;
-  const ENDP = `http://192.168.0.25:7002/sites/rss/${itemId}`;
+  const ENDP = `https://api.erorice.com/sites/rss/${itemId}`;
   const res = await fetch(ENDP);
   const data = await res.json();
 
