@@ -33,6 +33,13 @@ export async function getServerSideProps(context) {
 
   const fetchRes = await fetch(`https://api.erorice.com/rss/all/latest?page=${page}&limit=${limit}`);
   const data = await fetchRes.json();
+  console.log(data);
+
+  if (!Array.isArray(data) || !data.length) {
+    return {
+        notFound: true,
+    }
+}
 
 
   const res = await fetch('https://api.erorice.com/total_count')

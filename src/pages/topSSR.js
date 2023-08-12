@@ -14,12 +14,16 @@ import PopularMovies from '@/components/PopularMovies';
 import FetchClickCounts from '@/components/Clickcount';
 
 export default function Ssr({ data, totalCount, page, limit }) {
-    
+
     const itemIds = useMemo(() => data ? data.map(item => item.id) : [], [data]);
 
     const [items, setItems] = useState(itemIds);
     const [clickCounts, setClickCounts] = useState({});
 
+
+    if (!data) return null; // Ssrコンポーネントの先頭部分でこのように追加してください。
+
+    
     // useEffect(() => {
     //     const fetchClickCounts = async () => {
     //         const response = await fetch('https://api.erorice.com/click_counts', {
