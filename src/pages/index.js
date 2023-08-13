@@ -18,7 +18,7 @@ export default function Home({ data, totalCount, page, limit }) {
     <>
       <Header />
       <SearchBar />
-      <PopularMovies />
+      {/* <PopularMovies /> */}
       <PopularTags />
       <Ssr data={data} totalCount={totalCount} page={page} limit={limit} />
       <Footer />

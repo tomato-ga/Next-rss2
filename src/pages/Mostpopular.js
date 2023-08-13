@@ -27,7 +27,7 @@ const MostPopular = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const ENDP = `https://api.erorice.com/top_movies`;
+                const ENDP = `https://api.erorice.com/top_movies_page`;
                 const res = await fetch(ENDP);
                 const data = await res.json();
                 setData(data);

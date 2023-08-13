@@ -49,7 +49,7 @@ export default function Ssr({ data, totalCount, page, limit }) {
                                 <div onClick={() => {handleClickCount(item.id)}}>
                                 <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
                                 <div className="relative h-[270px] w-full md:h-[320px] md:w-full">
-                                    <Image fill src={item.imgurl} className={styles.image} alt={item.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw" priority />
+                                    <Image fill src={item.imgurl} className={styles.image} alt={item.title} priority />
 
                                     <span className="absolute rounded-md top-2 left-2 bg-white bg-opacity-90 text-red-600 text-xl font-bold tracking-widest text-center p-1">
                                         <FetchClickCounts itemId={item.id}/>

@@ -39,7 +39,7 @@ const PopularMovies = () => {
             <div key={movieIndex} className="mr-3 mb-3 flex flex-col">
                 <div className="relative flex justify-center items-center h-[150px] w-[160px] md:h-[170px] md:w-[180px] mx-auto">
                     <Link href="/[siteId]/[itemId]" as={`/${movie.rss.site_id}/${movie.rss.id}`}>
-                        <Image fill src={movie.rss.imgurl} alt={movie.rss.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw" priority />
+                        <Image fill src={movie.rss.imgurl} alt={movie.rss.title}  />
                     </Link>
                 </div>
             </div>
