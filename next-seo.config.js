@@ -12,7 +12,7 @@ export default {
     },
   ],
   openGraph: {
-    url: 'https://hogehoge.com/',
+    url: 'https://erorice.com',
     type: 'website',
     locale: 'ja_JP',
     site_name: 'エロコメストβ',
