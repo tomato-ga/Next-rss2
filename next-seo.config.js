@@ -1,5 +1,5 @@
 export default {
-  titleTemplate: '%s | エロコメスト',
+  titleTemplate: '%s | エロコメストβ',
   defaultTitle: '',
   additionalMetaTags: [
     {
@@ -8,14 +8,14 @@ export default {
     },
     {
       name: 'application-name',
-      content: 'エロコメスト',
+      content: 'エロコメストβ',
     },
   ],
   openGraph: {
     url: 'https://hogehoge.com/',
     type: 'website',
     locale: 'ja_JP',
-    site_name: 'エロコメスト',
+    site_name: 'エロコメストβ',
   },
   // twitter: {
   //   handle: '@hogehoge',
