@@ -16,44 +16,10 @@ import FetchClickCounts from '@/components/Clickcount';
 export default function Ssr({ data, totalCount, page, limit }) {
 
     const itemIds = useMemo(() => data ? data.map(item => item.id) : [], [data]);
-
     const [items, setItems] = useState(itemIds);
     const [clickCounts, setClickCounts] = useState({});
 
-
     if (!data) return null; // Ssrコンポーネントの先頭部分でこのように追加してください。
-
-    
-    // useEffect(() => {
-    //     const fetchClickCounts = async () => {
-    //         const response = await fetch('https://api.erorice.com/click_counts', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify(itemIds), 
-    //         });
-    
-    //         if (!response.ok) {
-    //             console.error(`Error fetching click counts: ${response.status} ${response.statusText}`);
-    //             return;
-    //         }
-    
-    //         const initialClickCounts = await response.json();
-    //         setClickCounts(initialClickCounts);
-    //     };
-    
-    //     if (Array.isArray(itemIds) && itemIds.every(Number.isInteger)) {
-    //         fetchClickCounts();
-    //     } else {
-    //         console.error("itemIds must be an array of integers", itemIds);
-    //     }
-    // }, [itemIds]);
-    
-
-    // console.log('ID一覧',itemIds);
-    // console.log('クリックカウント数',clickCounts);
-    // console.log('clickCountsの型:', typeof clickCounts);
 
 
     return (
@@ -108,3 +74,35 @@ export default function Ssr({ data, totalCount, page, limit }) {
         </div>
     );
 }
+
+    
+    // useEffect(() => {
+    //     const fetchClickCounts = async () => {
+    //         const response = await fetch('https://api.erorice.com/click_counts', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify(itemIds), 
+    //         });
+    
+    //         if (!response.ok) {
+    //             console.error(`Error fetching click counts: ${response.status} ${response.statusText}`);
+    //             return;
+    //         }
+    
+    //         const initialClickCounts = await response.json();
+    //         setClickCounts(initialClickCounts);
+    //     };
+    
+    //     if (Array.isArray(itemIds) && itemIds.every(Number.isInteger)) {
+    //         fetchClickCounts();
+    //     } else {
+    //         console.error("itemIds must be an array of integers", itemIds);
+    //     }
+    // }, [itemIds]);
+    
+
+    // console.log('ID一覧',itemIds);
+    // console.log('クリックカウント数',clickCounts);
+    // console.log('clickCountsの型:', typeof clickCounts);
