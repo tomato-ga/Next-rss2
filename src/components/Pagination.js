@@ -23,18 +23,19 @@ const Pagination = ({ totalCount, pageSize, currentPage, pageChangeUrl }) => {
     const pageLinks = () => {
         let links = [];
     
-        // 常に現在のページを中心に、前後2ページを表示するように調整
         let startPage = Math.max(1, current - 2);
-        let endPage = Math.min(totalPages, current + 2);
+        let endPage = Math.min(totalPages, startPage + 4);
     
-        // ページの数が5つを保つための調整
-        if (endPage - startPage < 4) {
-            if (current < 3) {
-                endPage = Math.min(5, totalPages);
-                startPage = endPage - 4;
-            } else {
-                startPage = Math.max(1, endPage - 4);
-            }
+        // startPageが1より小さくならないように調整
+        if (startPage < 1) {
+            startPage = 1;
+            endPage = startPage + 4;
+        }
+    
+        // endPageがtotalPagesより大きくならないように調整
+        if (endPage > totalPages) {
+            endPage = totalPages;
+            startPage = Math.max(1, endPage - 4);
         }
     
         for (let i = startPage; i <= endPage; i++) {
@@ -53,10 +54,11 @@ const Pagination = ({ totalCount, pageSize, currentPage, pageChangeUrl }) => {
     };
     
     
+    
 
 
     return (
-        <div className="flex items-center justify-center"> 
+        <div> 
             <ul className="inline-flex -space-x-px text-base h-10 ">
                 <button className="flex items-center justify-center px-4 h-10 ml-0 leading-tight text-gray-500 bg-white dark:bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
                     disabled={current === 1} onClick={() => changePage(current - 1)}>前</button>
