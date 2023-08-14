@@ -53,6 +53,7 @@ const Header = () => {
                     <div className="hidden lg:flex space-x-4">
                         <Link href="/Mostpopular" className="text-gray-700 hover:text-red-300">人気動画</Link>
                         <Link href="/favpage" className="text-gray-700 hover:text-red-300">お気に入り</Link>
+                        <Link href="/rireki" className="text-gray-700 hover:text-red-300">閲覧履歴</Link>
                     </div>
                 </div>
             </nav>

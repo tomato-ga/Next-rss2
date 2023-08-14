@@ -27,7 +27,7 @@ const FavPage = () => {
     useEffect(() => {
     
         const checkSavedArticles = () => {
-          let savedbrowserArticles = JSON.parse(localStorage.getItem('favArticleData')) || [];
+          let savedbrowserArticles = JSON.parse(localStorage.getItem('articleData')) || [];
     
           // タイムスタンプに基づいて記事をソート
           savedbrowserArticles.sort((a, b) => new Date(b[0].timestamp) - new Date(a[0].timestamp));
@@ -48,7 +48,7 @@ const FavPage = () => {
             <div className="justify-center text-center font-bold">
                 <h2 className="mb-4">
                     <span className="border-b-2 pb-1 border-blue-300 text-2xl">
-                        お気に入り動画
+                        閲覧履歴
                     </span>
                 </h2>
             </div>
