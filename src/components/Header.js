@@ -45,6 +45,7 @@ const Header = () => {
                             <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
                                 <li><Link href="/Mostpopular" className="block px-4 py-2 hover:text-red-300">人気動画</Link></li>
                                 <li><Link href="/favpage" className="block px-4 py-2 hover:text-red-300">お気に入り</Link></li>
+                                <li><Link href="/rireki" className="text-gray-700 hover:text-red-300">閲覧履歴</Link></li>
                             </ul>
                         </div>
                     </div>
