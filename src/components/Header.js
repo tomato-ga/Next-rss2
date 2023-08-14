@@ -24,7 +24,7 @@ const Header = () => {
     }, []);
 
     return (
-        <header className="border-b flex items-center h-16 px-8 justify-between bg-white text-black relative">
+        <header className="border-b flex items-center h-16 px-0 justify-between bg-white text-black relative">
             <nav className="border-gray-200 w-full">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <Link href='/'>
@@ -45,7 +45,7 @@ const Header = () => {
                             <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
                                 <li><Link href="/Mostpopular" className="block px-4 py-2 hover:text-red-300">人気動画</Link></li>
                                 <li><Link href="/favpage" className="block px-4 py-2 hover:text-red-300">お気に入り</Link></li>
-                                <li><Link href="/rireki" className="text-gray-700 hover:text-red-300">閲覧履歴</Link></li>
+                                <li><Link href="/rireki" className="block px-4 py-2 hover:text-red-300">閲覧履歴</Link></li>
                             </ul>
                         </div>
                     </div>
