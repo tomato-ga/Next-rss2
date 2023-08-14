@@ -24,15 +24,15 @@ const Header = () => {
     }, []);
 
     return (
-        <header className="border-b flex items-center h-16 px-0 justify-between bg-white text-black relative">
+        <header className="border-b flex items-center h-16 pl-1 justify-between bg-white text-black relative">
             <nav className="border-gray-200 w-full">
-                <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
                     <Link href='/'>
                         <span className="text-lg font-bold text-black cursor-pointer">エロコメスト</span>
                     </Link>
 
                     {/* ハンバーガーメニューボタン: 小さいデバイスでのみ表示 */}
-                    <div className="relative inline-block text-left lg:hidden">
+                    <div className="relative inline-block text-left lg:hidden mr-1">
                         <button ref={buttonRef} onClick={toggleDropdown} id="dropdownDefaultButton" data-dropdown-toggle="dropdown" className="text-blue-700 bg-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center" type="button">
                             <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
