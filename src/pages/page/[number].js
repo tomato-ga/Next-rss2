@@ -9,13 +9,13 @@ import PopularTags from '@/components/PopularTags';
 import Footer from '@/components/Footer';
 
 const Page = ({ data, totalCount, page, limit }) => {
-  // todo next-seoのコンポーネント入れる
+  
   return (
     <>
     <Header />
     <SearchBar />
-    <PopularMovies />
-    <PopularTags />
+    {/* <PopularMovies />
+    <PopularTags /> */}
     <Ssr data={data} totalCount={totalCount} page={page} limit={limit} />
     <Footer />
 
@@ -38,7 +38,7 @@ export async function getServerSideProps(context) {
   
     const res = await fetch('https://api.erorice.com/total_count')
     const totalData = await res.json()
-    const totalCount = totalData.count
+    const totalCount = totalData
   
     return {
       props: { 

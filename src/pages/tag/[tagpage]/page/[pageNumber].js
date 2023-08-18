@@ -1,6 +1,6 @@
 // /Volumes/SSD_1TB/next-antena2/front/src/pages/tag/[tagpage]/page/[pageNumber].js
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
 import Tags from '@/components/Tags';
@@ -20,24 +20,19 @@ import PopularTags from '@/components/PopularTags';
 import Footer from '@/components/Footer';
 
 
-const TagPage = () => {
+const TagPage = ({ tagpage, posts, totalCount, pageNumber, pageSize }) => {
+
+    const totalPages = Math.ceil(totalCount.count / pageSize);
+
     const router = useRouter();
-    const { tagpage, pageNumber } = router.query; // Grab pageNumber from router.query
-    const pageSize = 20; 
-
-    const [posts, currentPage, changePage] = useTagPagination(`https://api.erorice.com`, tagpage, pageSize);
-    const totalCount = useTotalCount(`https://api.erorice.com/tag_count?tag=${tagpage}`);
-
-    useEffect(() => {
-        changePage(parseInt(pageNumber));
-    }, [tagpage, pageNumber]);
-
+    const changePage = (newPage) => {
+    router.push(`/tag/${tagpage}/page/${newPage}`);
+    };
 
     return (
-        <>
+    <>
         <Header />
         <SearchBar />
-
         <div className="justify-center text-center font-bold">
             <h2 className="mb-4">
                 <span className="border-b-2 pb-1 border-blue-300 text-2xl">
@@ -45,7 +40,6 @@ const TagPage = () => {
                 </span>
             </h2>
         </div>
-
 
         <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
             <Sidebar />
@@ -63,7 +57,7 @@ const TagPage = () => {
                         console.error("Invalid date: ", item.published_at);
                     }
                     let tagsArray = [];
-                    if (item.tag) { // Check if tag exists
+                    if (item.tag) {
                         tagsArray = item.tag.split(',').map(tag => tag.trim());
                     }
                     return (
@@ -84,29 +78,50 @@ const TagPage = () => {
                                 <div className='tags'>
                                 <Tags tagsArray={tagsArray} numberTags={5}/>
                                 </div>
-                                {/* <div className='date px-2 align-sub text-gray-500'>
-                                    {date && <p>{formattedDate}</p>}
-                                </div> */}
                             </div>
                         </div>
                 </div>
                     );
                 })}
-                <Pagination 
-                totalCount={totalCount} 
-                pageSize={pageSize} 
-                currentPage={currentPage} 
-                changePage={changePage}
-                pageChangeUrl={(page) => {
-                    return `/tag/${tagpage}/page/${page}`;
-                }}
-                />
-            </div>
+            <Pagination 
+            totalCount={totalCount} 
+            pageSize={pageSize} 
+            currentPage={pageNumber} 
+            totalPages={totalPages}
+            changePage={changePage}
+            pageChangeUrl={(page) => {
+                return `/tag/${tagpage}/page/${page}`;
+            }}
+            />
         </div>
-    <Footer />
-
-        </>
+        </div>
+        <Footer />
+    </>
     );
+};
+
+export async function getServerSideProps({ params }) {
+    const pageSize = 20;
+    const tagpage = params.tagpage;
+    const pageNumber = params.pageNumber || 1;
+
+    // SSRのためにデータフェッチを直接行う
+    const fetchUrl = `https://api.erorice.com/tag?tag=${tagpage}&page=${pageNumber}&limit=${pageSize}`;
+    const res = await fetch(fetchUrl);
+    const posts = await res.json();
+
+    const totalRes = await fetch(`https://api.erorice.com/tag_count?tag=${tagpage}`);
+    const totalCount = await totalRes.json();
+
+    return {
+    props: {
+        posts,
+        totalCount,
+        tagpage,
+        pageNumber: parseInt(pageNumber),
+        pageSize,
+    }
+    };
 }
 
 export default TagPage;

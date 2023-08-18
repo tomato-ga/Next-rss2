@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-export default function useTagPagination(baseUrl, tag, pageSize) {
+export default function NoneuseTagPagination(baseUrl, tag, pageSize) {
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1); // Set initial page to 1
 

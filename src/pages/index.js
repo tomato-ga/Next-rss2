@@ -11,15 +11,15 @@ import Footer from '@/components/Footer';
 import { setData } from '@/store/dataSlice';
 import { useEffect } from 'react';
 
-export default function Home({ data, totalCount, page, limit }) {
+export default function Home({ data, totalCount, popumoviesRes, popuTagsRes, page, limit }) {
 
 
   return (
     <>
       <Header />
       <SearchBar />
-      <PopularMovies />
-      <PopularTags />
+      <PopularMovies popumoviesRes={popumoviesRes} />
+      <PopularTags popuTagsRes={popuTagsRes} />
       <Ssr data={data} totalCount={totalCount} page={page} limit={limit} />
       <Footer />
     </>
@@ -31,40 +31,62 @@ export async function getServerSideProps(context) {
   const page = context.query.page || 1;
   const limit = context.query.limit || 20;
 
-  const fetchRes = await fetch(`https://api.erorice.com/rss/all/latest?page=${page}&limit=${limit}`);
-  const data = await fetchRes.json();
-  console.log(data);
+  const fetchData = async () => {
+    try {
+      // ページネーションでトップに表示する件数
+      const fetchRes = await fetch(
+        `https://api.erorice.com/rss/all/latest?page=${page}&limit=${limit}`
+      );
+      const data = await fetchRes.json();
+  
+      if (!Array.isArray(data) || !data.length) {
+        return {
+          notFound: true,
+        };
+      }
+  
+      // ページネーションの総数カウント
+      const res = await fetch("https://api.erorice.com/total_count");
+      const totalData = await res.json();
+      const totalCount = totalData;
+      
+      // 人気動画
+      const popumovies = await fetch("https://api.erorice.com/top_movies");
+      const popumoviesRes = await popumovies.json();
 
-  if (!Array.isArray(data) || !data.length) {
-    return {
-        notFound: true,
+      // 人気のキーワード
+      const poputags = await fetch("https://api.erorice.com/top_tags");
+      const popuTagsRes = await poputags.json();
+
+
+      if (!data && !totalCount && !popumoviesRes && !popuTagsRes) {
+        return {
+          notFound: true,
+        };
+      }
+  
+      return { data, totalCount, popumoviesRes, popuTagsRes }; // 返り値を明示的に返す
+    } catch (error) {
+      console.error(error);
     }
-}
+  };
 
-
-  const res = await fetch('https://api.erorice.com/total_count')
-  const totalData = await res.json()
-  const totalCount = totalData.count
-
-
-  if (!data && !totalCount) {
-    return {
-      notFound: true,
-    }
-  }
+  const { data, totalCount, popumoviesRes, popuTagsRes } = await fetchData();
 
   // キャッシュ設定
   context.res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59'
-  )
+    "Cache-Control",
+    "public, s-maxage=10, stale-while-revalidate=59"
+  );
 
   return {
     props: {
       data,
       totalCount,
-      page, 
+      popumoviesRes,
+      popuTagsRes,
+      page,
       limit,
-    }
-  }
+    },
+  };
 }

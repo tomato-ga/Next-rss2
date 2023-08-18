@@ -20,17 +20,14 @@ import PopularTags from '@/components/PopularTags';
 import Footer from '@/components/Footer';
 
 
-const SearchPage = () => {
+const SearchPage = ({ posts, totalCount, keyword, pageNumber, pageSize }) => {
     const router = useRouter();
-    const { keyword, pageNumber } = router.query; // Grab pageNumber from router.query
-    const pageSize = 20; 
 
-    const [posts, currentPage, changePage] = useSearchPagination(`https://api.erorice.com`, keyword, pageSize);
-    const totalCount = useTotalCount(`https://api.erorice.com/search_count?tag=${keyword}`);
+    const totalPages = Math.ceil(totalCount.count / pageSize);
 
-    useEffect(() => {
-        changePage(parseInt(pageNumber));
-    }, [keyword, pageNumber]);
+    const changePage = (newPage) => {
+    router.push(`/search/${keyword}/page/${newPage}`);
+    };
 
 
     return (
@@ -62,7 +59,7 @@ const SearchPage = () => {
                         console.error("Invalid date: ", item.published_at);
                     }
                     let tagsArray = [];
-                    if (item.tag) { // Check if tag exists
+                    if (item.tag) {
                         tagsArray = item.tag.split(',').map(tag => tag.trim());
                     }
                     return (
@@ -83,9 +80,6 @@ const SearchPage = () => {
                                 <div className='tags'>
                                 <Tags tagsArray={tagsArray} numberTags={5}/>
                                 </div>
-                                {/* <div className='date px-2 align-sub text-gray-500'>
-                                    {date && <p>{formattedDate}</p>}
-                                </div> */}
                             </div>
                         </div>
                         </div>
@@ -94,21 +88,43 @@ const SearchPage = () => {
                 <Pagination 
                 totalCount={totalCount} 
                 pageSize={pageSize} 
-                currentPage={currentPage} 
+                currentPage={pageNumber} 
                 changePage={changePage}
                 pageChangeUrl={(page) => {
                     return `/tag/${keyword}/page/${page}`;
                 }}
                 />
-    
             </div>
         </div>
     <Footer />
-
         </>
-
     );
-
 }
+
+
+export async function getServerSideProps({ params }) {
+    const pageSize = 20;
+    const keyword = params.keyword;
+    const pageNumber = params.pageNumber || 1;
+
+    // SSRのためにデータフェッチを直接行う
+    const fetchUrl = `https://api.erorice.com/search?tag=${keyword}&page=${pageNumber}&limit=${pageSize}`;
+    const res = await fetch(fetchUrl);
+    const posts = await res.json();
+
+    const totalRes = await fetch(`https://api.erorice.com/search_count?tag=${keyword}`);
+    const totalCount = await totalRes.json();
+
+    return {
+    props: {
+        posts,
+        totalCount,
+        keyword,
+        pageNumber: parseInt(pageNumber),
+        pageSize,
+    }
+    };
+}
+
 
 export default SearchPage;

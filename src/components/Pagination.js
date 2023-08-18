@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 const Pagination = ({ totalCount, pageSize, currentPage, pageChangeUrl }) => {
+
     const router = useRouter();
     const [current, setCurrent] = useState(currentPage);
-    const totalPages = Math.ceil(totalCount / pageSize);
+    const totalPages = Math.ceil(totalCount.count / pageSize);
 
     useEffect(() => {
         setCurrent(currentPage);  
@@ -53,10 +54,6 @@ const Pagination = ({ totalCount, pageSize, currentPage, pageChangeUrl }) => {
         return links;
     };
     
-    
-    
-
-
     return (
         <div> 
             <ul className="inline-flex -space-x-px text-base h-10 ">
@@ -68,23 +65,6 @@ const Pagination = ({ totalCount, pageSize, currentPage, pageChangeUrl }) => {
             </ul>
         </div>
     );
-    
-
 }
 
-
 export default Pagination;
-
-
-// todo ページネーションは最大5件にして、次へ前へは別で表示させる
-
-// 現在のページネーションJSX
-        // <div>
-        //     <button disabled={current === 1} onClick={() => changePage(current - 1)}>前へ</button>
-        //     <button disabled={current === totalPages} onClick={() => changePage(current + 1)}>次へ</button>
-        //     <br />
-        //     <span>現在の数字{current}</span>
-        //     <div>
-        //         {pageLinks()} 
-        //     </div>
-        // </div>
