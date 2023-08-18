@@ -1,15 +1,16 @@
 {
   "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/Mostpopular": "pages/Mostpopular.html",
-  "/_error": "pages/_error.js",
-  "/rireki": "pages/rireki.html",
   "/favpage": "pages/favpage.html",
+  "/rireki": "pages/rireki.html",
   "/topSSR": "pages/topSSR.html",
-  "/[siteId]/[itemId]": "pages/[siteId]/[itemId].js",
-  "/search/[keyword]/page/[pageNumber]": "pages/search/[keyword]/page/[pageNumber].js",
   "/page/[number]": "pages/page/[number].js",
   "/": "pages/index.js",
+  "/server-sitemap.xml": "pages/server-sitemap.xml.js",
+  "/[siteId]/[itemId]": "pages/[siteId]/[itemId].js",
+  "/search/[keyword]/page/[pageNumber]": "pages/search/[keyword]/page/[pageNumber].js",
   "/tag/[tagpage]/page/[pageNumber]": "pages/tag/[tagpage]/page/[pageNumber].js",
   "/404": "pages/404.html"
 }

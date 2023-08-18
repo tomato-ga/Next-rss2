@@ -4,7 +4,8 @@
     "/[siteId]/[itemId]": {},
     "/": {},
     "/page/[number]": {},
+    "/tag/[tagpage]/page/[pageNumber]": {},
     "/search/[keyword]/page/[pageNumber]": {},
-    "/tag/[tagpage]/page/[pageNumber]": {}
+    "/server-sitemap.xml": {}
   }
 }
