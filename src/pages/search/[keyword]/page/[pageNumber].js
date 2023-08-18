@@ -68,11 +68,18 @@ const SearchPage = ({ posts, totalCount, keyword, pageNumber, pageSize }) => {
 
                             <div className='border-gray-200'>
                                 <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
-                                    <div className="relative h-[170px] w-full md:h-[320px] md:w-full">
+                                        <div className="relative h-[270px] w-full md:h-[320px] md:w-full">
+                                            <img src={item.imgurl} className="w-full h-full object-cover" alt={item.title} />
+                    
+                                            <span className="absolute rounded-md top-2 left-2 bg-white bg-opacity-90 text-red-600 text-xl font-bold tracking-widest text-center p-1">
+                                                <FetchClickCounts itemId={item.id} />
+                                            </span>
+                                        </div>
+                                    {/* <div className="relative h-[170px] w-full md:h-[320px] md:w-full">
                                         <Image fill src={item.imgurl} className="object-cover" alt={item.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw"/>
                                         <FetchClickCounts itemId={item.id}/>
 
-                                    </div>
+                                    </div> */}
                                     <h2 className='m-2 text-sm md:text-xl font-bold text-blue-600'>
                                         {item.title}
                                     </h2>
