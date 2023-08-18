@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "functions": {
+    "/[siteId]/[itemId]": {},
+    "/": {},
+    "/page/[number]": {},
+    "/search/[keyword]/page/[pageNumber]": {},
+    "/tag/[tagpage]/page/[pageNumber]": {}
+  }
+}
