@@ -1,11 +1,11 @@
 {
   "version": 1,
   "functions": {
-    "/[siteId]/[itemId]": {},
     "/": {},
     "/page/[number]": {},
-    "/tag/[tagpage]/page/[pageNumber]": {},
     "/search/[keyword]/page/[pageNumber]": {},
-    "/server-sitemap.xml": {}
+    "/server-sitemap.xml": {},
+    "/tag/[tagpage]/page/[pageNumber]": {},
+    "/[siteId]/[itemId]": {}
   }
 }
