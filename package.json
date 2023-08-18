@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "NODE_OPTIONS='--inspect' next dev",
-    "build": "next build",
+    "build": "next build && next export && next-sitemap --config sitemap.config.js",
     "start": "next start",
     "lint": "next lint"
   },
@@ -25,5 +25,8 @@
     "react-redux": "^8.1.2",
     "redux": "^4.2.1",
     "tailwindcss": "3.3.3"
+  },
+  "devDependencies": {
+    "next-sitemap": "^4.2.2"
   }
 }
