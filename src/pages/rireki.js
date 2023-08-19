@@ -20,7 +20,7 @@ import PopularTags from '@/components/PopularTags';
 import Footer from '@/components/Footer';
 
 
-const FavPage = () => {
+const RirekiPage = () => {
     const [localData, setLocalData] = useState([]);
 
     useEffect(() => {
@@ -88,4 +88,4 @@ const FavPage = () => {
 }
 
 
-export default FavPage;
+export default RirekiPage;

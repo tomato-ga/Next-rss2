@@ -1,40 +1,63 @@
 import { useEffect, useState } from "react";
 import { handleFavCount } from "../lib/clickCountDB";
 
-const Fav = ({ postId, articleData }) => {
+const FavButton = ({ postId, articleData }) => {
 
     const [FavCount, setFavCount] = useState(0);
     const [isFavorited, setIsFavorited] = useState(false);
 
+    let savedFavPageLists = {
+        "FavoritePages": [],
+    }
+
+    // お気に入りページが存在するか確認する
     useEffect(() => {
-        const checkIfArticleIsFavorited = () => {
-            // まずlocalStorageの個別のお気に入り状態を確認します
-            const isFavoritedInStorage = localStorage.getItem(`fav_${postId}`) ? true : false;
-            if (isFavoritedInStorage) {
-                setIsFavorited(true);
-                return;  // すでにお気に入りとして登録されているので、この後の確認は不要です
-            }
-    
-            // 次に、favArticleDataの中に記事が存在するかどうかを確認します
-            const favArticlesStr = localStorage.getItem('favArticleData');
+        // 既存のお気に入りローカルを取得
+        const existingData = JSON.parse(localStorage.getItem('favArticleData'));
+        if (existingData && existingData.FavoritePages) {
+            savedFavPageLists.FavoritePages = existingData.FavoritePages;
+            setIsFavorited(existingData.FavoritePages);
+        }
+
+        const favArticlesStr = localStorage.getItem('favArticleData');
             if (favArticlesStr) {
                 const favArticles = JSON.parse(favArticlesStr);
                 const isArticleFavorited = favArticles.some(article => article.id === postId);
                 setIsFavorited(isArticleFavorited);
             }
-        };
+    },[postId]);
+
+
+    // useEffect(() => {
+    //     const checkIfArticleIsFavorited = () => {
+    //         // まずlocalStorageの個別のお気に入り状態を確認します
+    //         const isFavoritedInStorage = localStorage.getItem(`fav_${postId}`) ? true : false;
+    //         if (isFavoritedInStorage) {
+    //             setIsFavorited(true);
+    //             return;  // すでにお気に入りとして登録されているので、この後の確認は不要です
+    //         }
     
-        checkIfArticleIsFavorited();
-    }, [postId]);
+    //         // 次に、favArticleDataの中に記事が存在するかどうかを確認します
+    //         const favArticlesStr = localStorage.getItem('favArticleData');
+    //         if (favArticlesStr) {
+    //             const favArticles = JSON.parse(favArticlesStr);
+    //             const isArticleFavorited = favArticles.some(article => article.id === postId);
+    //             setIsFavorited(isArticleFavorited);
+    //         }
+    //     };
     
+    //     checkIfArticleIsFavorited();
+    // }, [postId]);
     
+    // TODO お気に入り追加処理からスクラッチで実装する(自分で書いたほうが身につく)
+
     const incrementFavCount = async () => {
         console.log("Button clicked!"); 
     
         if (isFavorited) {
             // お気に入りを取り消す場合の処理を追加
             localStorage.removeItem(`fav_${postId}`);
-    
+
             let favArticles = localStorage.getItem('favArticleData');
             favArticles = favArticles ? JSON.parse(favArticles) : [];
     
@@ -87,4 +110,4 @@ const Fav = ({ postId, articleData }) => {
     );
 };
 
-export default Fav;
+export default FavButton;
