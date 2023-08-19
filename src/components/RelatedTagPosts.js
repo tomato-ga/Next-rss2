@@ -40,7 +40,7 @@ const RelatedTagPosts = ({ tag }) => {
             return (
                 <div key={post.id} className="border-gray-300 rounded-lg shadow-lg">
                   <div onClick={() => { handleClickCount(post.id) }}>
-                    <Link href="/[siteId]/[itemId]" as={`/${post.site_id}/${post.id}`}>
+                    <Link href="/item/[items]" as={`/item/${post.id}`}>
                     <div className="relative h-[270px] w-full md:h-[320px] md:w-full">
                                       <img src={post.imgurl} className="w-full h-full object-cover" alt={post.title} />
               

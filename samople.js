@@ -45,7 +45,7 @@ return (
                 return (
                     <div key={index} className='Ui w-96 h-auto p-4 bg-white shadow-md rounded-md'>
                         <div onClick={() => { handleClickCount(item.id) }}>
-                            <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
+                            <Link href="/item/[items]" as={`/${item.site_id}/${item.id}`}>
                                 
                                     <div className="Topimages w-full h-56 bg-pink-100 rounded-sm mb-4">
                                         <Image fill src={item.imgurl} className={styles.image} alt={item.title} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>

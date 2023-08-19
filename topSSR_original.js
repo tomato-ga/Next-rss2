@@ -71,7 +71,7 @@ export default function Ssroriginal({ data, totalCount, page, limit }) {
                         <div key={index} className='my-1 px-4 border-gray-300 rounded-lg shadow-lg'>
                             <div className='border-b border-gray-200 m-3'>
                                 <div onClick={() => {handleClickCount(item.id)}}>
-                                <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
+                                <Link href="/item/[items]" as={`/${item.site_id}/${item.id}`}>
                                     <div className="p-4 relative">
                                         <Image fill src={item.imgurl} className={styles.image} alt={item.title} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
                                         <p className='absolute top-0 left-0 bg-white opacity-75'>クリック数: {clickCounts[item.id] || 0}</p>

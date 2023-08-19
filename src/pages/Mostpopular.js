@@ -78,7 +78,7 @@ console.log(data);
                         <div key={`${index}`} className='border-gray-300 rounded shadow-md'>
                             <div onClick={() => { handleClickCount(item.rss.id) }}>
                                 <div className='border-gray-200'>
-                                    <Link href="/[siteId]/[itemId]" as={`/${item.rss.site_id}/${item.rss.id}`}>
+                                    <Link href="/item/[items]" as={`/item/${item.rss.id}`}>
                                         <div className="relative h-[170px] w-full md:h-[320px] md:w-full">
                                             <Image fill src={item.rss.imgurl} className="object-cover" alt={item.rss.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw"/>
                                             <FetchClickCounts itemId={item.rss.id}/>

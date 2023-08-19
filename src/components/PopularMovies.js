@@ -39,7 +39,7 @@ const PopularMovies = ({ popumoviesRes }) => {
                 {popumoviesRes.map((movie, movieIndex) => (
                     <div key={movieIndex} className="mr-3 mb-3 flex flex-col">
                         <div className="relative w-[160px] h-[150px] md:w-[180px] md:h-[170px] mx-auto">
-                            <Link href="/[siteId]/[itemId]" as={`/${movie.rss.site_id}/${movie.rss.id}`}>
+                            <Link href="/item/[items]" as={`/item/${movie.rss.id}`}>
                                 <div className="absolute inset-0">
                                     <img src={movie.rss.imgurl} className="w-full h-full object-cover" alt={movie.rss.title} />
                                 </div>
@@ -69,7 +69,7 @@ const PopularMovies = ({ popumoviesRes }) => {
 //             {popumoviesRes.map((movie, movieIndex) => (
 //                 <div key={movieIndex} className="mr-3 mb-3 flex flex-col">
 //                     <div className="relative flex justify-center items-center h-[150px] w-[160px] md:h-[170px] md:w-[180px] mx-auto">
-//                         <Link href="/[siteId]/[itemId]" as={`/${movie.rss.site_id}/${movie.rss.id}`}>
+//                         <Link href="/item/[items]" as={`/${movie.rss.site_id}/${movie.rss.id}`}>
 //                             <Image fill src={movie.rss.imgurl} alt={movie.rss.title}  />
 //                         </Link>
 //                     </div>

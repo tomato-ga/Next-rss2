@@ -65,7 +65,7 @@ const TagPage = ({ tagpage, posts, totalCount, pageNumber, pageSize }) => {
                             <div onClick={() => { handleClickCount(item.id) }}>
 
                             <div className='border-gray-200'>
-                                <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
+                                <Link href="/item/[items]" as={`/item/${item.id}`}>
                                         <div className="relative h-[270px] w-full md:h-[320px] md:w-full">
                                             <img src={item.imgurl} className="w-full h-full object-cover" alt={item.title} />
                     

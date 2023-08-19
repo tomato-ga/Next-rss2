@@ -10,7 +10,7 @@ const Localrireki = ({ localData }) => {
             <div key={groupIndex} className="w-full md:w-1/2 lg:w-auto mb-3">
                 {articleGroup.map((article, articleIndex) => (
                 <div key={articleIndex} onClick={() => {handleClickCount(article.id)}}>
-                    <Link key={articleIndex} href="/[siteId]/[itemId]" as={`/${article.site_id}/${article.id}`}>
+                    <Link key={articleIndex} href="/item/[items]" as={`/item/${article.id}`}>
                         <div className="mr-3 flex flex-col lg:flex-inline">
                         <div className="relative flex justify-center items-center h-[200px] md:h-[170px] w-[250px] md:w-[170px] mx-auto">
                             <Image className="" fill src={article.imgurl} alt={article.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 50vw, (max-width: 1200px) 50vw" />

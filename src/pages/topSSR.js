@@ -47,7 +47,7 @@ export default function Ssr({ data, totalCount, page, limit }) {
                         <div key={index} className='border-gray-300 rounded-lg shadow-lg'>
                             <div className=' border-gray-200 '>
                                 <div onClick={() => { handleClickCount(item.id) }}>
-                                    <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
+                                    <Link href="/item/[items]" as={`/item/${item.id}`}>
                                         <div className="relative h-[270px] w-full md:h-[320px] md:w-full">
                                             <img src={item.imgurl} className="w-full h-full object-cover" alt={item.title} />
                     
@@ -132,7 +132,7 @@ export default function Ssr({ data, totalCount, page, limit }) {
     //                     <div key={index} className='border-gray-300 rounded-lg shadow-lg'>
     //                         <div className=' border-gray-200 '>
     //                             <div onClick={() => {handleClickCount(item.id)}}>
-    //                             <Link href="/[siteId]/[itemId]" as={`/${item.site_id}/${item.id}`}>
+    //                             <Link href="/item/[items]" as={`/${item.site_id}/${item.id}`}>
     //                             <div className="relative h-[270px] w-full md:h-[320px] md:w-full">
     //                                 <Image fill src={item.imgurl} className={styles.image} alt={item.title} priority />
     //                                 {/* <img src={item.imgurl} className={styles.image} alt={item.title} /> */}
