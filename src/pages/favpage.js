@@ -25,18 +25,14 @@ const FavPage = () => {
     const [localData, setLocalData] = useState([]);
 
     useEffect(() => {
-    
         const checkSavedArticles = () => {
-          let savedbrowserArticles = JSON.parse(localStorage.getItem('favArticleData')) || [];
-    
+        let savedbrowserArticles = JSON.parse(localStorage.getItem('favArticleData')) || [];
           // タイムスタンプに基づいて記事をソート
-          savedbrowserArticles.sort((a, b) => new Date(b[0].timestamp) - new Date(a[0].timestamp));
-    
-          if (savedbrowserArticles) {
+        savedbrowserArticles.sort((a, b) => new Date(b[0].timestamp) - new Date(a[0].timestamp));
+        if (savedbrowserArticles) {
             setLocalData(savedbrowserArticles);
-          }
+        }
         };
-    
         checkSavedArticles();
     }, []);
 
@@ -107,7 +103,6 @@ const FavPage = () => {
             <Footer />
         </>
     );
-    
 }
 
 export default FavPage;

@@ -38,41 +38,40 @@ const Posts = ({ data }) => {
 
   const [localData, setLocalData] = useState([]);
 
+
   useEffect(() => {
-    if (!data) return;
-
-    let savedArticles = JSON.parse(localStorage.getItem('articleData')) || [];
-    let currentTime = new Date().toISOString();
-    let newDataWithTimestamp = { ...data[0], timestamp: currentTime };
-    const isArticleExist = savedArticles.some(article => article[0].id === newDataWithTimestamp.id);
-
-    if (isArticleExist) {
-      savedArticles = savedArticles.filter(article => article[0].id !== newDataWithTimestamp.id);
+    let savedPagelists = {
+      "pages": [],
     }
 
-    if (savedArticles.length === 500) {
-      savedArticles.pop();
-    }
+  // 既存の閲覧履歴ローカルを取得
+  const existingData = JSON.parse(localStorage.getItem('articleData'));
+  if (existingData && existingData.pages) {
+    savedPagelists.pages = existingData.pages;
+    setLocalData(existingData.pages);
+  }
 
-    savedArticles.unshift([newDataWithTimestamp]);
-    localStorage.setItem('articleData', JSON.stringify(savedArticles));
+  // 新しいデータが既に存在する場合、配列から削除
+  const existingIndex = savedPagelists.pages.findIndex(page => page.id === data[0].id);
+  if (existingIndex !== -1) {
+    savedPagelists.pages.splice(existingIndex, 1);
+  }
 
-    const checkSavedArticles = () => {
-      let savedbrowserArticles = JSON.parse(localStorage.getItem('articleData')) || [];
-      savedbrowserArticles.sort((a, b) => new Date(b[0].timestamp) - new Date(a[0].timestamp));
-      if (savedbrowserArticles) {
-        setLocalData(savedbrowserArticles);
-      }
-    };
+  // 配列の先頭にデータを追加
+  savedPagelists.pages.unshift(data[0]);
 
-    checkSavedArticles();
-  }, [data]);
-
+  // データをローカルストレージに保存
+  localStorage.setItem('articleData', JSON.stringify(savedPagelists));
+  console.log(savedPagelists);
+}, [data]);
+    
   if (!data) {
-    return <p>ロード中です。もしかしたらデータないかも</p>;
+    return <p>ロード中です。もしかしたらデータが存在しないかもです</p>;
   }
 
   let tags = data[0].tag.split(',');
+
+
 
   return (
     <div>

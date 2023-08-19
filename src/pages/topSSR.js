@@ -21,7 +21,6 @@ export default function Ssr({ data, totalCount, page, limit }) {
 
     if (!data) return null; // Ssrコンポーネントの先頭部分でこのように追加してください。
 
-
     return (
 
         <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
