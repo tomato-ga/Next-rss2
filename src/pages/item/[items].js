@@ -62,7 +62,7 @@ const Posts = ({ data }) => {
 
   // データをローカルストレージに保存
   localStorage.setItem('articleData', JSON.stringify(savedPagelists));
-  console.log(savedPagelists);
+  // console.log(savedPagelists);
 }, [data]);
     
   if (!data) {
