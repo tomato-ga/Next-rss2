@@ -3,14 +3,12 @@
 import { useState, useEffect, useMemo } from 'react';
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import styles from '@/components/iiim.module.css'
+
 import Sidebar from '@/components/Sidebar';
 import Tags from '@/components/Tags';
 import Pagination from '@/components/Pagination';
 import { handleClickCount } from '@/lib/clickCountDB';
-import NewSidebar from '@/components/NewSide';
-import PopularMovies from '@/components/PopularMovies';
+
 import FetchClickCounts from '@/components/Clickcount';
 
 export default function Ssr({ data, totalCount, page, limit }) {

@@ -4,19 +4,13 @@ import React, { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
 import Tags from '@/components/Tags';
-import Pagination from '@/components/Pagination';
-import useTotalCount from '@/hooks/useTotalCount';
+
 import Link from 'next/link';
-import styles from '@/components/iiim.module.css'
 import Image from 'next/image';
-import useTagPagination from '@/hooks/useTagPagination';
-import { useRouter } from 'next/router';
+
 import FetchClickCounts from '@/components/Clickcount';
 import { handleClickCount } from '@/lib/clickCountDB';
-
 import SearchBar from '@/components/SearchBar';
-import PopularMovies from '@/components/PopularMovies';
-import PopularTags from '@/components/PopularTags';
 import Footer from '@/components/Footer';
 
 

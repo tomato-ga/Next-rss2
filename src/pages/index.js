@@ -8,8 +8,6 @@ import PopularMovies from '@/components/PopularMovies';
 import PopularTags from '@/components/PopularTags';
 import Footer from '@/components/Footer';
 
-import { setData } from '@/store/dataSlice';
-import { useEffect } from 'react';
 
 export default function Home({ data, totalCount, popumoviesRes, popuTagsRes, page, limit }) {
 

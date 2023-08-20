@@ -1,18 +1,11 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import Image from 'next/image';
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
 import RelatedTagPosts from '@/components/RelatedTagPosts';
-import Comment from '@/components/Comment';
 import Tags from '@/components/Tags';
-import Link from 'next/link';
-import FetchClickCounts from '@/components/Clickcount';
 import Localrireki from '@/components/Localrireki';
-import { handleClickCount } from '@/lib/clickCountDB';
 import Fav from '@/components/Favs';
-import { handleFavCount } from '@/lib/clickCountDB';
 import Footer from '@/components/Footer';
 import SearchBar from '@/components/SearchBar';
 import { NextSeo } from 'next-seo';
