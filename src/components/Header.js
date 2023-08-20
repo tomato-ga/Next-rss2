@@ -28,7 +28,7 @@ const Header = () => {
             <nav className="border-gray-200 w-full">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
                     <Link href='/'>
-                        <span className="text-lg font-bold text-black cursor-pointer">エロコメβ</span>
+                        <span className="text-lg font-bold text-black cursor-pointer">エロコメベータ</span>
                     </Link>
 
                     {/* ハンバーガーメニューボタン: 小さいデバイスでのみ表示 */}

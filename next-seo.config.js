@@ -8,14 +8,14 @@ export default {
     },
     {
       name: 'application-name',
-      content: 'エロコメβ',
+      content: 'エロコメベータ',
     },
   ],
   openGraph: {
     url: 'https://erorice.com',
     type: 'website',
     locale: 'ja_JP',
-    site_name: 'エロコメβ',
+    site_name: 'エロコメベータ',
   },
   // twitter: {
   //   handle: '@hogehoge',
