@@ -8,7 +8,7 @@ import Localrireki from '@/components/Localrireki';
 import Fav from '@/components/Favs';
 import Footer from '@/components/Footer';
 import SearchBar from '@/components/SearchBar';
-import { NextSeo } from 'next-seo';
+import { NextSeo, ArticleJsonLd } from 'next-seo';
 
 // TODO このSSRのときに、関連記事もSSRするようにすればOK RelatedTagPostsはコンポーネントなだけだから、SSRできない
 export async function getServerSideProps(context) {
@@ -71,8 +71,20 @@ const Posts = ({ data }) => {
       <NextSeo 
         title={data[0].title}
         description={data[0].description} 
-        canonical={`http://localhost:3000/${data[0].site_id}/${data[0].id}`}
+        canonical={`https://erorice.com/${data[0].site_id}/${data[0].id}`}
       />
+
+
+      <ArticleJsonLd
+      url={`https://erorice.com/${data[0].site_id}/${data[0].id}`}
+      title={data[0].title}
+      images={data[0].imgurl}
+      datePublished={data[0].created_at}
+      authorName="エロコメ運営者"
+      publisherName='エロコメ'
+      description={`${tags}のエロ動画を紹介しています。エロコメはエロ動画のアンテナサイトです。`}
+      />
+
       <Header />
       <SearchBar />
 

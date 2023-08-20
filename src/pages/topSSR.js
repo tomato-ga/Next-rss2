@@ -3,12 +3,13 @@
 import { useState, useEffect, useMemo } from 'react';
 import React from 'react';
 import Link from 'next/link';
+import { NextSeo, ArticleJsonLd } from 'next-seo';
+
 
 import Sidebar from '@/components/Sidebar';
 import Tags from '@/components/Tags';
 import Pagination from '@/components/Pagination';
 import { handleClickCount } from '@/lib/clickCountDB';
-
 import FetchClickCounts from '@/components/Clickcount';
 
 export default function Ssr({ data, totalCount, page, limit }) {
@@ -20,6 +21,23 @@ export default function Ssr({ data, totalCount, page, limit }) {
     if (!data) return null; // Ssrコンポーネントの先頭部分でこのように追加してください。
 
     return (
+        <>
+            <div>
+            <NextSeo 
+                title={data[0].title}
+                description={data[0].description} 
+                canonical={`https://erorice.com/${data[0].site_id}/${data[0].id}`}
+            />
+
+            <ArticleJsonLd
+                url={`https://erorice.com/${data[0].site_id}/${data[0].id}`}
+                title={data[0].title}
+                images={data[0].imgurl}
+                datePublished={data[0].created_at}
+                authorName="エロコメ運営者"
+                publisherName='エロコメ'
+            />
+            </div>
 
         <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
             <Sidebar />
@@ -69,6 +87,7 @@ export default function Ssr({ data, totalCount, page, limit }) {
                 <Pagination totalCount={totalCount} pageSize={limit} currentPage={page} pageChangeUrl={(page) => `/page/${page}`} />
             </div>
         </div>
+        </>
     );
 }
 
