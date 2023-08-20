@@ -22,22 +22,6 @@ export default function Ssr({ data, totalCount, page, limit }) {
 
     return (
         <>
-            <div>
-            <NextSeo 
-                title={data[0].title}
-                description={data[0].description} 
-                canonical={`https://erorice.com/${data[0].site_id}/${data[0].id}`}
-            />
-
-            <ArticleJsonLd
-                url={`https://erorice.com/${data[0].site_id}/${data[0].id}`}
-                title={data[0].title}
-                images={data[0].imgurl}
-                datePublished={data[0].created_at}
-                authorName="エロコメ運営者"
-                publisherName='エロコメ'
-            />
-            </div>
 
         <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
             <Sidebar />
