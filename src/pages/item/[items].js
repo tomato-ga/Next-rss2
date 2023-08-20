@@ -9,25 +9,36 @@ import Fav from '@/components/Favs';
 import Footer from '@/components/Footer';
 import SearchBar from '@/components/SearchBar';
 import { NextSeo, ArticleJsonLd } from 'next-seo';
+import BreadCrumb from '@/components/BreadCrumb';
+import SimilarTags from '@/components/SimilarTags';
 
-// TODO このSSRのときに、関連記事もSSRするようにすればOK RelatedTagPostsはコンポーネントなだけだから、SSRできない
 export async function getServerSideProps(context) {
   const { items } = context.params;
   const ENDP = `https://api.erorice.com/sites/rss/${items}`;
   const res = await fetch(ENDP);
   const data = await res.json();
-
   const tags = data[0]?.tag.split(',');
+
+  // SimilarTags用のAPIフェッチ
+  const poputags = async () => {
+    const res = await fetch("https://api.erorice.com/top_tags");
+    const popuTagsRes = await res.json();
+    return popuTagsRes;
+  }
+
+  const apiTags = await poputags();
+  const goalTags = [...apiTags, ...tags];
 
   return {
     props: {
       data,
-      tags,
+      goalTags,
     }
   };
 }
 
-const Posts = ({ data }) => {
+
+const Posts = ({ data, goalTags }) => {
 
   const [localData, setLocalData] = useState([]);
 
@@ -64,6 +75,15 @@ const Posts = ({ data }) => {
 
   let tags = data[0].tag.split(',');
 
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+  const shuffledGoalTags = shuffleArray(goalTags);
 
 
   return (
@@ -91,6 +111,7 @@ const Posts = ({ data }) => {
       <div className='container mx-auto px-4 py-6 flex flex-col-reverse md:flex-row'>
           <Sidebar />
           <div className='md:w-3/4 md:ml-4 overflow-hidden'>
+            <BreadCrumb data={data} />
               <h1 className="m-2 text-xl md:text-4xl font-bold text-blue-600 border-b pb-2">{data[0].title}</h1>
               <div className='grid md:grid-cols-2 gap-2'>
                   <div className='desc p-5'>
@@ -105,6 +126,11 @@ const Posts = ({ data }) => {
               <div className='text-2xl bg-blue-700 text-white text-center font-semibold hover:bg-orange-700 rounded-md'>
                   <h3><a href={data[0].link} target='_blank'>{data[0].title}のページを見る</a></h3>
               </div>
+
+              <h3 className='text-2xl font-bold py-6'>このページを見ている人はこのキーワードも見ています</h3>
+              <Tags tagsArray={shuffledGoalTags} numberTags={7}/>
+              
+
               <div className='mt-5 mb-3 p-2 font-bold text-2xl bg-slate-400 text-black'>
                       <h2>最近チェックした動画</h2>
               </div>
