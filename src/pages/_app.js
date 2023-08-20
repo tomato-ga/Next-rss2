@@ -28,7 +28,11 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
+
         <link rel="dns-prefetch" href="//api.erorice.com" />
+        <title>エロ動画アンテナ - エロコメベータ</title>
+        <meta name="description" content="エロ動画を大量に紹介しています。エロコメはエロ動画のアンテナサイトです。お気に入りのキーワードで無料エロ動画を楽しめます" />
+      
       </Head>
       <GoogleTagManager googleTagManagerId={process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID} />
       <DefaultSeo {...SEO} />
