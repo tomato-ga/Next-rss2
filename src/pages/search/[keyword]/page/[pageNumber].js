@@ -115,7 +115,7 @@ export async function getServerSideProps({ params }) {
     const pageNumber = params.pageNumber || 1;
 
     // SSRのためにデータフェッチを直接行う
-    const fetchUrl = `https://api.erorice.com/search?tag=${keyword}&page=${pageNumber}&limit=${pageSize}`;
+    const fetchUrl = `https://api.erorice.com/search?q=${keyword}&page=${pageNumber}&limit=${pageSize}`;
     const res = await fetch(fetchUrl);
     const posts = await res.json();
 
