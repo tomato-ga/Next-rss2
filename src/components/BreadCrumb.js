@@ -8,7 +8,7 @@ const BreadCrumb = ({ data }) => {
 
 
     return (
-    <ol className="list-decimal list-inside p-4 rounded-md text-gray-700">
+    <ol className="list-decimal list-inside p-4 rounded-md text-gray-700 text-xs">
         <li key={data[0].id} className="inline-block">
             <Link href="/" className="text-blue-600 hover:text-blue-800">ホーム</Link>
             <span className="mx-2">&gt;</span>
