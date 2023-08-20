@@ -1,21 +1,21 @@
 export default {
-  titleTemplate: '%s | エロコメストβ',
+  titleTemplate: '%s | エロコメベータ',
   defaultTitle: '',
   additionalMetaTags: [
     {
       property: 'dc:creator',
-      content: 'エロコメスト運営',
+      content: 'エロコメ運営',
     },
     {
       name: 'application-name',
-      content: 'エロコメストβ',
+      content: 'エロコメβ',
     },
   ],
   openGraph: {
     url: 'https://erorice.com',
     type: 'website',
     locale: 'ja_JP',
-    site_name: 'エロコメストβ',
+    site_name: 'エロコメβ',
   },
   // twitter: {
   //   handle: '@hogehoge',

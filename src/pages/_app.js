@@ -1,3 +1,5 @@
+// /Volumes/SSD_1TB/next-antena2/front/src/pages/_app.js
+
 import '@/styles/globals.css';
 import { DefaultSeo } from 'next-seo';
 import SEO from 'next-seo.config.js';
