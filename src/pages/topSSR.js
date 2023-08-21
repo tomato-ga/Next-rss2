@@ -47,23 +47,30 @@ export default function Ssr({ data, totalCount, page, limit }) {
                         <div key={index} className='border-gray-300 rounded-lg shadow-lg'>
                             <div className=' border-gray-200 '>
                                 <div onClick={() => { handleClickCount(item.id) }}>
-                                    <Link href="/item/[items]" as={`/item/${item.id}`}>
-                                        <div className="relative h-[270px] w-full md:h-[320px] md:w-full">
+                                    <div className=" h-[270px] w-full md:h-[320px] md:w-full">
+                                        <Link href="/item/[items]" as={`/item/${item.id}`} className=''>
                                             <img src={item.imgurl} className="w-full h-full object-cover" alt={item.title} />
-                                            
-                                            <span className="absolute top-2 left-0 text-red-600 text-xl font-bold tracking-widest text-center p-1">
-                                                <FetchClickCounts itemId={item.id} />
-                                            </span>
+                                        </Link>
+                                    </div>
 
-                                            <span className="absolute top-16 left-0 text-red-600 text-xl font-bold tracking-widest text-center p-1">
-                                                <Favthumbnail postId={item.id} articleData={item}/>
-                                            </span>
-                                        </div>
-                    
-                                        <h2 className='m-2 text-sm md:text-xl font-bold text-blue-600'>
-                                            {item.title}
-                                        </h2>
-                                    </Link>
+                                    <div className='relative'>
+                                        <span className="absolute top-2 left-0 text-red-600 text-xl font-bold tracking-widest text-center p-1">
+                                            <FetchClickCounts itemId={item.id} />
+                                        </span>
+
+                                        <span className="absolute top-16 left-0 text-red-600 text-xl font-bold tracking-widest text-center p-1 z-10">
+                                            <Favthumbnail postId={item.id} articleData={item}/>
+                                        </span>
+                                    </div>
+                                    
+                                <Link href="/item/[items]" as={`/item/${item.id}`} className=''>
+                                    <h2 className='m-2 text-sm md:text-xl font-bold text-blue-600'>
+                                        {item.title}
+                                    </h2>
+                                </Link>
+
+                                    
+
                                 </div>
                                 <div className='tags'>
                                     <Tags tagsArray={tagsArray} numberTags={5} />

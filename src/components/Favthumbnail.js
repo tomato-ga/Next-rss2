@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import handleFavCount from '@/lib/clickCountDB';
 
 const Favthumbnail = ({ postId, articleData }) => {
+
+
     const [FavCount, setFavCount] = useState(0);
     const [isFavorited, setIsFavorited] = useState(false);
     let savedFavPageLists = {
@@ -21,7 +23,7 @@ const Favthumbnail = ({ postId, articleData }) => {
     }, [postId]);
 
     const buttonFavCount = async () => {
-        
+
 
         const existingData = JSON.parse(localStorage.getItem('favArticleData'));
         if (existingData && existingData.FavoritePages) {
@@ -49,9 +51,10 @@ const Favthumbnail = ({ postId, articleData }) => {
     }
 
     return (
-        <div onClick={buttonFavCount}>
             <span className="absolute rounded-md top-2 left-2 bg-white bg-opacity-90 text-red-600 text-xl font-bold tracking-widest text-center p-1 pointer-events-none">
                 <button
+                    onClick={(event) => { event.preventDefault(); buttonFavCount(event); }}
+
                     disabled={isFavorited}
                     className={`py-1.5 px-3 ${isFavorited ? 'opacity-50' : 'hover:text-blue-600 hover:scale-105 hover:shadow'} text-center border  rounded-md font-bold text-blue-700 h-8 text-sm flex items-center gap-1 lg:gap-2`}
                 >
@@ -60,7 +63,6 @@ const Favthumbnail = ({ postId, articleData }) => {
                     </svg>
                 </button>
             </span>
-        </div>
     )
 }
 
