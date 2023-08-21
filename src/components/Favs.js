@@ -20,7 +20,6 @@ const FavButton = ({ postId, articleData }) => {
     }, [postId]);
 
     const buttonFavCount = async () => {
-        console.log('ボタン押したぞ');
         const existingData = JSON.parse(localStorage.getItem('favArticleData'));
         if (existingData && existingData.FavoritePages) {
             savedFavPageLists.FavoritePages = existingData.FavoritePages;

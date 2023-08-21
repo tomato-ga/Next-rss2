@@ -11,6 +11,7 @@ import Tags from '@/components/Tags';
 import Pagination from '@/components/Pagination';
 import { handleClickCount } from '@/lib/clickCountDB';
 import FetchClickCounts from '@/components/Clickcount';
+import Favthumbnail from '@/components/Favthumbnail';
 
 export default function Ssr({ data, totalCount, page, limit }) {
 
@@ -49,9 +50,13 @@ export default function Ssr({ data, totalCount, page, limit }) {
                                     <Link href="/item/[items]" as={`/item/${item.id}`}>
                                         <div className="relative h-[270px] w-full md:h-[320px] md:w-full">
                                             <img src={item.imgurl} className="w-full h-full object-cover" alt={item.title} />
-                    
-                                            <span className="absolute rounded-md top-2 left-2 bg-white bg-opacity-90 text-red-600 text-xl font-bold tracking-widest text-center p-1">
+                                            
+                                            <span className="absolute top-2 left-0 text-red-600 text-xl font-bold tracking-widest text-center p-1">
                                                 <FetchClickCounts itemId={item.id} />
+                                            </span>
+
+                                            <span className="absolute top-16 left-0 text-red-600 text-xl font-bold tracking-widest text-center p-1">
+                                                <Favthumbnail postId={item.id} articleData={item}/>
                                             </span>
                                         </div>
                     
