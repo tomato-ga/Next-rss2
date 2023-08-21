@@ -31,10 +31,11 @@ const FetchClickCounts = ({ itemId }) => {
     }, [itemId]);
 
     return (
-        <span className="absolute rounded-md top-2 left-2 bg-white bg-opacity-90 text-red-600 text-xl font-bold tracking-widest text-center p-1">
-        {clickCount}<br/><div className='text-xs'>Click</div>
+        <span className="inline-block rounded-md top-2 left-2 bg-white bg-opacity-90 text-red-600 text-xl font-bold tracking-widest text-center p-1">
+            {clickCount}<br/><div className='text-xs'>Click</div>
         </span>
     )
+    
 };
 
 export default FetchClickCounts;

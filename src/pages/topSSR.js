@@ -23,7 +23,7 @@ export default function Ssr({ data, totalCount, page, limit }) {
 
     return (
         <>
-
+    
         <div className='container mx-auto flex flex-col-reverse md:flex-row p-5 justify-between md:justify-start'>
             <Sidebar />
             <div className="md:w-3/4 md:ml-4 grid sm:grid-cols-1 md:grid-cols-2 gap-3 p-1 order-2 md:order-2">
@@ -43,48 +43,51 @@ export default function Ssr({ data, totalCount, page, limit }) {
                     if (item.tag) { // Check if tag exists
                         tagsArray = item.tag.split(',').map(tag => tag.trim());
                     }
-                    return (
-                        <div key={index} className='border-gray-300 rounded-lg shadow-lg'>
-                            <div className=' border-gray-200 '>
-                                <div onClick={() => { handleClickCount(item.id) }}>
-                                    <div className=" h-[270px] w-full md:h-[320px] md:w-full">
-                                        <Link href="/item/[items]" as={`/item/${item.id}`} className=''>
-                                            <img src={item.imgurl} className="w-full h-full object-cover" alt={item.title} />
-                                        </Link>
-                                    </div>
+return (
+                    <div key={index} className='border-gray-300 rounded-lg shadow-lg'>
+                        <div className='border-gray-200'>
+                            <div onClick={() => { handleClickCount(item.id) }}>
+                                <div className="h-[270px] w-full md:h-[320px] md:w-full">
+                                    <Link href="/item/[items]" as={`/item/${item.id}`} className=''>
+                                        <img src={item.imgurl} className="w-full h-full object-cover" alt={item.title} />
+                                    </Link>
+                                </div>
 
-                                    <div className='relative'>
-                                        <span className="absolute top-2 left-0 text-red-600 text-xl font-bold tracking-widest text-center p-1">
+                                <div className='relative flex items-center mt-2'>
+                                    <div className='flex flex-col items-center'>
+                                        <span className="text-red-600 text-xl font-bold tracking-widest text-center p-2">
                                             <FetchClickCounts itemId={item.id} />
                                         </span>
 
-                                        <span className="absolute top-16 left-0 text-red-600 text-xl font-bold tracking-widest text-center p-1 z-10">
+                                        <span className="text-red-600 text-xl font-bold tracking-widest text-center p-2">
                                             <Favthumbnail postId={item.id} articleData={item}/>
                                         </span>
                                     </div>
-                                    
-                                <Link href="/item/[items]" as={`/item/${item.id}`} className=''>
-                                    <h2 className='m-2 text-sm md:text-xl font-bold text-blue-600'>
-                                        {item.title}
-                                    </h2>
-                                </Link>
 
-                                    
-
-                                </div>
-                                <div className='tags'>
-                                    <Tags tagsArray={tagsArray} numberTags={5} />
+                                    <div className='ml-4'>
+                                        <Link href="/item/[items]" as={`/item/${item.id}`} className=''>
+                                            <h2 className='text-sm md:text-xl font-bold text-blue-600 z-20'>
+                                                {item.title}
+                                            </h2>
+                                        </Link>
+                                        <div className='tags'>
+                                            <Tags tagsArray={tagsArray} numberTags={5} />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    );
-                    
-                })}
-                <Pagination totalCount={totalCount} pageSize={limit} currentPage={page} pageChangeUrl={(page) => `/page/${page}`} />
-            </div>
+                    </div>
+                );
+
+            })}
+            <Pagination totalCount={totalCount} pageSize={limit} currentPage={page} pageChangeUrl={(page) => `/page/${page}`} />
         </div>
-        </>
-    );
+    </div>
+    </>
+);
+    
+    
 }
 
     
