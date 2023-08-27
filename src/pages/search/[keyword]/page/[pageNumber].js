@@ -113,13 +113,27 @@ export async function getServerSideProps({ params }) {
     const pageSize = 20;
     const keyword = params.keyword;
     const pageNumber = params.pageNumber || 1;
+    const encodedKeyword = encodeURIComponent(keyword);
+
 
     // SSRのためにデータフェッチを直接行う
-    const fetchUrl = `https://api.erorice.com/search?q=${keyword}&page=${pageNumber}&limit=${pageSize}`;
+    const fetchUrl = `https://api.erorice.com/search?q=${encodedKeyword}&page=${pageNumber}&limit=${pageSize}`;
     const res = await fetch(fetchUrl);
+
+    if (!res.ok) {
+        console.error('Error fetching posts:', res.statusText);
+        throw new Error('Failed to fetch posts');
+    }
+
     const posts = await res.json();
 
     const totalRes = await fetch(`https://api.erorice.com/search_count?tag=${keyword}`);
+
+    if (!totalRes.ok) {
+        console.error('Error fetching total count:', totalRes.statusText);
+        throw new Error('Failed to fetch total count');
+    }
+
     const totalCount = await totalRes.json();
 
     return {
