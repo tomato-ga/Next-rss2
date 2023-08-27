@@ -1,4 +1,4 @@
-// /Volumes/SSD_1TB/next-antena2/front/src/pages/tag/[tagpage]/page/[pageNumber].js
+// /Volumes/SSD_1TB/next-antena2/front/src/pages/search/[tagpage]/page/[pageNumber].js
 
 import React, { useEffect } from 'react';
 import Header from '@/components/Header';
@@ -127,7 +127,7 @@ export async function getServerSideProps({ params }) {
 
     const posts = await res.json();
 
-    const totalRes = await fetch(`https://api.erorice.com/search_count?tag=${keyword}`);
+    const totalRes = await fetch(`https://api.erorice.com/search_count?q=${keyword}`);
 
     if (!totalRes.ok) {
         console.error('Error fetching total count:', totalRes.statusText);
