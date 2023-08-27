@@ -43,7 +43,7 @@ export default function Ssr({ data, totalCount, page, limit }) {
                     if (item.tag) { // Check if tag exists
                         tagsArray = item.tag.split(',').map(tag => tag.trim());
                     }
-return (
+                return (
                     <div key={index} className='border-gray-300 rounded-lg shadow-lg'>
                         <div className='border-gray-200'>
                             <div onClick={() => { handleClickCount(item.id) }}>

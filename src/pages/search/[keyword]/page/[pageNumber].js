@@ -98,7 +98,7 @@ const SearchPage = ({ posts, totalCount, keyword, pageNumber, pageSize }) => {
                 currentPage={pageNumber} 
                 changePage={changePage}
                 pageChangeUrl={(page) => {
-                    return `/tag/${keyword}/page/${page}`;
+                    return `/search/${keyword}/page/${page}`;
                 }}
                 />
             </div>

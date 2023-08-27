@@ -50,10 +50,11 @@ const Favthumbnail = ({ postId, articleData }) => {
         }
     }
 
+    // TODO ボタン押せるようにするのと、デザインやっぱちょっと変なので変更する
     return (
         <span className="inline-block rounded-md top-2 left-2 bg-white bg-opacity-90 text-red-600 text-xl font-bold tracking-widest text-center p-1 pointer-events-none">
             <button
-                onClick={(event) => { event.preventDefault(); buttonFavCount(event); }}
+                onClick={buttonFavCount}
                 disabled={isFavorited}
                 className={`py-1.5 px-3 ${isFavorited ? 'opacity-50' : 'hover:text-blue-600 hover:scale-105 hover:shadow'} text-center border  rounded-md font-bold text-blue-700 h-8 text-sm flex items-center gap-1 lg:gap-2`}
             >
