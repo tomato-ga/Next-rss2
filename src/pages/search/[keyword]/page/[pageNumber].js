@@ -1,4 +1,4 @@
-// /Volumes/SSD_1TB/next-antena2/front/src/pages/search/[tagpage]/page/[pageNumber].js
+// /Volumes/SSD_1TB/next-antena2/front/src/pages/search/[keyword]/page/[pageNumber].js
 
 import React, { useEffect } from 'react';
 import Header from '@/components/Header';
