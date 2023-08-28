@@ -4,7 +4,6 @@ import handleFavCount from '@/lib/clickCountDB';
 
 const Favthumbnail = ({ postId, articleData }) => {
 
-
     const [FavCount, setFavCount] = useState(0);
     const [isFavorited, setIsFavorited] = useState(false);
     let savedFavPageLists = {
@@ -24,6 +23,7 @@ const Favthumbnail = ({ postId, articleData }) => {
 
     const buttonFavCount = async () => {
 
+        console.log('ボタンが押されたよ')
 
         const existingData = JSON.parse(localStorage.getItem('favArticleData'));
         if (existingData && existingData.FavoritePages) {
@@ -38,7 +38,7 @@ const Favthumbnail = ({ postId, articleData }) => {
 
             if (!isFavorited) {
                 setIsFavorited(true);
-                savedFavPageLists.FavoritePages.unshift(articleData[0]);
+                savedFavPageLists.FavoritePages.unshift(articleData);
                 localStorage.setItem('favArticleData', JSON.stringify(savedFavPageLists));
             } else {
                 savedFavPageLists.FavoritePages = savedFavPageLists.FavoritePages.filter(article => article.id !== postId);
@@ -52,10 +52,9 @@ const Favthumbnail = ({ postId, articleData }) => {
 
     // TODO ボタン押せるようにするのと、デザインやっぱちょっと変なので変更する
     return (
-        <span className="inline-block rounded-md top-2 left-2 bg-white bg-opacity-90 text-red-600 text-xl font-bold tracking-widest text-center p-1 pointer-events-none">
+        <span className="inline-block rounded-md top-2 left-2 bg-white bg-opacity-90 text-red-600 text-xl font-bold tracking-widest text-center p-1 ">
             <button
                 onClick={buttonFavCount}
-                disabled={isFavorited}
                 className={`py-1.5 px-3 ${isFavorited ? 'opacity-50' : 'hover:text-blue-600 hover:scale-105 hover:shadow'} text-center border  rounded-md font-bold text-blue-700 h-8 text-sm flex items-center gap-1 lg:gap-2`}
             >
                 <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
