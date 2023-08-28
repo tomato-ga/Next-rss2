@@ -1,3 +1,5 @@
+// /Volumes/SSD_1TB/next-antena2/front/src/pages/item/[items].js
+
 import React from 'react';
 import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
@@ -20,25 +22,24 @@ export async function getServerSideProps(context) {
   const tags = data[0]?.tag.split(',');
 
   // SimilarTags用のAPIフェッチ
-  const poputags = async () => {
-    const res = await fetch("https://api.erorice.com/top_tags");
-    const popuTagsRes = await res.json();
-    return popuTagsRes;
-  }
+  // const poputags = async () => {
+  //   const res = await fetch("https://api.erorice.com/top_tags");
+  //   const popuTagsRes = await res.json();
+  //   return popuTagsRes;
+  // }
 
-  const apiTags = await poputags();
-  const goalTags = [...apiTags, ...tags];
+  // const apiTags = await poputags();
+  // const goalTags = [...apiTags, ...tags];
 
   return {
     props: {
       data,
-      goalTags,
+      // goalTags,
     }
   };
 }
 
-
-const Posts = ({ data, goalTags }) => {
+const Posts = ({ data }) => { //goalTags
 
   const [localData, setLocalData] = useState([]);
 
@@ -75,15 +76,15 @@ const Posts = ({ data, goalTags }) => {
 
   let tags = data[0].tag.split(',');
 
-  function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
+//   function shuffleArray(array) {
+//     for (let i = array.length - 1; i > 0; i--) {
+//         const j = Math.floor(Math.random() * (i + 1));
+//         [array[i], array[j]] = [array[j], array[i]];
+//     }
+//     return array;
+// }
 
-  const shuffledGoalTags = shuffleArray(goalTags);
+  // const shuffledGoalTags = shuffleArray(goalTags);
 
 
   return (
@@ -128,7 +129,7 @@ const Posts = ({ data, goalTags }) => {
               </div>
 
               <h3 className='text-2xl font-bold py-6'>このページを見ている人はこのキーワードも見ています</h3>
-              <Tags tagsArray={shuffledGoalTags} numberTags={7}/>
+              <Tags tagsArray={tags} numberTags={7}/>
               
 
               <div className='mt-5 mb-3 p-2 font-bold text-2xl bg-slate-400 text-black'>
