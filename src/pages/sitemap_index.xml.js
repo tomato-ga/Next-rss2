@@ -4,7 +4,7 @@ import fetch from 'node-fetch';
 
 const BASE_URL = 'https://api.erorice.com/sitemap_index';  // サイトマップインデックスへのURLを指定
 
-function SiteMap() {
+function SiteMapIndex() {
   // getServerSideProps will do the heavy lifting
 }
 
@@ -35,4 +35,4 @@ export async function getServerSideProps({ res }) {
   };
 }
 
-export default SiteMap;
+export default SiteMapIndex;
