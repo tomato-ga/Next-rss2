@@ -11,7 +11,9 @@ function SiteMap() {
 export async function getServerSideProps({ res }) {
   try {
     const response = await fetch(BASE_URL);
-    const xmlData = await response.text();  // XML形式のレスポンスをテキストとして取得
+    const xmlData = await response.json();  // XML形式のレスポンスをテキストとして取得
+
+    console.log(xmlData);
 
     if (xmlData) {
         console.log('getServerSideProps is running...')
