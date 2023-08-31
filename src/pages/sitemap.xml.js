@@ -1,6 +1,8 @@
+// /Volumes/SSD_1TB/next-antena2/front/src/pages/sitemap.xml.js
+
 import fetch from 'node-fetch';
 
-const BASE_URL = 'https://api.erorice.com/sitemap'; // FastAPIアプリのベースURL
+const BASE_URL = 'https://api.erorice.com/sitemap_index';  // サイトマップインデックスへのURLを指定
 
 function SiteMap() {
   // getServerSideProps will do the heavy lifting
@@ -9,12 +11,12 @@ function SiteMap() {
 export async function getServerSideProps({ res }) {
   try {
     const response = await fetch(BASE_URL);
-    const xmlData = await response.json();
+    const xmlData = await response.text();  // XML形式のレスポンスをテキストとして取得
 
     if (xmlData) {
         console.log('getServerSideProps is running...')
     } else {
-        console.log('NoNNNNNNNNNN')
+        console.log('No data received.')
     }
 
     // Set appropriate headers and send the XML data

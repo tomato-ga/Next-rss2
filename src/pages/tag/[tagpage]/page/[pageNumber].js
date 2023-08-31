@@ -68,7 +68,8 @@ const TagPage = ({ tagpage, posts, totalCount, pageNumber, pageSize }) => {
                                 <Link href="/item/[items]" as={`/item/${item.id}`}>
                                         <div className="relative h-[270px] w-full md:h-[320px] md:w-full">
                                             <img src={item.imgurl} className="w-full h-full object-cover" alt={item.title} />
-                    
+                                            {/* <Image fill src={item.imgurl} className="object-cover" alt={item.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw"/> */}
+
                                             <span className="absolute rounded-md top-2 left-2 bg-white bg-opacity-90 text-red-600 text-xl font-bold tracking-widest text-center p-1">
                                                 <FetchClickCounts itemId={item.id} />
                                             </span>
