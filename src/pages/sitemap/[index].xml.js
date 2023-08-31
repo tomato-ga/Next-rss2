@@ -5,11 +5,11 @@ function SiteMap() {
   }
 
 export async function getServerSideProps({ params, res }) {
-  console.log('Getting sitemap for index:', params.index);
+  console.log('index番号:', params.index);
 
   try {
-    const { index } = params.index;
-    const response = await fetch(`https://api.erorice.com/sitemap/${index}.xml`);
+    const index = params.index;
+    const response = await fetch(`https://api.erorice.com/sitemap/${index}`);
     
     // Check if the request was successful
     if (response.ok) {
