@@ -10,7 +10,7 @@ const useFetchTotalCount = () => {
     useEffect(() => {
         const fetchTotalCount = async () => {
             try {
-                const res = await fetch('https://ape.erorice.com/total_count');
+                const res = await fetch('https://api.erorice.com/total_count');
                 const data = await res.json();
                 setTotalCount(data.count);
                 setLoading(false);

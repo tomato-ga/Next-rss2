@@ -7,7 +7,7 @@ export const getServerSideProps = async (ctx) => {
   // 1から1000までのページを取得する例
   for (let number = 1; number <= 2800; number++) {
     try {
-      const response = await axios.get(`https://ape.erorice.com/rss/all/latest?page=${number}`);
+      const response = await axios.get(`https://api.erorice.com/rss/all/latest?page=${number}`);
 
       // ステータスコードが200以外の場合、ループを中断
       if (response.status !== 200) {

@@ -16,14 +16,14 @@ import SimilarTags from '@/components/SimilarTags';
 
 export async function getServerSideProps(context) {
   const { items } = context.params;
-  const ENDP = `https://ape.erorice.com/sites/rss/${items}`;
+  const ENDP = `https://api.erorice.com/sites/rss/${items}`;
   const res = await fetch(ENDP);
   const data = await res.json();
   const tags = data[0]?.tag.split(',');
 
   // SimilarTags用のAPIフェッチ
   // const poputags = async () => {
-  //   const res = await fetch("https://ape.erorice.com/top_tags");
+  //   const res = await fetch("https://api.erorice.com/top_tags");
   //   const popuTagsRes = await res.json();
   //   return popuTagsRes;
   // }

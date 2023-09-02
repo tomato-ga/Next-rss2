@@ -8,7 +8,7 @@ const PopularTags = ({ popuTagsRes }) => {
     // useEffect(() => {
     //     const fetchData = async () => {
     //         try {
-    //             const ENDP = `https://ape.erorice.com/top_tags`;
+    //             const ENDP = `https://api.erorice.com/top_tags`;
     //             const res = await fetch(ENDP);
     //             const data = await res.json();
     //             setData(data);

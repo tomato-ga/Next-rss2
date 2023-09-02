@@ -117,7 +117,7 @@ export async function getServerSideProps({ params }) {
 
 
     // SSRのためにデータフェッチを直接行う
-    const fetchUrl = `https://ape.erorice.com/search?q=${encodedKeyword}&page=${pageNumber}&limit=${pageSize}`;
+    const fetchUrl = `https://api.erorice.com/search?q=${encodedKeyword}&page=${pageNumber}&limit=${pageSize}`;
     const res = await fetch(fetchUrl);
 
     if (!res.ok) {
@@ -127,7 +127,7 @@ export async function getServerSideProps({ params }) {
 
     const posts = await res.json();
 
-    const totalRes = await fetch(`https://ape.erorice.com/search_count?q=${keyword}`);
+    const totalRes = await fetch(`https://api.erorice.com/search_count?q=${keyword}`);
 
     if (!totalRes.ok) {
         console.error('Error fetching total count:', totalRes.statusText);

@@ -20,7 +20,7 @@ import { NextSeo } from 'next-seo';
 // TODO このSSRのときに、関連記事もSSRするようにすればOK RelatedTagPostsはコンポーネントなだけだから、SSRできない
 export async function getServerSideProps(context) {
   const { siteId, itemId } = context.params;
-  const ENDP = `https://ape.erorice.com/sites/rss/${itemId}`;
+  const ENDP = `https://api.erorice.com/sites/rss/${itemId}`;
   const res = await fetch(ENDP);
   const data = await res.json();
 

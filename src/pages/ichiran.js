@@ -45,7 +45,7 @@ export async function getServerSideProps() {
 
   try {
     // NOTE: ローカルのAPIとDBに接続しないとダメ
-    const API_URL = 'https://ape.erorice.com/site_names_and_ids';
+    const API_URL = 'https://api.erorice.com/site_names_and_ids';
     const response = await fetch(API_URL);
     sitesIchiran = await response.json();
 

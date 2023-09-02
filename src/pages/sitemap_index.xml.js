@@ -2,7 +2,7 @@
 
 import fetch from 'node-fetch';
 
-const BASE_URL = 'https://ape.erorice.com/sitemap_index';  // サイトマップインデックスへのURLを指定
+const BASE_URL = 'https://api.erorice.com/sitemap_index';  // サイトマップインデックスへのURLを指定
 
 function SiteMapIndex() {
   // getServerSideProps will do the heavy lifting

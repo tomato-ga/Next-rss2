@@ -33,10 +33,10 @@ export async function getServerSideProps(context) {
       };
     }
     
-    const fetchRes = await fetch(`https://ape.erorice.com/rss/all/latest?page=${page}&limit=${limit}`);
+    const fetchRes = await fetch(`https://api.erorice.com/rss/all/latest?page=${page}&limit=${limit}`);
     const data = await fetchRes.json();
   
-    const res = await fetch('https://ape.erorice.com/total_count')
+    const res = await fetch('https://api.erorice.com/total_count')
     const totalData = await res.json()
     const totalCount = totalData
   

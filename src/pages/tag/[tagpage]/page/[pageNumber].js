@@ -114,11 +114,11 @@ export async function getServerSideProps({ params }) {
     const pageNumber = params.pageNumber || 1;
 
     // SSRのためにデータフェッチを直接行う
-    const fetchUrl = `https://ape.erorice.com/tag?tag=${tagpage}&page=${pageNumber}&limit=${pageSize}`;
+    const fetchUrl = `https://api.erorice.com/tag?tag=${tagpage}&page=${pageNumber}&limit=${pageSize}`;
     const res = await fetch(fetchUrl);
     const posts = await res.json();
 
-    const totalRes = await fetch(`https://ape.erorice.com/tag_count?tag=${tagpage}`);
+    const totalRes = await fetch(`https://api.erorice.com/tag_count?tag=${tagpage}`);
     const totalCount = await totalRes.json();
 
     return {

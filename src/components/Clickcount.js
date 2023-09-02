@@ -10,7 +10,7 @@ const FetchClickCounts = ({ itemId }) => {
                 return;
             }
 
-            const response = await fetch('https://ape.erorice.com/click_counts', {
+            const response = await fetch('https://api.erorice.com/click_counts', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
