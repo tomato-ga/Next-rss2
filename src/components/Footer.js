@@ -20,7 +20,7 @@ const Footer = () => {
             </ul>
         </div>
         <div>
-            <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">登録について</h2>
+            <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">機能</h2>
             <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
                     <Link href="/Mostpopular" className="hover:underline">人気動画</Link>
@@ -36,10 +36,10 @@ const Footer = () => {
 
 
         <div>
-            <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">兄弟サイト</h2>
+            <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">登録サイト様</h2>
             <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
-                    <a href="#" className="hover:underline">構築予定</a>
+                    <a href="/ichiran" className="hover:underline">登録サイト様一覧</a>
                 </li>
             </ul>
         </div>

@@ -10,7 +10,7 @@ export async function getServerSideProps({ params, res }) {
 
   try {
     const index = 2;
-    const response = await fetch(`https://api.erorice.com/sitemap/${index}`);
+    const response = await fetch(`https://ape.erorice.com/sitemap/${index}`);
     
     console.log('Status:', response.status); // Changed to 'response.status'
     

@@ -11,7 +11,7 @@ const PopularMovies = ({ popumoviesRes }) => {
     // useEffect(() => {
     //     const fetchData = async () => {
     //         try {
-    //             const ENDP = `https://api.erorice.com/top_movies`;
+    //             const ENDP = `https://ape.erorice.com/top_movies`;
     //             const res = await fetch(ENDP);
     //             const data = await res.json();
     //             setData(data);

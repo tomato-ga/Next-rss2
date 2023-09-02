@@ -33,7 +33,7 @@ export async function getServerSideProps(context) {
     try {
       // ページネーションでトップに表示する件数
       const fetchRes = await fetch(
-        `https://api.erorice.com/rss/all/latest?page=${page}&limit=${limit}`
+        `https://ape.erorice.com/rss/all/latest?page=${page}&limit=${limit}`
       );
       const data = await fetchRes.json();
   
@@ -44,16 +44,16 @@ export async function getServerSideProps(context) {
       }
   
       // ページネーションの総数カウント
-      const res = await fetch("https://api.erorice.com/total_count");
+      const res = await fetch("https://ape.erorice.com/total_count");
       const totalData = await res.json();
       const totalCount = totalData;
       
       // 人気動画
-      const popumovies = await fetch("https://api.erorice.com/top_movies");
+      const popumovies = await fetch("https://ape.erorice.com/top_movies");
       const popumoviesRes = await popumovies.json();
 
       // 人気のキーワード
-      const poputags = await fetch("https://api.erorice.com/top_tags");
+      const poputags = await fetch("https://ape.erorice.com/top_tags");
       const popuTagsRes = await poputags.json();
 
 

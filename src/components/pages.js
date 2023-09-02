@@ -84,7 +84,7 @@ export async function getServerSideProps(context) {
     let initialTotalCount = 0;
 
     try {
-        const dataRes = await fetch(`https://api.erorice.com/rss/all/latest?page=${pageNumber}`);
+        const dataRes = await fetch(`https://ape.erorice.com/rss/all/latest?page=${pageNumber}`);
         if(dataRes.ok) {
             initialData = await dataRes.json();
         } else {
@@ -92,7 +92,7 @@ export async function getServerSideProps(context) {
             throw new Error('Data fetch error');
         }
 
-        const countRes = await fetch('https://api.erorice.com/total_count');
+        const countRes = await fetch('https://ape.erorice.com/total_count');
         if(countRes.ok) {
             const countData = await countRes.json();
             initialTotalCount = countData.count;

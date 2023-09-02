@@ -14,7 +14,7 @@ const RelatedTagPosts = ({ tag }) => {
   useEffect(() => {
     const fetchRelatedPosts = async () => {
       try {
-        const response = await fetch(`https://api.erorice.com/tag?tag=${tag}`);
+        const response = await fetch(`https://ape.erorice.com/tag?tag=${tag}`);
         const data = await response.json();
         setPosts(data);
       } catch (error) {

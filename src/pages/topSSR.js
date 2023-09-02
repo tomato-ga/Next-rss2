@@ -93,7 +93,7 @@ export default function Ssr({ data, totalCount, page, limit }) {
     
     // useEffect(() => {
     //     const fetchClickCounts = async () => {
-    //         const response = await fetch('https://api.erorice.com/click_counts', {
+    //         const response = await fetch('https://ape.erorice.com/click_counts', {
     //             method: 'POST',
     //             headers: {
     //                 'Content-Type': 'application/json',

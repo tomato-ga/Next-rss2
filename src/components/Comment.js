@@ -30,7 +30,7 @@ const Comment = ({rss_id}) => {
 
         const sendComment = async () => {
             try {
-                const fetchComment = await fetch(`https://api.erorice.com/comment`, {
+                const fetchComment = await fetch(`https://ape.erorice.com/comment`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
