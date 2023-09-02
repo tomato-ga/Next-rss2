@@ -18,6 +18,7 @@ import SearchBar from '@/components/SearchBar';
 import PopularMovies from '@/components/PopularMovies';
 import PopularTags from '@/components/PopularTags';
 import Footer from '@/components/Footer';
+import Favthumbnail from '@/components/Favthumbnail';
 
 
 const TagPage = ({ tagpage, posts, totalCount, pageNumber, pageSize }) => {
@@ -65,28 +66,38 @@ const TagPage = ({ tagpage, posts, totalCount, pageNumber, pageSize }) => {
                             <div onClick={() => { handleClickCount(item.id) }}>
 
                             <div className='border-gray-200'>
-                                <Link href="/item/[items]" as={`/item/${item.id}`}>
-                                        <div className="relative h-[270px] w-full md:h-[320px] md:w-full">
-                                            <img src={item.imgurl} className="w-full h-full object-cover" alt={item.title} />
-                                            {/* <Image fill src={item.imgurl} className="object-cover" alt={item.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw"/> */}
+                            <div onClick={() => { handleClickCount(item.id) }}>
+                                <div className="h-[270px] w-full md:h-[320px] md:w-full">
+                                    <Link href="/item/[items]" as={`/item/${item.id}`} className=''>
+                                        <img src={item.imgurl} className="w-full h-full object-cover" alt={item.title} />
+                                    </Link>
+                                </div>
 
-                                            <span className="absolute rounded-md top-2 left-2 bg-white bg-opacity-90 text-red-600 text-xl font-bold tracking-widest text-center p-1">
-                                                <FetchClickCounts itemId={item.id} />
-                                            </span>
+                                <div className='relative flex items-center mt-2'>
+                                    <div className='flex flex-col items-center'>
+                                        <span className="text-red-600 text-xl font-bold tracking-widest text-center p-2">
+                                            <FetchClickCounts itemId={item.id} />
+                                        </span>
+
+                                        <span className="text-red-600 text-xl font-bold tracking-widest text-center p-2">
+                                            <Favthumbnail postId={item.id} articleData={item}/>
+                                        </span>
+                                    </div>
+
+                                    <div className='ml-4'>
+                                        <Link href="/item/[items]" as={`/item/${item.id}`} className=''>
+                                            <h2 className='text-sm md:text-xl font-bold text-blue-600 z-20'>
+                                                {item.title}
+                                            </h2>
+                                        </Link>
+                                        <div className='tags'>
+                                            <Tags tagsArray={tagsArray} numberTags={5} />
                                         </div>
-                                    {/* <div className="relative h-[170px] w-full md:h-[320px] md:w-full">
-                                        <Image fill src={item.imgurl} className="object-cover" alt={item.title} sizes="(max-width: 600px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw"/>
-                                        <FetchClickCounts itemId={item.id}/>
-
-                                    </div> */}
-                                    <h2 className='m-2 text-sm md:text-xl font-bold text-blue-600'>
-                                        {item.title}
-                                    </h2>
-                                </Link>
-                                <div className='tags'>
-                                <Tags tagsArray={tagsArray} numberTags={5}/>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+
                         </div>
                 </div>
                     );
