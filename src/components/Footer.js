@@ -39,7 +39,7 @@ const Footer = () => {
             <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">登録サイト様</h2>
             <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
-                    <a href="/ichiran" className="hover:underline">登録サイト様一覧</a>
+                    <Link href="/ichiran" className="hover:underline">登録サイト様一覧</Link>
                 </li>
             </ul>
         </div>
